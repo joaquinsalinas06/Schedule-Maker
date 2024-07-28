@@ -1,0 +1,1394 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title> Schedule Maker </title>
+  
+  <link href="style.css" rel="stylesheet" type="text/css" />
+  <link href="desktop.css" rel="stylesheet" type="text/css" />
+  <style>
+    input.HourBox {width: 24pt;}
+    input.MinuteBox {width: 24pt;}
+    
+    div.border {color: #78CCAD; border-style: solid; border-width: 1pt; border-radius: 6pt;}
+    
+    h3 {white-space: nowrap;}
+    p {line-height: normal;}
+    
+    .inline {display: inline-block;}
+    
+  </style>
+</head>
+
+<body>
+
+<table id="MainTable">
+    
+    <tr id="MobileTitleRow">
+        <td></td>
+
+        <td id="MobileTitlecolumn">
+            <a class="TitleLink" href="https://www.dylancarroll.net">Dylan Carroll</a>
+        </td>
+    </tr>
+    <tr id = "MobileTitleDiv"></tr>
+
+
+    <tr id="TopBarRow">
+        
+        <td id="DesktopTitleColumn">
+            <a class="TitleLink" href="https://www.dylancarroll.net">Dylan Carroll</a>
+        </td>
+        <td id="TitleDivColumn" > <div id="TitleDiv"></div> </td>
+        
+        
+        <td>
+            <table id="NavTable">
+                <tr>
+                    <td><a class="NavLink" href="https://www.dylancarroll.net/about">About</a></td>
+                    <td><a class="NavLink" href="https://www.dylancarroll.net/programming">Programming</a></td>
+                    <td><a class="NavLink" href="https://www.dylancarroll.net/animation">Animation</a></td>
+                </tr>
+                <tr>
+                    
+                    <td><a class="NavLink" href="https://www.dylancarroll.net/contact">Contact</a></td>
+                    <td><a class="NavLink" href="https://www.dylancarroll.net/other">Other</a></td>
+                </tr>
+            </table>
+
+        </td>
+    </tr>
+    
+    <tr><td id = "ContentPad"></td></tr>
+
+    <tr id="BodyRow"> 
+        <table id="BodyTable"><tr>
+            <td id="BodyEdge"></td>
+
+            <td>
+                <div id="BodyDiv">
+                    
+                    <h1>Scheduler</h1>
+
+                    <h3>What this is:</h3>
+                    <p>This application automates the process of selecting a schedule from a list of courses. Given a list of many course sections, it generates a list of all schedules from that list you could possibly register for, so you can easily select from that list</p>
+
+                    <h3>How to use it:</h3>
+                    <p> <b>Step 1:</b> For each class you may want to register for, fill out all of the information for every section of that class. Or, import the data of those classes from their CRNs. </p>
+                    <p><b>Step 2:</b> Click "Calculate Options" to generate the list of all valid schedules that can be made from those sections. </p>
+                    <p> <b>Step 3:</b> Click "Show Next" and "Show Previous" to cycle through that list to find which schedules are your favorite. </p>
+                    <p> <b>Step 4:</b> Download the images of your favorites schedules to remember them later.</p>
+
+                    
+                    <h3>Things to Note</h3>
+                    <li style="font-size: 15pt; color: #505050; font-family: 'Calibri', 'Candara', 'Segoe', 'Segoe UI'">
+                        The "Group" box is meant to create groups of classes that satisfy the same purpose. For example, if you have several sections of the same math class that you may register for, you would give them all the same group, so that only one of them can show up in each schedule. 
+                    </li>
+                    <br>
+                    <li style="font-size: 15pt; color: #505050; font-family: 'Calibri', 'Candara', 'Segoe', 'Segoe UI'">
+                        The "Mandatory Group" box is for listing groups you need at least one class from. Any schedule without at least one class from all mandatory groups will not be displayed.
+                    </li>
+                    <br>
+                    <li style="font-size: 15pt; color: #505050; font-family: 'Calibri', 'Candara', 'Segoe', 'Segoe UI'">
+                        The "CRN" and "Note" boxes are optional and won't affect the scheduling calculations.
+                    </li>
+                    <br>
+                    <li style="font-size: 15pt; color: #505050; font-family: 'Calibri', 'Candara', 'Segoe', 'Segoe UI'">
+                        This is still somewhat of a work in progress. Please contact me if you encounter any issues!
+                    </li>
+                    <br>
+                    <br>
+                    <br>
+
+                    <div class="border settings" >
+                        <table style="margin-left: auto; margin-right: auto; line-height: 0pt; border-spacing: 12pt 0pt;"> 
+                        <tbody id="settingsTbody">
+                            <tr>
+                                <td> <h3 style="line-height: 0pt;"> Settings </td>
+                            </tr>
+                            
+                            <tr>
+
+                                <td > <p>CRN Load </p> </td>
+                                <td>
+                                    <select id="termSelect" class="inline">
+                                        <option value="">Select Term...</option>
+                                        <option value="24-1">24-1</option>
+                                        <option value="24-2">24-2</option>
+                                        <option value="25-1">25-1</option>
+                                        <option value="25-2">25-2</option>
+                                        <option value="26-1">26-1</option>
+                                        <option value="26-2">26-2</option>
+                                        <option value="27-1">27-1</option>
+                                        <option value="27-2">27-2</option>
+                                        <option value="28-1">28-1</option>
+                                        <option value="28-2">28-2</option>
+                                        
+
+                                    </select>
+                                </td>
+
+                                <td>
+                                    <div class="inline" style="width: 12pt;"></div>
+                                    <textarea  id="crnList" cols=10 rows=2 style="vertical-align:middle; resize: vertical;"></textarea>
+                                </td>
+                                
+                                <td>
+                                    <input class="inline"  type="button" value="Import CRNs" onclick="importCRNs()">
+                                </td>
+                            </tr>
+                            
+                            <tr>
+                                <td > <p>Save/Load: </p> </td>
+               
+                                <td><input class="inline" style="width: 150pt;" type="file" id="saveFile" name="saveFile" onchange="fileSelected()"></td>
+                                
+                                <td><input class="inline" type=button value="Download Save" onclick="downloadSave()"></td>
+                                    
+                            </tr>
+
+                            <tr>
+                                <td> <p>Min Courses</p> </td>
+                                <td> <input id="MinCourseBox" type="number" min=1 value="1" style="width: 48pt"> </td>
+
+
+                                <td> <p>Max Courses</p> </td>
+                                <td> <input  id="MaxCourseBox" type="number" min=1 style="width: 48pt"> </td>
+
+                                    
+                            </tr>
+                            
+                            <tr>
+                                <td> <p>Min Credits</p> </td>
+                                <td> <input id="MinCreditsBox" type="number" min=0 style="width: 48pt"> </td>
+                                    
+                                
+                                
+                                <td> <p>Max Credits</p> </td>
+                                <td> <input id="MaxCreditsBox" type="number" min=0 style="width: 48pt"> </td>
+                                
+                                
+                            </tr>
+
+                            <tr>
+                                <td > <p>Start Time: </p> </td>
+                                <td> <input id="StartTimeBox" class=StartTime type="time">  </td>
+                                    
+                                
+                                
+                                <td> <p>End Time: </p> </td>
+                                <td> <input id="EndTimeBox" class=EndTime type="time" >  </td>
+                            </tr>
+                        </tbody>
+                        
+                        </table>
+
+                        <div align=center>
+                            <p class="inline" >Mandatory Groups: </p>
+                            <div class="inline" style="width: 24pt;"></div>
+                            <textarea id="mandatoryGroups" cols=20 rows=3 style="vertical-align:middle; resize: vertical;"></textarea>
+                        </div>
+
+                        &nbsp;
+
+                    </div>
+
+                    &nbsp;
+
+                    <table  style="width: 100%;">
+                        <tbody id="CourseTableBody">
+                        <tr><td>
+                            <div class="border" style="line-height: 0pt;"> 
+                                <input class="act" value="X" type="button"
+                                    style="width: 20px; height: 20px; padding: 0pt 0pt;   font-size: 10pt;
+                                    vertical-align:middle; margin-left: 20px; margin-top: 20px;"
+                                    onclick="removeCourse(this)">
+                                
+                                <div align="center" style="margin-top: -35px;">
+                                    
+                                        
+                                    <h3 class="inline" style="line-height: 0pt;">Course</h3>
+
+                                    <span style="white-space: nowrap;"> 
+                                        <p class="inline" style="margin-left: 24pt;">Name:</p> <input type="text" style="width: 72pt;">
+                                        <p class="inline" style="margin-left: 24pt;">CRN:</p> <input type="number" style="width: 60pt;"> 
+                                    </span>
+
+                                </div>
+                                
+                                
+                                <div align="center">
+                                    <p class="inline">Credits:</p> <input type="number" min="0" style="width: 36pt;">
+                                
+                                    <p class="inline" style="margin-left: 12pt;">Shade:</p>
+                                    <select>
+                                        <option value="0">Medium</option>
+                                        <option value ="1">Dark</option>
+                                        <option value="2">Light</option>
+                                    </select>
+
+                                    <p class="inline" style="margin-left: 12pt;">Color:</p>
+                                    <select>
+                                        <option value="0">Red</option>
+                                        <option value="1">Orange</option>
+                                        <option value="2">Yellow</option>
+                                        <option value="3">Green</option>
+                                        <option value="4">Teal</option>
+                                        <option value="5">Blue</option>
+                                        <option value="6">Purple</option>
+                                        <option value="7">Grey</option>
+                                    </select>
+                                </div>
+
+                                <div>
+                                    <div align="center">
+                                        <p class="inline">Start:</p> <input type="time">
+
+                                        <p class="inline" style="margin-left: 12pt;">End:</p> <input type="time">
+
+                                        <input type="text" value="MTWRFS" style="width: 40pt; margin-left: 6pt;">
+                                    </div>
+
+                                    <div align="center">
+                                        <input type="button" value="Add Time Slot" onclick= "addTimeSlot(this)" style="margin-left: 6pt;">
+                                        <input type="button" value="Remove Time Slot" onclick= "removeTimeSlot(this)" style="margin-left: 6pt;"> 
+                                    </div>
+
+                                    
+                                </div>
+
+                                <div align="center">
+                                    <p class="inline">Group:</p> <input type="text" style="width: 60pt;">
+                                    
+                                    <span style="white-space: nowrap;"> 
+                                        <p class="inline" style="margin-left: 12pt;">Note:</p> <input class="inline" type="text" style="width: 100pt; margin-left: 12pt;">
+                                    </span>
+
+                                    
+
+                                </div>
+                            </div>
+                        </td></tr>
+
+                        
+                        </tbody>
+                    </table>
+                    
+
+                    &nbsp;
+                    <div align=center style="margin-left: auto; margin-right: auto; display: block;">
+                        <input class="act" type="button" onclick="removeCourse(null)" value="Remove Course">
+                        <input class="act" type="button" onclick="copyCourse()" value="Copy Course">
+                        <input class="act" type="button" onclick="addCourse()" value="Add Course">
+                    </div>
+                    
+                    &nbsp;
+
+                    <div id = "DisplayDiv">
+                        <div align=center style="margin-left: auto; margin-right: auto; display: block;">
+                            <input class="act" type="button" onclick="calcOptions()" value="Calculate Options">
+                            <input class="act" type="button" onclick="downloadAllImages()" value="Download All Images">
+                        </div>
+
+                        <canvas id="MainCanvas" style="width: 100%; color: #505050 1pt; margin-top: 24pt; margin-bottom: 24pt;" height="10px">
+
+                        </canvas>
+
+                        <div align=center style="margin-left: auto; margin-right: auto; display: block;">
+                            <input class="act" type="button" onclick="showPrev()" value="Show Previous">
+                            <input class="act" type="button" onclick="downloadImage()" value="Download Image">
+                            <input class="act" type="button" onclick="showNext()" value="Show Next">
+                        </div>
+
+
+                    </div>
+
+                </div>
+            </td>
+
+
+            <td id="BodyEdge"></td>
+        </tr></table>
+    </tr>
+
+</table>
+
+</body>
+
+<script>
+    var blankCourseElement = `<tr><td>
+                            <div class="border" style="line-height: 0pt;"> 
+                                <input class="act" value="X" type="button"
+                                    style="width: 20px; height: 20px; padding: 0pt 0pt;   font-size: 10pt;
+                                    vertical-align:middle; margin-left: 20px; margin-top: 20px;"
+                                    onclick="removeCourse(this)">
+                                <div align="center" style="margin-top: -35px;">
+                                    <h3 class="inline" style="line-height: 0pt;">Course</h3>
+                                    <span style="white-space: nowrap;"> 
+                                        <p class="inline" style="margin-left: 24pt;">Name:</p> <input type="text" style="width: 72pt;">
+                                        <p class="inline" style="margin-left: 24pt;">CRN:</p> <input type="number" style="width: 60pt;"> 
+                                    </span>
+                                </div>
+                                <div align="center">
+                                    <p class="inline">Credits:</p> <input type="number" min="0" style="width: 36pt;">
+                                    <p class="inline" style="margin-left: 12pt;">Shade:</p>
+                                    <select>
+                                        <option value="0">Medium</option>
+                                        <option value ="1">Dark</option>
+                                        <option value="2">Light</option>
+                                    </select>
+                                    <p class="inline" style="margin-left: 12pt;">Color:</p>
+                                    <select>
+                                        <option value="0">Red</option>
+                                        <option value="1">Orange</option>
+                                        <option value="2">Yellow</option>
+                                        <option value="3">Green</option>
+                                        <option value="4">Teal</option>
+                                        <option value="5">Blue</option>
+                                        <option value="6">Purple</option>
+                                        <option value="7">Grey</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <div align="center">
+                                        <p class="inline">Start:</p> <input type="time">
+                                        <p class="inline" style="margin-left: 12pt;">End:</p> <input type="time">
+                                        <input type="text" value="MTWRFS" style="width: 40pt; margin-left: 6pt;">
+                                    </div>
+                                    <div align="center">
+                                        <input type="button" value="Add Time Slot" onclick= "addTimeSlot(this)" style="margin-left: 6pt;">
+                                        <input type="button" value="Remove Time Slot" onclick= "removeTimeSlot(this)" style="margin-left: 6pt;"> 
+                                    </div>
+                                </div>
+                                <div align="center">
+                                    <p class="inline">Group:</p> <input type="text" style="width: 60pt;">
+                                    <span style="white-space: nowrap;"> 
+                                        <p class="inline" style="margin-left: 12pt;">Note:</p> <input class="inline" type="text" style="width: 100pt; margin-left: 12pt;">
+                                    </span>
+                                </div>
+                            </div>
+                        </td></tr>`;
+
+    var blankTimeSlot = `<div align="center">
+                            <p class="inline">Start:</p> <input type="time">
+
+                            <p class="inline" style="margin-left: 12pt;">End:</p> <input type="time">
+
+                            <input type="text" value="MTWRFS" style="width: 40pt; margin-left: 6pt;">
+                        </div>`
+
+    //Draw Settings
+    const WIDTH = 2000;
+    const HEIGHT = 1200;
+    const TOP_MARGIN = 0.07;
+    const SIDE_MARGIN = 0.1;
+    const MAJOR_LINE_WIDTH = 6;
+    const MINOR_LINE_WIDTH = 2;
+    const DAY_COUNT = 6;
+
+    var weekDayStrings = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
+    var weekDayChars = ["m", "t", "w", "r", "f", "s", "u"];
+
+    var courseCount = 1;
+                    
+    var startTime = 0;
+    var endTime = 0; 
+    var minCredits = 0;
+    var maxCredits = 0;
+    var minCourses = 0;
+    var maxCourses = 0;
+    var mandatoryGroups = [];
+
+    var currentOptionViewed = undefined;
+    var allSchedules = undefined;
+
+
+    
+
+    class Course{
+        constructor(name, ID, crn, group, credits, starts, ends, days,  color, shade, notes){
+            this.name = name; 
+            this.ID = ID;
+            this.crn = crn; 
+            this.group = group; 
+            this.credits = credits; 
+            this.starts = starts; 
+            this.ends = ends; 
+            this.days = days;
+            this.shade = shade;
+            this.color = color;
+            this.notes = notes;
+        }
+
+        //Checks if two courses' time slots overlap or if they belong to the same group
+        collides(other){
+            if(this.group === other.group){
+                return false;
+            }
+
+            for(let i = 0; i < this.starts.length; i++){
+                for(let j = 0; j < other.starts.length; j++){
+                    
+                    if(daysOverlap(this.days[i], other.days[j]) ){
+                        //If the two courses overlap
+                        if((this.starts[i] >= other.starts[j] && this.starts[i] <= other.ends[j]) 
+                        || (other.starts[j] >= this.starts[i] && other.starts[j] <= this.ends[i])){
+                            return false;
+                        }
+                    }
+                }
+            }
+
+            return true;
+        }
+
+        copy(){
+            var newStarts = [...this.starts];
+            var newEnds = [...this.ends];
+            return new Course(this.name, this.ID, this.crn, this.group, this.credits, 
+                newStarts, newEnds, this.days, this.color, this.shade, this.notes);
+        }
+
+    }
+
+    class Schedule{
+        constructor(courses){
+            this.courses = courses;
+            this.count = courses.length;
+            this.credits = this.countCredits();
+            this.IDString = this.createIDString();
+        }
+
+        createIDString(){
+            var string = "ID";
+            for(let i = 0; i < this.count; i++){
+                string += " ";
+                string += this.courses[i].ID;
+            }
+
+            return string;
+        }
+
+        countCredits(){
+            let sum = 0;
+            for(let i = 0; i < this.count; i++){
+                sum += this.courses[i].credits;
+            }
+
+            return sum;
+        }
+
+        formsValidSchedule(course){
+            for(let i = 0; i < this.count; i++){
+                if(!this.courses[i].collides(course)){
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        createNewSchedule(course){
+            let newCourseArray = new Array();
+            
+            for(let i= 0; i < this.count; i++){
+                newCourseArray.push(this.courses[i].copy());
+            }
+            newCourseArray.push(course.copy());
+
+            //Sort the courses in the list by their number
+            newCourseArray.sort( function (a, b) {return a.ID - b.ID;} );
+
+            return new Schedule(newCourseArray);
+        }
+
+        hasMandatoryGroups(){
+            for(let i = 0; i < mandatoryGroups.length; i++){
+                var hasCurrentGroup = false;
+
+                for(let j = 0; j < this.count; j++){
+                    if(this.courses[j].group == mandatoryGroups[i]){
+                        hasCurrentGroup = true;
+                    }
+                }
+
+                if(!hasCurrentGroup){
+                    return false;
+                }
+            }
+            
+            return true;
+        }
+    
+        isInArray(array){
+            for(let i = 0; i < array.length; i++){
+                if( this.equals(array[i]) ){
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        equals(other){
+            return (this.IDString == other.IDString);
+        }
+    
+        createPossibilities(courses){
+            var newPossibilities = []
+            for(let i = 0; i < courses.length; i++){
+
+                if(this.formsValidSchedule(courses[i])){
+                    newPossibilities.push(this.createNewSchedule(courses[i]));
+                }
+            }
+
+            return newPossibilities;            
+        }
+    }
+
+    //////////////////////
+    // Button Functions //
+    //////////////////////
+
+    function fileSelected(){
+        var file = document.getElementById("saveFile").files[0];
+        var text = file.text();
+        text.then(function(text) { populateFields(text, true, false, true) })
+    }
+
+    function downloadSave(){
+        if(! updateSettings()){
+            return null;
+        }
+        
+        var courses = getCourseDatas();
+        if(courses === null){
+            return null;
+        } 
+
+        saveString = ""
+
+        saveString += startTime + ";";
+        saveString += endTime + ";";
+        saveString += minCourses + ";";
+        saveString += maxCourses + ";";
+        saveString += minCredits + ";";
+        saveString += maxCredits + ";";
+
+        for(let i = 0; i < mandatoryGroups.length; i++){
+            if(i != 0){saveString += ":"}
+            saveString += mandatoryGroups[i];
+        }
+        saveString += "\n";
+
+
+        for(let i = 0; i < courses.length; i++){
+            if(i != 0) saveString += "\n"
+
+            var currentCourse = courses[i]
+
+            saveString += currentCourse.crn + ";"; 
+            saveString += currentCourse.name + ";"; 
+            saveString += currentCourse.credits + ";"; 
+            saveString += currentCourse.shade + ";";
+            saveString += currentCourse.color + ";";
+            
+            for(let i = 0; i < currentCourse.starts.length; i++){
+                if(i!=0){saveString += ":";}
+                saveString += currentCourse.starts[i];
+            }
+            saveString += ";";
+
+            for(let i = 0; i < currentCourse.ends.length; i++){
+                if(i!=0){saveString += ":";}
+                saveString += currentCourse.ends[i];
+            }
+            saveString += ";";
+
+            for(let i = 0; i < currentCourse.days.length; i++){
+                if(i!=0){saveString += ":";}
+                saveString += currentCourse.days[i];
+            }
+            saveString += ";";
+            
+            saveString += currentCourse.group + ";"; 
+            saveString += currentCourse.notes;
+        }
+
+        download(saveString, "save.txt", "txt")
+
+
+    }
+    
+    function importCRNs(){
+        
+        url = "https://www.dylancarroll.net/other/scheduler/CRN_Data/"
+        termFile = document.getElementById("termSelect").value
+        url += termFile
+
+        fetch(url)
+            .then(response => response.blob())
+            .then(blob => blob.text())
+            .then(function(data) {extractCRNData(data)} );
+
+
+    }
+
+    function addTimeSlot(button){
+        var div = button.parentElement;
+
+        var template = document.createElement("template");
+        template.innerHTML = blankTimeSlot
+        var newTimeSlot = template.content.firstChild;
+
+        div.parentElement.insertBefore(newTimeSlot, div);
+    }
+
+    function removeTimeSlot(button){
+        var div = button.parentElement.parentElement;
+
+        var children = div.children;
+
+        if(children.length > 2){
+            children[children.length-2].remove();
+        }
+    }
+
+    function removeCourse(buttonObj){
+        var removeCourse;
+        
+        if(buttonObj == null){
+            if(courseCount>0){
+                var courseTableBody = document.getElementById("CourseTableBody");
+                removeCourse = courseTableBody.childNodes[courseTableBody.childNodes.length - 2];
+            }
+        }
+        else{
+            removeCourse = buttonObj.parentElement.parentElement.parentElement;
+        }
+        
+        removeCourse.remove();
+        courseCount -= 1;
+    }
+
+    function copyCourse(){
+        courseCount += 1;
+        var courseTableBody = document.getElementById("CourseTableBody");
+        var lastCourse = courseTableBody.childNodes[courseTableBody.childNodes.length - 2];
+        var buttonTR = courseTableBody.childNodes[courseTableBody.childNodes.length - 1];
+        
+        courseTableBody.insertBefore(lastCourse.cloneNode(true), buttonTR);
+    }
+
+    function addCourse(){
+        courseCount += 1;
+
+        var template = document.createElement("template");
+        template.innerHTML = blankCourseElement;
+        
+        var newCourseElement = template.content.firstChild;
+        
+        var courseTableBody = document.getElementById("CourseTableBody");
+        var buttonTR = courseTableBody.childNodes[courseTableBody.childNodes.length - 1];
+
+        courseTableBody.insertBefore(newCourseElement, buttonTR);
+    }
+ 
+    function calcOptions(){
+        if(! updateSettings()){
+            return null;
+        }
+        
+        var courses = getCourseDatas();
+        if(courses === null){
+            return null;
+        } 
+
+        //Create a list of lists with a layer for each number of courses
+        var layers = new Array();
+        for(let i = 0; i < maxCourses; i++){
+            layers.push(new Array());
+        }
+
+        //Populate the first layer with schedules with single courses
+        for(let i = 0; i < courses.length; i++){
+            layers[0].push( new Schedule([ courses[i] ]) );
+        }
+
+        for(let i = 1; i < maxCourses; i++){
+            var previousList = layers[i-1]
+            var currentList = layers[i];
+
+            for(let j = 0; j < previousList.length; j++){
+                var newPossibilities = previousList[j].createPossibilities(courses);
+
+                for(let k = 0; k < newPossibilities.length; k++){
+                    if( !newPossibilities[k].isInArray(currentList) ){
+                        currentList.push(newPossibilities[k]);
+                    }
+                }
+
+            }
+        }
+
+        //Add all valid schedules to the allSchedules array;
+
+        allSchedules = []
+        for(let i = minCourses-1; i <= maxCourses-1; i++){
+            var layer = layers[i];
+
+            for(let j = 0; j < layer.length; j++){
+                var schedule = layer[j];
+
+                if(schedule.credits >= minCredits && schedule.credits <= maxCredits && schedule.hasMandatoryGroups() ){
+                    allSchedules.push(schedule);
+                }
+            }
+        }
+
+        //Draw the correct schedules
+        currentOptionViewed = 0;
+
+        drawSchedule(currentOptionViewed);
+    }
+
+    function downloadAllImages(){
+        if(allSchedules === undefined){
+            alert("You must click calculate options first.")
+            return undefined;
+        }
+        
+        for(let i = 0; i < allSchedules.length; i++){
+            drawSchedule(i);
+            downloadCanvas(i);
+        }
+    }
+
+    function downloadImage(){
+        if(allSchedules === undefined){
+            alert("You must click calculate options first.")
+            return undefined;
+        }
+
+        drawSchedule(currentOptionViewed);
+        downloadCanvas(currentOptionViewed);
+    }
+
+    function showNext(){
+        if(allSchedules === undefined){
+            alert("You must click calculate options first.")
+            return undefined;
+        }
+
+        currentOptionViewed ++;
+
+        if(currentOptionViewed >= allSchedules.length){
+            currentOptionViewed = 0;
+        }
+
+        drawSchedule(currentOptionViewed);
+    }
+
+    function showPrev(){
+        if(allSchedules === undefined){
+            alert("You must click calculate options first.")
+            return undefined;
+        }
+        
+        currentOptionViewed --;
+
+        if(currentOptionViewed < 0){
+            currentOptionViewed = allSchedules.length-1;
+        }
+
+        drawSchedule(currentOptionViewed);
+    }
+
+    ///////////////////
+    // Program Logic //
+    ///////////////////
+
+    function extractCRNData(allCourses){
+        var crnStr = document.getElementById("crnList").value;
+        var crns = crnStr.split("\n");
+
+
+        var loadString = "";
+
+        for(let i = 0; i < crns.length; i++){
+            var regex = "~" +  crns[i] + ";.*";
+            
+            
+            matched = allCourses.match(regex)
+
+            if(matched == null){
+                alert("CRN " + crns[i] +" not found.");
+                continue;
+            }
+
+            if(i!=0){loadString+="\n";}
+            loadString += matched[0].replace("~", "");
+        }
+
+
+        loadString = "\n" + loadString; 
+
+        populateFields(loadString, false, true, false);
+    }
+
+    function populateFields(text, overwriteSettings, loadNameIntoGroup, removeExistingCourses){
+        
+        var courseList = text.split("\n");
+
+        if(overwriteSettings){
+            //Update Settings Field
+
+            var settings = courseList[0].split(";");
+    
+            var settingsTbody = document.getElementById("settingsTbody");
+
+            var row1 = settingsTbody.children[1];
+            var row2 = settingsTbody.children[2];
+            var row3 = settingsTbody.children[3];
+            
+            document.getElementById("StartTimeBox").value = minsToTime(parseInt(settings[0]));
+            document.getElementById("EndTimeBox").value = minsToTime(parseInt(settings[1])); 
+            document.getElementById("MinCourseBox").value = parseInt(settings[2]);
+            document.getElementById("MaxCourseBox").value = parseInt(settings[3]);
+            document.getElementById("MinCreditsBox").value = parseInt(settings[4]);
+            document.getElementById("MaxCreditsBox").value = parseInt(settings[5]);
+
+            document.getElementById("mandatoryGroups").value = settings[6].replace(":", "\n");
+        }
+
+        let totalNewCourses = courseList.length-1;
+        let oldCourseCount = courseCount;
+        if(!removeExistingCourses){
+            totalNewCourses += courseCount;
+        }
+
+        //Get to the correct number of courses
+        while(courseCount < totalNewCourses-1){
+            addCourse();
+        }
+        while(courseCount > totalNewCourses-1){
+            removeCourse();
+        }
+        
+
+        //Loop through and fill in all of the courses
+        var courseTableBody = document.getElementById("CourseTableBody");
+        var courseTDs = courseTableBody.children;
+
+        console.log(courseTDs);
+
+        for(let i = oldCourseCount-1; i < courseList.length-1 + oldCourseCount; i++){
+            var currentCourse = courseList[i+1 - (oldCourseCount-1)].split(";");
+            
+            var borderDiv = courseTDs[i].children[0].children[0];
+
+            var div1 = borderDiv.children[1];
+            var div2 = borderDiv.children[2];
+            var div3 = borderDiv.children[3];
+            var div4 = borderDiv.children[4];
+
+            div1.children[1].children[3].value = currentCourse[0]; //name
+            div1.children[1].children[1].value = currentCourse[1]; //crn
+            div2.children[1].value = currentCourse[2]; //credits
+            div2.children[3].value = currentCourse[3]; //shade
+            div2.children[5].value = currentCourse[4]; //color
+            
+            
+            var starts = currentCourse[5].split(":"); //starts
+            var ends = currentCourse[6].split(":"); //ends
+            var days = currentCourse[7].split(":"); //days
+
+            //Get to the correct number of time slots
+            var addButton = div3.children[div3.children.length-1].firstChild;
+            while(div3.children.length-1 < starts.length){
+                addTimeSlot(addButton);
+            }
+            while(div3.children.length-1 > starts.length){
+                removeTimeSlot(addButton);
+            }
+
+            for(let i = 0; i < div3.children.length-1; i++){
+                var currentDiv = div3.children[i];
+
+
+                currentDiv.children[1].value = minsToTime(starts[i]); //start
+                currentDiv.children[3].value = minsToTime(ends[i]); //end
+                currentDiv.children[4].value = days[i]; //day
+            }
+            
+            if(loadNameIntoGroup){currentCourse[8] = currentCourse[1]}
+            div4.children[1].value = currentCourse[8]; //group
+            
+
+            div4.children[2].children[1].value = currentCourse[9]; //notes
+
+        }
+    }
+
+    function updateSettings(){
+        var settingsTbody = document.getElementById("settingsTbody");
+
+        var row1 = settingsTbody.children[1];
+        var row2 = settingsTbody.children[2];
+        var row3 = settingsTbody.children[3];
+
+        var newStart = document.getElementById("StartTimeBox").value;
+        var newEnd =  document.getElementById("EndTimeBox").value;
+        var newMinCourses =  document.getElementById("MinCourseBox").value;
+        var newMaxCourses = document.getElementById("MaxCourseBox").value
+        var newMinCredits = document.getElementById("MinCreditsBox").value
+        var newMaxCredits = document.getElementById("MaxCreditsBox").value
+
+        mandatoryGroups = document.getElementById("mandatoryGroups").value.split("\n");
+
+       for(let i = 0; i < mandatoryGroups.length; i++){
+           if(mandatoryGroups[i] == ""){
+               mandatoryGroups.splice(i, 1);
+           }
+       }
+
+        if(! validateSettings(newMinCourses, newMaxCourses, newMinCredits, newMaxCredits) ){
+            return false;
+        }
+        else{
+            startTime = timeToMins(newStart);
+            endTime = timeToMins(newEnd);
+            minCourses = parseInt(newMinCourses);
+            maxCourses = parseInt(newMaxCourses);
+            minCredits = parseInt(newMinCredits);
+            maxCredits = parseInt(newMaxCredits);
+
+            return true;
+        }
+        
+    }
+
+    //TODO: Check the bounds of the values
+    function validateSettings(start, end, minCourses, maxCourses, minCredits, maxCredits){
+        if(minCourses === ""){
+            alert("Min courses can't be empty");
+            return false;
+        }
+        else if(maxCourses === ""){
+            alert("Max courses can't be empty");
+            return false;
+        }
+        else if(minCredits === ""){
+            alert("Min Credits can't be empty");
+            return false;
+        }
+        else if(maxCredits === ""){
+            alert("Max Credits can't be empty");
+            return false;
+        }
+        else{
+            return true;
+        }
+    }
+
+    function validateCourseForm(course, name, crn, credits, starts, ends){
+        
+        for(let i = 0; i < starts.length; i++){
+            
+            if(starts[i] === ""){
+                alert("Course " + course + " start time can't be empty");
+                return false;
+            }
+            
+            if(ends[i] === ""){
+                alert("Course " + course + " end time can't be empty");
+                return false;
+            }
+        }
+        
+        if(name === ""){
+            alert("Course " + course + " name can't be empty");
+            return false;
+        }
+        else if(crn === ""){
+            alert("Course " + course + " CRN can't be empty");
+            return false;
+        }
+        else if(credits === ""){
+            alert("Course " + course + " credits can't be empty");
+            return false;
+        }
+        else{
+            return true;
+        }
+
+        
+    }
+
+    function getCourseDatas(){
+        var courseTableBody = document.getElementById("CourseTableBody");
+        var courseTDs = courseTableBody.children;
+
+        var courses = []
+
+        var minStart = null;
+        var maxEnd = null;
+
+        for(let i = 0; i < courseTDs.length; i++){
+            var borderDiv = courseTDs[i].children[0].children[0];
+
+            var div1 = borderDiv.children[1];
+            var div2 = borderDiv.children[2];
+            var div3 = borderDiv.children[3];
+            var div4 = borderDiv.children[4];
+
+            var name = div1.children[1].children[1].value;
+            var crn = div1.children[1].children[3].value;
+            var credits = div2.children[1].value;
+            var shade = div2.children[3].value;
+            var color = div2.children[5].value;
+            
+            
+            var rawStarts = [];
+            var rawEnds = [];
+            var days = [];
+
+            for(let i = 0; i < div3.children.length-1; i++){
+                var currentDiv = div3.children[i];
+
+                rawStarts.push(currentDiv.children[1].value);
+                rawEnds.push(currentDiv.children[3].value);
+                days.push(currentDiv.children[4].value.toLowerCase());
+            }
+            
+            
+            var group = div4.children[1].value;
+            var notes = div4.children[2].children[1].value;
+
+
+            if(! validateCourseForm(i+1, name, crn, credits, rawStarts, rawEnds)){
+                return null;
+            }
+
+            var starts = [];
+            var ends = [];
+
+            for(let i = 0; i < rawStarts.length; i++){
+                var startMins = timeToMins(rawStarts[i]);
+                var endMins = timeToMins(rawEnds[i]);
+                
+                
+
+                starts.push(startMins);
+                ends.push(endMins);
+
+                //If the times weren't selected, automatically fill them in with the min and maxes.
+                if(startTime === null && (minStart===null || minStart>startMins)){
+                    minStart = startMins;
+                }
+                if(endTime === null && (maxEnd===null || maxEnd<endMins)){
+                    maxEnd = endMins;
+                }
+            }
+
+            if(group == ""){
+                group = i.toString();
+            }
+            
+            var newCourse = new Course(name, i, crn, group, parseInt(credits), starts, ends, days, color, shade, notes);
+            courses.push( newCourse );
+
+        }
+
+        if(startTime===null){
+            startTime = minStart - 15;
+        }
+        if(endTime===null){
+            endTime = maxEnd + 15;
+        }
+
+        return courses;
+    }
+
+    function timeToMins(time){
+        if(time == ""){
+            return null;
+        }
+        
+        var splitTime = time.split(":");
+        var hour = splitTime[0];
+        var minute = splitTime[1];
+        return parseInt(hour)*60 + parseInt(minute);
+    }
+
+    function minsToTime(mins){
+        var hours = Math.floor(mins/60);
+        var minutes = mins - (hours*60);
+        var minutesString = minutes.toString();
+        if(minutesString.length ==1 )(minutesString = 0 + minutesString)
+        
+        var hoursString = hours.toString()
+        if(hoursString.length ==1 )(hoursString = 0 + hoursString)
+
+        return hoursString + ":" + minutesString; 
+    }
+
+    function minsToPrettyTime(mins){
+        var hours = Math.floor(mins/60);
+        var minutes = mins - (hours*60);
+        
+        var AMPM = "";
+        if(hours > 12){
+            hours -= 12;
+            AMPM = "PM"
+        }
+        else{
+            AMPM = "AM"
+        }
+
+        var minutesString = minutes.toString();
+        if(minutesString.length ==1 )(minutesString = 0 + minutesString)
+        
+        var hoursString = hours.toString()
+        if(hoursString.length ==1 )(hoursString = " " + hoursString)
+
+        return hoursString + ":" + minutesString + " " + AMPM; 
+    }
+
+    function colStrToRGB(shadeStr, colorIndStr){
+        //Select the correct color from this list
+
+
+        var colors = [ [[212, 21, 21], [150,0,0], [255,128,128]], //Red
+                       [[255,128,0], [148,74,0], [255, 175, 94]], //Orange
+                       [[255, 230, 0], [224, 183, 0], [255, 255, 92]], //Yellow
+                       [ [43,179,43], [83,219,83], [0,130,0]], //Green
+                       [[11,230,226], [23,156,153], [161, 255, 252]], //Teal
+                       [[0,115,255], [0,78,194], [74,167,255]], //Blue
+                       [[162,23,255], [83,0,138], [223,64,255]], //Purple
+                       [[128,128,128], [64,64,64], [191,191,191]]] //Grey
+
+
+        return colors[parseInt(colorIndStr)][parseInt(shadeStr)]
+    }
+
+    function daysOverlap(days1, days2){
+        for(let i = 0; i < days1.length; i++){
+            if (days2.toLowerCase().includes( days1.toLowerCase().charAt(i) ) ){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    // Function to download data to a file
+    //Thanks Stack Overflow: https://stackoverflow.com/questions/13405129/javascript-create-and-save-file    
+    function download(data, filename, type) {
+        var file = new Blob([data], {type: type});
+        if (window.navigator.msSaveOrOpenBlob) // IE10+
+            window.navigator.msSaveOrOpenBlob(file, filename);
+        else { // Others
+            var a = document.createElement("a"),
+                    url = URL.createObjectURL(file);
+            a.href = url;
+            a.download = filename;
+            document.body.appendChild(a);
+            a.click();
+            setTimeout(function() {
+                document.body.removeChild(a);
+                window.URL.revokeObjectURL(url);  
+            }, 0); 
+        }
+    }
+    
+    //TODO: Add information about the schedule in the top bar
+    function drawSchedule(scheduleIndex){        
+        var canvas = document.getElementById("MainCanvas");
+        var ctx = canvas.getContext("2d");
+
+        canvas.width = WIDTH;
+        canvas.height = HEIGHT;
+
+        var dayWidth = (WIDTH*(1-SIDE_MARGIN))/DAY_COUNT;
+        
+        var hourCount = (endTime - startTime)/60.0;
+        
+        var hourHeight = (HEIGHT*(1-TOP_MARGIN)) / hourCount;
+
+        var topMarginOffset = HEIGHT*TOP_MARGIN
+        var sideMarginOffset = WIDTH*SIDE_MARGIN
+
+
+        let schedule = allSchedules[scheduleIndex];
+
+        
+        
+        if(schedule === undefined){
+
+
+            var fontSize = WIDTH/30;
+            ctx.font = fontSize + "px Arial";
+
+            
+            ctx.fillText("No options found.", WIDTH/3, HEIGHT/3);
+
+
+            ctx.fillText("Things to try: ", WIDTH/4, HEIGHT/3 + fontSize*2);
+            ctx.fillText("  • Change course count or credit requirements.", WIDTH/4, HEIGHT/3 + fontSize*3);
+            ctx.fillText("  • Remove mandatory groups.", WIDTH/4, HEIGHT/3 + fontSize*4);
+            ctx.fillText("  • Add more sections.", WIDTH/4, HEIGHT/3 + fontSize*5);
+
+        }
+        else{
+
+            ctx.fillStyle = "#FFFFFF";
+            ctx.fillRect(0, 0, WIDTH, HEIGHT);
+            
+            ctx.lineWidth = MAJOR_LINE_WIDTH;
+            ctx.fillStyle = "#000000";
+            
+            //Create top margin
+            ctx.beginPath();
+            ctx.moveTo(sideMarginOffset , 0);
+            ctx.lineTo(sideMarginOffset, HEIGHT);
+            ctx.stroke();
+
+            ctx.beginPath();
+            ctx.moveTo(0 , topMarginOffset);
+            ctx.lineTo(WIDTH, topMarginOffset);
+            ctx.stroke();
+
+            ctx.beginPath();
+            ctx.moveTo(0 , 0);
+            ctx.lineTo(WIDTH , 0);
+            ctx.lineTo(WIDTH , HEIGHT);
+            ctx.lineTo(0 , HEIGHT);
+            ctx.lineTo(0 , 0);
+            ctx.stroke();
+
+            var fontSize = Math.floor(topMarginOffset / 2.5);
+            ctx.font = fontSize + "px Arial";
+
+            ctx.fillText("Option " + (scheduleIndex+1), fontSize*0.5, fontSize*1.2)
+            ctx.fillText(schedule.credits + " credits", fontSize*0.5, fontSize*2.2)
+
+
+            var fontSize = Math.floor(topMarginOffset / 2);
+            ctx.font = fontSize + "px Arial";
+
+
+            //Draw Vertical Lines
+            for(let day = 1; day <= DAY_COUNT; day++){
+                let xPos = sideMarginOffset + dayWidth*day;
+
+                ctx.fillText(weekDayStrings[day-1], xPos-dayWidth*0.95, topMarginOffset*0.70)
+
+                ctx.beginPath();
+                ctx.moveTo(xPos , 0);
+                ctx.lineTo(xPos, HEIGHT);
+                ctx.stroke();
+            }
+            var fontSize = Math.floor(dayWidth / 11) + "px";
+            ctx.font = fontSize + " Arial";
+            ctx.lineWidth = MINOR_LINE_WIDTH;
+
+            var startHourOffset = (Math.ceil(startTime/60)-(startTime/60)) * hourHeight
+
+            console.log( Math.ceil(startTime/60) - (startTime/60));
+            console.log(startHourOffset);
+            //Draw horizontal lines
+            for(let hour = 0; hour < hourCount+1; hour++){
+                let yPos = topMarginOffset + hourHeight*hour + startHourOffset;
+
+                if(hour != 0){
+                    var time = minsToPrettyTime( (Math.ceil(startTime/60) + (hour-1)) *60);
+                    ctx.fillText(time, sideMarginOffset*0.22, yPos-hourHeight+ 2*Math.floor(dayWidth / 11) );
+                }
+
+                ctx.beginPath();
+                ctx.moveTo(0 , yPos);
+                ctx.lineTo(WIDTH, yPos);
+                ctx.stroke();
+            }
+
+            for(let i = 0; i < schedule.count; i++){
+                drawCourse( schedule.courses[i], ctx, dayWidth, hourHeight, sideMarginOffset, topMarginOffset)
+            }
+        }
+
+    }
+
+    function drawCourse(course, ctx, dayWidth, hourHeight, sideMarginOffset, topMarginOffset){
+        
+        for(let i = 0; i < course.days.length; i++){
+            for(let day = 0; day < DAY_COUNT; day++){
+                var onDay = daysOverlap(course.days[i], weekDayChars[day])
+
+                if(onDay){
+                    var xPos = sideMarginOffset + dayWidth*day;
+                    var yPos = topMarginOffset + (hourHeight*(course.starts[i]-startTime)/60);
+
+                    var color = colStrToRGB(course.shade, course.color);
+
+                    ctx.fillStyle = `rgb(
+                        ${color[0]},
+                        ${color[1]},
+                        ${color[2]})`
+
+
+                    var duration = (course.ends[i] - course.starts[i])/60
+                    ctx.fillRect(xPos + MAJOR_LINE_WIDTH/2, yPos, dayWidth - MAJOR_LINE_WIDTH, duration*hourHeight);
+
+                    ctx.fillStyle = findTextColor(color);
+                    
+
+                    
+                    //var fontSize = Math.floor(hourHeight /4);
+                    var fontSize = Math.floor(dayWidth / 11);
+                    ctx.font = fontSize + "px Arial";
+                
+                    
+                    var notes = course.notes;
+                    var notes2 = ""
+
+                    console.log(ctx.measureText(notes));
+
+                    while(ctx.measureText(notes).width >= dayWidth*.9){
+                        notes2 = notes[notes.length-1] + notes2;
+                        notes = notes.substr(0, notes.length-1);
+                    }
+
+                    ctx.fillText(course.name, xPos + fontSize/2, yPos + fontSize*1.1);
+                    ctx.fillText(course.crn + " - " + course.credits, xPos + fontSize/2, yPos + fontSize*2.1);
+                    ctx.fillText(notes, xPos + fontSize/2, yPos + fontSize*3.1);
+                    ctx.fillText(notes2, xPos + fontSize/2, yPos + fontSize*4.1);
+                }
+            }
+        }
+    }
+
+    function findTextColor(color){
+        if( (0.299*color[0] + 0.587*color[1] + 0.114*color[2]) > 128 ){
+            return "#000000";
+        }
+        else{
+            return "#E0E0E0";
+        }
+    }
+
+    function downloadCanvas(i){
+        
+        
+        var canvas = document.getElementById("MainCanvas");
+        var link = document.createElement('a');
+        link.download = "Option_" + (i+1) +  '.png';
+        link.href = canvas.toDataURL();
+        link.click();
+
+        link.remove();
+    }
+</script>
+</body>
+
+</html>
