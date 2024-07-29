@@ -18,19 +18,10 @@ const style = {
 export const CourseSelect = ({ course }) => {
   const { courses, setCourses } = useContext(CourseContext);
   const [open, setOpen] = useState(false);
-  const [courseDetails, setCourseDetails] = useState({
-    name: course,
-    credits: "",
-    semester: "",
-  });
+  const [courseDetails, setCourseDetails] = useState(course);
 
-  const handleOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-  };
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -42,95 +33,45 @@ export const CourseSelect = ({ course }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Submitting form with details:", courseDetails);
+    const updatedCourses = courses.map((c) =>
+      c.name === course.name ? courseDetails : c
+    );
+    setCourses(updatedCourses);
     handleClose();
   };
 
   const handleEliminate = () => {
-    const updatedCourses = courses.filter((c) => c !== course);
+    const updatedCourses = courses.filter((c) => c.name !== course.name);
     setCourses(updatedCourses);
     handleClose();
   };
 
   return (
-    <div
-      className="course-box text-white p-2 m-1 border border-white cursor-pointer"
-      onClick={handleOpen}
-    >
-      {course}
-
-      <Modal
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-      >
+    <div className="course-box text-white p-2 m-1 border border-white cursor-pointer" onClick={handleOpen}>
+      {course.name}
+      <Modal open={open} onClose={handleClose}>
         <Box sx={style}>
-          <h2 id="modal-modal-title">Edit Course</h2>
+          <h2>Edit Course</h2>
           <form onSubmit={handleSubmit}>
             <div className="mb-4">
-              <label htmlFor="name" className="block text-black">
-                Course Name
-              </label>
-              <input
-                type="text"
-                name="name"
-                id="name"
-                value={courseDetails.name}
-                onChange={handleChange}
-                className="border border-gray-300 rounded-md p-2 w-full"
-              />
+              <label htmlFor="name" className="block text-black">Course Name</label>
+              <input type="text" name="name" id="name" value={courseDetails.name} onChange={handleChange} required className="border border-gray-300 rounded-md p-2 w-full" />
             </div>
             <div className="mb-4">
-              <label htmlFor="credits" className="block text-black">
-                Credits
-              </label>
-              <input
-                type="number"
-                name="credits"
-                id="credits"
-                value={courseDetails.credits}
-                onChange={handleChange}
-                className="border border-gray-300 rounded-md p-2 w-full"
-              />
+              <label htmlFor="credits" className="block text-black">Credits</label>
+              <input type="number" name="credits" id="credits" value={courseDetails.credits} onChange={handleChange} required className="border border-gray-300 rounded-md p-2 w-full" />
             </div>
             <div className="mb-4">
-              <label htmlFor="semester" className="block text-black">
-                Semester
-              </label>
-              <input
-                type="text"
-                name="semester"
-                id="semester"
-                value={courseDetails.semester}
-                onChange={handleChange}
-                className="border border-gray-300 rounded-md p-2 w-full"
-              />
+              <label htmlFor="semester" className="block text-black">Semester</label>
+              <input type="text" name="semester" id="semester" value={courseDetails.semester} onChange={handleChange} required className="border border-gray-300 rounded-md p-2 w-full" />
             </div>
-            <button type="submit" className="mr-2">
-              Save
-            </button>
-            <button
-              type="button"
-              onClick={(e) => {
-                e.stopPropagation();
-                console.log("Close button clicked");
-                handleClose();
-              }}
-            >
-              Close
-            </button>
-            <button
-              type="button"
-              onClick={(e) => {
-                e.stopPropagation();
-                console.log("Eliminate button clicked");
-                handleEliminate();
-              }}
-              className="ml-2 bg-red-500 text-white p-2 rounded-md"
-            >
-              Eliminate
-            </button>
+            <div className="mb-4">
+              <label htmlFor="classesPerWeek" className="block text-black">Classes Per Week</label>
+              <input type="number" name="classesPerWeek" id="classesPerWeek" value={courseDetails.classesPerWeek} onChange={handleChange} required className="border border-gray-300 rounded-md p-2 w-full" />
+            </div>
+            <button type="submit" className="mr-2">Save</button>
+            <button type="button" onClick={handleClose}>Close</button>
+            <button type="button" onClick={handleEliminate} className="ml-2 bg-red-500 text-white p-2 rounded-md">Eliminate</button>
           </form>
         </Box>
       </Modal>
