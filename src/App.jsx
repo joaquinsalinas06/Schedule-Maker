@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { CourseList } from "./components/Courses/CourseList";
 import { SemesterForm } from "./components/SemesterForm";
 import { CourseContext } from "./contexts/CourseContext";
-import { Schedule } from "./components/Schedule";
+import { ScheduleComponent } from "./components/Schedule";
 import { CourseOptions } from "./components/Courses/CourseOptions";
 
 function App() {
@@ -14,7 +14,7 @@ function App() {
       <CourseList />
       <button onClick={() => console.log(courses)}>Log Courses</button>
       <CourseOptions />
-      <Schedule />
+      <ScheduleComponent />
     </>
   );
 }

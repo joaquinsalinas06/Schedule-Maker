@@ -1,8 +1,8 @@
 import React, { useContext, useState } from "react";
 import { CourseSelect } from "./CourseSelect";
-import { CourseContext } from "../../contexts/CourseContext";
 import Modal from "@mui/material/Modal";
 import Box from "@mui/material/Box";
+import { CourseContext } from "../../contexts/CourseContext";
 
 const style = {
   position: "absolute",
@@ -23,7 +23,7 @@ export const CourseList = () => {
     name: "",
     credits: "",
     semester: "",
-    classesPerWeek: ""
+    classesPerWeek: "",
   });
 
   const handleOpen = () => setOpen(true);

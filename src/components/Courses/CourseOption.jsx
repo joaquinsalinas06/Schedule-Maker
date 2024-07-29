@@ -5,7 +5,11 @@ export const CourseOption = () => {
   const [numClasses, setNumClasses] = useState(1);
   const [selectedCourse, setSelectedCourse] = useState("");
   const [sectionName, setSectionName] = useState("");
-  const { courses } = useContext(CourseContext);
+  const [professor, setProfessor] = useState("");
+  const [days, setDays] = useState([]);
+  const [startTimes, setStartTimes] = useState([]);
+  const [endTimes, setEndTimes] = useState([]);
+  const { courses, addCourse } = useContext(CourseContext);
 
   const handleCourseChange = (event) => {
     const selectedCourseName = event.target.value;
@@ -18,6 +22,49 @@ export const CourseOption = () => {
 
   const handleSectionChange = (event) => {
     setSectionName(event.target.value);
+  };
+
+  const handleProfessorChange = (event) => {
+    setProfessor(event.target.value);
+  };
+
+  const handleDayChange = (index, event) => {
+    const newDays = [...days];
+    newDays[index] = event.target.value;
+    setDays(newDays);
+  };
+
+  const handleStartTimeChange = (index, event) => {
+    const newStartTimes = [...startTimes];
+    newStartTimes[index] = event.target.value;
+    setStartTimes(newStartTimes);
+  };
+
+  const handleEndTimeChange = (index, event) => {
+    const newEndTimes = [...endTimes];
+    newEndTimes[index] = event.target.value;
+    setEndTimes(newEndTimes);
+  };
+
+  const handleAddCourse = () => {
+    const course = {
+      name: selectedCourse,
+      section: sectionName,
+      professor: professor,
+      days: days,
+      startTimes: startTimes,
+      endTimes: endTimes,
+      classesPerWeek: numClasses
+    };
+    console.log(courses)
+    addCourse(course);
+    console.log(courses)
+    setSelectedCourse("");
+    setSectionName("");
+    setProfessor("");
+    setDays([]);
+    setStartTimes([]);
+    setEndTimes([]);
   };
 
   useEffect(() => {
@@ -63,15 +110,28 @@ export const CourseOption = () => {
         </div>
 
         <div>
-          <label htmlFor="teacher" className="block text-sm font-medium text-gray-700">Professor:</label>
-          <input type="text" name="teacher" id="teacher" className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm" />
+          <label htmlFor="professor" className="block text-sm font-medium text-gray-700">Professor:</label>
+          <input 
+            type="text" 
+            name="professor" 
+            id="professor" 
+            value={professor} 
+            onChange={handleProfessorChange} 
+            className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm" 
+          />
         </div>
 
         {[...Array(numClasses)].map((_, index) => (
           <div key={index} className="space-y-2">
             <div>
               <label htmlFor={`day-${index}`} className="block text-sm font-medium text-gray-700">Day {index + 1}:</label>
-              <select name={`day-${index}`} id={`day-${index}`} className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+              <select
+                name={`day-${index}`}
+                id={`day-${index}`}
+                value={days[index] || ""}
+                onChange={(e) => handleDayChange(index, e)}
+                className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+              >
                 <option value="Monday">Monday</option>
                 <option value="Tuesday">Tuesday</option>
                 <option value="Wednesday">Wednesday</option>
@@ -82,26 +142,38 @@ export const CourseOption = () => {
             </div>
 
             <div>
-              <label htmlFor={`initialTime-${index}`} className="block text-sm font-medium text-gray-700">Initial Time {index + 1}:</label>
+              <label htmlFor={`startTime-${index}`} className="block text-sm font-medium text-gray-700">Start Time {index + 1}:</label>
               <input
                 type="time"
-                name={`initialTime-${index}`}
-                id={`initialTime-${index}`}
+                name={`startTime-${index}`}
+                id={`startTime-${index}`}
+                value={startTimes[index] || ""}
+                onChange={(e) => handleStartTimeChange(index, e)}
                 className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
               />
             </div>
 
             <div>
-              <label htmlFor={`finalTime-${index}`} className="block text-sm font-medium text-gray-700">Final Time {index + 1}:</label>
+              <label htmlFor={`endTime-${index}`} className="block text-sm font-medium text-gray-700">End Time {index + 1}:</label>
               <input
                 type="time"
-                name={`finalTime-${index}`}
-                id={`finalTime-${index}`}
+                name={`endTime-${index}`}
+                id={`endTime-${index}`}
+                value={endTimes[index] || ""}
+                onChange={(e) => handleEndTimeChange(index, e)}
                 className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
               />
             </div>
           </div>
         ))}
+
+        <button
+          type="button"
+          onClick={handleAddCourse}
+          className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+        >
+          Add Course
+        </button>
       </form>
     </div>
   );
