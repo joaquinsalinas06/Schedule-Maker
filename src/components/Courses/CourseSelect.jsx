@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
-import { CourseContext } from "../contexts/CourseContext";
+import { CourseContext } from "../../contexts/CourseContext";
 
 const style = {
   position: "absolute",
