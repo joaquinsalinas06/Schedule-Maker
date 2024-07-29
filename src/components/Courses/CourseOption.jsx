@@ -1,7 +1,9 @@
 import React, { useState, useContext, useEffect } from "react";
 import { CourseContext } from "../../contexts/CourseContext";
+import { DetailedCourseContext } from "../../contexts/DetailedCourseContext";
 
 export const CourseOption = () => {
+  const [showButton, setShowButton] = useState(true);
   const [numClasses, setNumClasses] = useState(1);
   const [selectedCourse, setSelectedCourse] = useState("");
   const [sectionName, setSectionName] = useState("");
@@ -9,7 +11,8 @@ export const CourseOption = () => {
   const [days, setDays] = useState([]);
   const [startTimes, setStartTimes] = useState([]);
   const [endTimes, setEndTimes] = useState([]);
-  const { courses, addCourse } = useContext(CourseContext);
+  const { courses } = useContext(CourseContext);
+  const { addDetailedCourse } = useContext(DetailedCourseContext);
 
   const handleCourseChange = (event) => {
     const selectedCourseName = event.target.value;
@@ -47,24 +50,20 @@ export const CourseOption = () => {
   };
 
   const handleAddCourse = () => {
+    const selectedCourseData = courses.find(course => course.name === selectedCourse);
     const course = {
       name: selectedCourse,
       section: sectionName,
       professor: professor,
-      days: days,
+      days: days.length > 0 ? days : Array(numClasses).fill("Monday"),
       startTimes: startTimes,
       endTimes: endTimes,
+      credits: selectedCourseData ? selectedCourseData.credits : null,
+      semester: selectedCourseData ? selectedCourseData.semester : null,
       classesPerWeek: numClasses
     };
-    console.log(courses)
-    addCourse(course);
-    console.log(courses)
-    setSelectedCourse("");
-    setSectionName("");
-    setProfessor("");
-    setDays([]);
-    setStartTimes([]);
-    setEndTimes([]);
+    addDetailedCourse(course);
+    setShowButton(false);
   };
 
   useEffect(() => {
@@ -75,6 +74,18 @@ export const CourseOption = () => {
       }
     }
   }, [courses, selectedCourse]);
+
+  const isFormComplete = () => {
+    if (!selectedCourse || !sectionName || !professor) {
+      return false;
+    }
+    for (let i = 0; i < numClasses; i++) {
+      if (!days[i] || !startTimes[i] || !endTimes[i]) {
+        return false;
+      }
+    }
+    return true;
+  };
 
   return (
     <div className="border border-double border-gray-300 rounded-lg p-6 w-4/5 mx-auto my-4 bg-white shadow-md">
@@ -87,6 +98,7 @@ export const CourseOption = () => {
             onChange={handleCourseChange}
             value={selectedCourse}
             className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+            required
           >
             <option value="">Select a course</option>
             {courses.map((course, index) => (
@@ -105,7 +117,8 @@ export const CourseOption = () => {
             id="section" 
             value={sectionName} 
             onChange={handleSectionChange} 
-            className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm" 
+            className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+            required 
           />
         </div>
 
@@ -117,7 +130,8 @@ export const CourseOption = () => {
             id="professor" 
             value={professor} 
             onChange={handleProfessorChange} 
-            className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm" 
+            className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+            required 
           />
         </div>
 
@@ -131,7 +145,9 @@ export const CourseOption = () => {
                 value={days[index] || ""}
                 onChange={(e) => handleDayChange(index, e)}
                 className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                required
               >
+                <option value="">Select Day</option>
                 <option value="Monday">Monday</option>
                 <option value="Tuesday">Tuesday</option>
                 <option value="Wednesday">Wednesday</option>
@@ -150,6 +166,7 @@ export const CourseOption = () => {
                 value={startTimes[index] || ""}
                 onChange={(e) => handleStartTimeChange(index, e)}
                 className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                required
               />
             </div>
 
@@ -162,18 +179,22 @@ export const CourseOption = () => {
                 value={endTimes[index] || ""}
                 onChange={(e) => handleEndTimeChange(index, e)}
                 className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                required
               />
             </div>
           </div>
         ))}
 
-        <button
-          type="button"
-          onClick={handleAddCourse}
-          className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
-        >
-          Add Course
-        </button>
+        {showButton && (
+          <button
+            type="button"
+            onClick={handleAddCourse}
+            className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+            disabled={!isFormComplete()}
+          >
+            Add Course
+          </button>
+        )}
       </form>
     </div>
   );

@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { CourseContext } from "../contexts/CourseContext";
+import { DetailedCourseContext } from "../contexts/DetailedCourseContext";
 
 class Course {
   constructor(name, credits, semester, classesPerWeek, section, professor, days, startTimes, endTimes) {
@@ -16,8 +16,7 @@ class Course {
   }
 
   collides(other) {
-    console.log("Checking collision between", this, "and", other);
-    if (this.name === other.name && this.section === other.section) {
+    if (this.section === other.section) {
       return false;
     }
 
@@ -80,16 +79,16 @@ const daysOverlap = (days1, days2) => {
 };
 
 export const ScheduleComponent = () => {
-  const { courses } = useContext(CourseContext);
+  const { detailedCourses } = useContext(DetailedCourseContext);
   const [schedules, setSchedules] = useState([]);
   const [currentScheduleIndex, setCurrentScheduleIndex] = useState(0);
 
   const generateSchedules = () => {
     console.log("Generating schedules...");
-    console.log("Courses:", courses);
+    console.log("Detailed Courses:", detailedCourses);
 
     let courseList = [];
-    for (let course of courses) {
+    for (let course of detailedCourses) {
       const newCourse = new Course(
         course.name,
         course.credits,
