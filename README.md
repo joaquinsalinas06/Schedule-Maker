@@ -8,4 +8,4 @@ The University Schedule Generator automates the process of selecting a schedule 
 
 ## Credits
 
-This project is an adaptation of the code created by Dylan Carroll. We are grateful to Dylan for his generosity in allowing us to use his code as a base for this project. Check out his work on [GitHub](https://github.com/DylanScottCarroll/) and his [website](https://www.dylancarroll.net/).
+This project is an adaptation of the code created by Dylan Carroll. I'm grateful to Dylan for his generosity in allowing us to use his code as a base for this project. Check out his work on [GitHub](https://github.com/DylanScottCarroll/) and his [website](https://www.dylancarroll.net/).
