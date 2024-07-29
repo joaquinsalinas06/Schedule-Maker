@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import { CourseContext } from "../contexts/CourseContext";
+import { CourseContext } from "../../contexts/CourseContext";
 
 export const CourseOption = () => {
   const [numClasses, setNumClasses] = useState(1);
