@@ -12,7 +12,6 @@ class Course {
     this.days = days || [];
     this.startTimes = startTimes || [];
     this.endTimes = endTimes || [];
-    console.log("Course created:", this);
   }
 
   collides(other) {
@@ -43,7 +42,6 @@ class Schedule {
     this.count = courses.length;
     this.credits = this.countCredits();
     this.IDString = this.createIDString();
-    console.log("Schedule created:", this);
   }
 
   createIDString() {
@@ -55,7 +53,6 @@ class Schedule {
   }
 
   formsValidSchedule(course) {
-    console.log("Checking if course can be added to schedule:", course, this);
     return this.courses.every(existingCourse => !existingCourse.collides(course));
   }
 
@@ -69,7 +66,6 @@ class Schedule {
 }
 
 const daysOverlap = (days1, days2) => {
-  console.log("Checking days overlap between", days1, "and", days2);
   for (let i = 0; i < days1.length; i++) {
     if (days2.toLowerCase().includes(days1.toLowerCase().charAt(i))) {
       return true;
@@ -84,11 +80,12 @@ export const ScheduleComponent = () => {
   const [currentScheduleIndex, setCurrentScheduleIndex] = useState(0);
 
   const generateSchedules = () => {
-    console.log("Generating schedules...");
-    console.log("Detailed Courses:", detailedCourses);
+    let groupedCourses = {};
 
-    let courseList = [];
     for (let course of detailedCourses) {
+      if (!groupedCourses[course.name]) {
+        groupedCourses[course.name] = [];
+      }
       const newCourse = new Course(
         course.name,
         course.credits,
@@ -100,48 +97,30 @@ export const ScheduleComponent = () => {
         course.startTimes,
         course.endTimes
       );
-      courseList.push(newCourse);
+      groupedCourses[course.name].push(newCourse);
     }
 
-    console.log("Course List:", courseList);
+    let courseGroups = Object.values(groupedCourses);
+    let allSchedules = [];
 
-    let layers = new Array(courseList.length).fill(null).map(() => []);
-    console.log("Layers initialized:", layers);
-
-    for (let i = 0; i < courseList.length; i++) {
-      layers[0].push(new Schedule([courseList[i]]));
-    }
-
-    console.log("First layer populated:", layers[0]);
-
-    for (let i = 1; i < courseList.length; i++) {
-      let previousLayer = layers[i - 1];
-      let currentLayer = layers[i];
-
-      for (let schedule of previousLayer) {
-        for (let course of courseList) {
-          let newSchedule = schedule.addCourse(course);
-          if (newSchedule && !currentLayer.some(sch => sch.IDString === newSchedule.IDString)) {
-            currentLayer.push(newSchedule);
-          }
-        }
+    const generateCombinations = (groupIndex, currentSchedule) => {
+      if (groupIndex === courseGroups.length) {
+        allSchedules.push(currentSchedule);
+        return;
       }
 
-      console.log(`Layer ${i} populated:`, currentLayer);
-    }
-
-    let validSchedules = [];
-    for (let layer of layers) {
-      for (let schedule of layer) {
-        if (!validSchedules.some(sch => sch.IDString === schedule.IDString)) {
-          validSchedules.push(schedule);
+      for (let course of courseGroups[groupIndex]) {
+        if (currentSchedule.formsValidSchedule(course)) {
+          let newSchedule = currentSchedule.addCourse(course);
+          generateCombinations(groupIndex + 1, newSchedule);
         }
       }
-    }
+    };
 
-    console.log("Valid Schedules:", validSchedules);
+    let initialSchedule = new Schedule([]);
+    generateCombinations(0, initialSchedule);
 
-    setSchedules(validSchedules);
+    setSchedules(allSchedules);
     setCurrentScheduleIndex(0);
   };
 
@@ -170,8 +149,15 @@ export const ScheduleComponent = () => {
             <h2 className="text-white">Schedule {currentScheduleIndex + 1}</h2>
             <ul className="text-white">
               {schedules[currentScheduleIndex].courses.map((course, index) => (
-                <li key={index}>
-                  {course.name} - {course.section} - {course.professor} - {course.days.join(', ')} - {course.startTimes.join(', ')} - {course.endTimes.join(', ')}
+                <li key={index} className="mb-2">
+                  <strong>{course.name}</strong> - {course.section} - {course.professor}
+                  <ul className="pl-4">
+                    {course.days.map((day, idx) => (
+                      <li key={idx}>
+                        {day}: {course.startTimes[idx]} - {course.endTimes[idx]}
+                      </li>
+                    ))}
+                  </ul>
                 </li>
               ))}
             </ul>
