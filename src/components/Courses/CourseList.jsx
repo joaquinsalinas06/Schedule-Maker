@@ -3,6 +3,7 @@ import { CourseSelect } from "./CourseSelect";
 import Modal from "@mui/material/Modal";
 import Box from "@mui/material/Box";
 import { CourseContext } from "../../contexts/CourseContext";
+import { useTranslation } from "react-i18next";
 
 const style = {
   position: "absolute",
@@ -17,6 +18,7 @@ const style = {
 };
 
 export const CourseList = () => {
+  const { t } = useTranslation();
   const { courses, setCourses } = useContext(CourseContext);
   const [open, setOpen] = useState(false);
   const [newCourse, setNewCourse] = useState({
@@ -50,15 +52,15 @@ export const CourseList = () => {
         onClick={handleOpen}
         className="mt-4 inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
       >
-        Add Course
+        {t("addCourse")}
       </button>
       <Modal open={open} onClose={handleClose}>
         <Box sx={style}>
-          <h2 className="text-xl font-semibold mb-4">Add New Course</h2>
+          <h2 className="text-xl font-semibold mb-4">{t("addNCourse")}</h2>
           <form onSubmit={addCourse}>
             <div className="mb-4">
               <label htmlFor="name" className="block text-gray-700">
-                Course Name
+                {t("cName")}
               </label>
               <input
                 type="text"
@@ -72,7 +74,7 @@ export const CourseList = () => {
             </div>
             <div className="mb-4">
               <label htmlFor="credits" className="block text-gray-700">
-                Credits
+                {t("cCredits")}
               </label>
               <input
                 type="number"
