@@ -12,6 +12,7 @@ class Course {
     this.days = days || [];
     this.startTimes = startTimes || [];
     this.endTimes = endTimes || [];
+
   }
 
   collides(other) {
@@ -22,9 +23,14 @@ class Course {
     for (let i = 0; i < this.startTimes.length; i++) {
       for (let j = 0; j < other.startTimes.length; j++) {
         if (daysOverlap(this.days[i], other.days[j])) {
+          let thisStart = parseTime(this.startTimes[i]);
+          let thisEnd = parseTime(this.endTimes[i]);
+          let otherStart = parseTime(other.startTimes[j]);
+          let otherEnd = parseTime(other.endTimes[j]);
+
           if (
-            (this.startTimes[i] >= other.startTimes[j] && this.startTimes[i] <= other.endTimes[j]) ||
-            (other.startTimes[j] >= this.startTimes[i] && other.startTimes[j] <= this.endTimes[i])
+            (thisStart >= otherStart && thisStart < otherEnd) ||
+            (otherStart >= thisStart && otherStart < thisEnd)
           ) {
             return true;
           }
@@ -66,12 +72,12 @@ class Schedule {
 }
 
 const daysOverlap = (days1, days2) => {
-  for (let i = 0; i < days1.length; i++) {
-    if (days2.toLowerCase().includes(days1.toLowerCase().charAt(i))) {
-      return true;
-    }
-  }
-  return false;
+  return days1 === days2;
+};
+
+const parseTime = (timeString) => {
+  let [hours, minutes] = timeString.split(":").map(Number);
+  return hours * 60 + minutes;
 };
 
 export const ScheduleComponent = () => {
@@ -134,14 +140,13 @@ export const ScheduleComponent = () => {
 
   const days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
   const timeSlots = [
-    "7:00 AM", "8:00 AM", "9:00 AM", "10:00 AM", "11:00 AM", "12:00 PM",
-    "1:00 PM", "2:00 PM", "3:00 PM", "4:00 PM", "5:00 PM", "6:00 PM",
-    "7:00 PM", "8:00 PM", "9:00 PM", "10:00 PM"
+    "07:00", "08:00", "09:00", "10:00", "11:00", "12:00",
+    "13:00", "14:00", "15:00", "16:00", "17:00", "18:00",
+    "19:00", "20:00", "21:00", "22:00"
   ];
 
   const renderScheduleTable = (schedule) => {
     let table = [];
-    console.log("Rendering schedule table...");
 
     for (let rowIndex = 0; rowIndex < timeSlots.length; rowIndex++) {
       let row = [];
@@ -153,7 +158,7 @@ export const ScheduleComponent = () => {
 
         for (let course of schedule.courses) {
           for (let i = 0; i < course.days.length; i++) {
-            if (course.days[i].toLowerCase().includes(days[colIndex].toLowerCase().charAt(0))) {
+            if (course.days[i].toLowerCase()===days[colIndex].toLowerCase()) {
               let startTime = parseTime(course.startTimes[i]);
               let endTime = parseTime(course.endTimes[i]);
               let slotTime = parseTime(timeSlots[rowIndex]);
@@ -177,17 +182,6 @@ export const ScheduleComponent = () => {
       table.push(<tr key={rowIndex}>{row}</tr>);
     }
     return table;
-  };
-
-  const parseTime = (timeString) => {
-    let [time, modifier] = timeString.split(" ");
-    let [hours, minutes] = time.split(":").map(Number);
-
-    if (modifier === "PM" && hours !== 12) {
-      hours += 12;
-    }
-
-    return hours * 60 + minutes;
   };
 
   return (
