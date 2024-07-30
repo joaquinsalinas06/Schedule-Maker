@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import { DetailedCourseContext } from "../contexts/DetailedCourseContext";
 
 class Course {
-  constructor(name, credits, semester, classesPerWeek, section, professor, days, startTimes, endTimes) {
+  constructor(name, credits, semester, classesPerWeek, section, professor, days, startTimes, endTimes, color) {
     this.name = name;
     this.credits = credits;
     this.semester = semester;
@@ -12,6 +12,7 @@ class Course {
     this.days = days || [];
     this.startTimes = startTimes || [];
     this.endTimes = endTimes || [];
+    this.color = color || "#ffffff";
   }
 
   collides(other) {
@@ -110,7 +111,8 @@ export const ScheduleComponent = () => {
         course.professor,
         course.days,
         course.startTimes,
-        course.endTimes
+        course.endTimes,
+        course.color
       );
       groupedCourses[course.name].push(newCourse);
     }
@@ -192,14 +194,15 @@ export const ScheduleComponent = () => {
 
               if (slotTime >= startTime && slotTime < endTime) {
                 cellContent = (
-                  <div className="bg-gray-800 text-white h-full flex flex-col justify-center">
-                    <div>{course.name}</div>
-                    <div>{course.startTimes[i]} - {course.endTimes[i]}</div>
-                    <div>{course.section}</div>
+                  <div
+                    className="h-full flex flex-col justify-center py-2"
+                    style={{ backgroundColor: course.color }}
+                  >
+                    <div>{course.name} - {course.section}</div>
                     <div>{course.professor}</div>
                   </div>
                 );
-                cellClass += " bg-gray-800 text-white";
+                cellClass += " text-white";
               }
             }
           }
