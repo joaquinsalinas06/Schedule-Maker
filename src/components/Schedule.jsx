@@ -155,15 +155,33 @@ export const ScheduleComponent = () => {
   ];
 
   const renderScheduleTable = (schedule) => {
+    const WIDTH = 1000;
+    const HEIGHT = 600;
+    const TOP_MARGIN = 0.07;
+    const SIDE_MARGIN = 0.1;
+    const DAY_COUNT = 6;
+
+    const dayWidth = (WIDTH * (1 - SIDE_MARGIN)) / DAY_COUNT;
+    const hourCount = 16;
+    const hourHeight = (HEIGHT * (1 - TOP_MARGIN)) / hourCount;
+
     let table = [];
 
     for (let rowIndex = 0; rowIndex < timeSlots.length; rowIndex++) {
       let row = [];
-      row.push(<td key={`time-${rowIndex}`} className="border w-32 h-16 text-center bg-gray-700 text-white">{timeSlots[rowIndex]}</td>);
+      row.push(
+        <td
+          key={`time-${rowIndex}`}
+          className="border text-center bg-gray-700 text-white"
+          style={{ width: dayWidth / 2, height: hourHeight / 2 }}
+        >
+          {timeSlots[rowIndex]}
+        </td>
+      );
 
       for (let colIndex = 0; colIndex < days.length; colIndex++) {
         let cellContent = "";
-        let cellClass = "border w-32 h-16 text-center";
+        let cellClass = "border text-center";
 
         for (let course of schedule.courses) {
           for (let i = 0; i < course.days.length; i++) {
@@ -186,7 +204,15 @@ export const ScheduleComponent = () => {
             }
           }
         }
-        row.push(<td key={`${rowIndex}-${colIndex}`} className={cellClass}>{cellContent}</td>);
+        row.push(
+          <td
+            key={`${rowIndex}-${colIndex}`}
+            className={cellClass}
+            style={{ width: dayWidth / 2, height: hourHeight / 2 }}
+          >
+            {cellContent}
+          </td>
+        );
       }
       table.push(<tr key={rowIndex}>{row}</tr>);
     }
@@ -198,29 +224,50 @@ export const ScheduleComponent = () => {
       {schedules.length > 0 && (
         <div className="w-full overflow-x-auto mb-4">
           <h2 className="text-white text-center mb-2">Schedule {currentScheduleIndex + 1}</h2>
-          <table className="table-fixed border-collapse border mx-auto max-h-screen">
+          <table
+            className="table-fixed border-collapse border mx-auto"
+            style={{ width: "1000px", height: "600px" }}
+          >
             <thead>
               <tr>
-                <th className="border w-32 h-16 text-center bg-gray-900 text-white">Time</th>
+                <th
+                  className="border text-center bg-gray-900 text-white"
+                  style={{ width: "100px", height: "37.5px" }}
+                >
+                  Time
+                </th>
                 {days.map((day, colIndex) => (
-                  <th key={day} className="border w-32 h-16 text-center bg-gray-900 text-white">{day}</th>
+                  <th
+                    key={day}
+                    className="border text-center bg-gray-900 text-white"
+                    style={{ width: "150px", height: "37.5px" }}
+                  >
+                    {day}
+                  </th>
                 ))}
               </tr>
             </thead>
-            <tbody>
-              {renderScheduleTable(schedules[currentScheduleIndex])}
-            </tbody>
+            <tbody>{renderScheduleTable(schedules[currentScheduleIndex])}</tbody>
           </table>
         </div>
       )}
       <div className="flex justify-center mt-4">
-        <button onClick={showPrevSchedule} className="bg-blue-500 text-white px-4 py-2 rounded mx-2">
+        <button
+          onClick={showPrevSchedule}
+          className="bg-blue-500 text-white px-4 py-2 rounded mx-2"
+        >
           Previous
         </button>
-        <button onClick={generateSchedules} className="bg-blue-500 text-white px-4 py-2 rounded mx-2">
+        <button
+          onClick={generateSchedules}
+          className="bg-blue-500 text-white px-4 py-2 rounded mx-2"
+        >
           Generate
         </button>
-        <button onClick={showNextSchedule} className="bg-blue-500 text-white px-4 py-2 rounded mx-2">
+        <button
+          onClick={showNextSchedule}
+          className="bg-blue-500 text-white px-4 py-2 rounded mx-2"
+        >
           Next
         </button>
       </div>

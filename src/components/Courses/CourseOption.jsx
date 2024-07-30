@@ -12,6 +12,7 @@ export const CourseOption = ({ index, removeCourse }) => {
   const [days, setDays] = useState([]);
   const [startTimes, setStartTimes] = useState([]);
   const [endTimes, setEndTimes] = useState([]);
+  const [color, setColor] = useState("#ffffff"); // Añadimos un estado para el color
   const { courses } = useContext(CourseContext);
   const { addDetailedCourse } = useContext(DetailedCourseContext);
 
@@ -50,6 +51,10 @@ export const CourseOption = ({ index, removeCourse }) => {
     setEndTimes(newEndTimes);
   };
 
+  const handleColorChange = (event) => {
+    setColor(event.target.value);
+  };
+
   const handleAddCourse = () => {
     const selectedCourseData = courses.find(course => course.name === selectedCourse);
     const course = {
@@ -61,7 +66,8 @@ export const CourseOption = ({ index, removeCourse }) => {
       endTimes: endTimes,
       credits: selectedCourseData ? selectedCourseData.credits : null,
       semester: selectedCourseData ? selectedCourseData.semester : null,
-      classesPerWeek: numClasses
+      classesPerWeek: numClasses,
+      color: color // Añadimos el color al curso
     };
     addDetailedCourse(course);
     setShowButton(false);
@@ -131,6 +137,17 @@ export const CourseOption = ({ index, removeCourse }) => {
               id="professor"
               value={professor}
               onChange={handleProfessorChange}
+              className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+              required
+            />
+
+            <label htmlFor="color" className="block text-sm font-medium text-gray-700 mt-4">Color:</label>
+            <input
+              type="color"
+              name="color"
+              id="color"
+              value={color}
+              onChange={handleColorChange}
               className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
               required
             />
