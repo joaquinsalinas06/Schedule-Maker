@@ -10,9 +10,7 @@ function App() {
 
   return (
     <>
-      <SemesterForm />
       <CourseList />
-      <button onClick={() => console.log(courses)}>Log Courses</button>
       <CourseOptions />
       <ScheduleComponent />
     </>

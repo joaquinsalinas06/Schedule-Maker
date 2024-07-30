@@ -20,8 +20,14 @@ export const CourseSelect = ({ course }) => {
   const [open, setOpen] = useState(false);
   const [courseDetails, setCourseDetails] = useState(course);
 
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  const handleOpen = (e) => {
+    e.stopPropagation();
+    setOpen(true);
+  };
+  const handleClose = (e) => {
+    e.stopPropagation();
+    setOpen(false);
+  };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -40,38 +46,103 @@ export const CourseSelect = ({ course }) => {
     handleClose();
   };
 
-  const handleEliminate = () => {
+  const handleEliminate = (e) => {
+    e.stopPropagation();
     const updatedCourses = courses.filter((c) => c.name !== course.name);
     setCourses(updatedCourses);
     handleClose();
   };
 
   return (
-    <div className="course-box text-white p-2 m-1 border border-white cursor-pointer" onClick={handleOpen}>
-      {course.name}
+    <div
+      className="course-box text-white p-4 m-2 border border-gray-300 rounded-md shadow-sm cursor-pointer bg-gray-800 hover:bg-gray-700"
+      onClick={handleOpen}
+    >
+      <div className="flex justify-between items-center">
+        <span className="text-lg font-semibold">{course.name}</span>
+      </div>
       <Modal open={open} onClose={handleClose}>
-        <Box sx={style}>
-          <h2>Edit Course</h2>
+        <Box sx={style} onClick={(e) => e.stopPropagation()}>
+          <h2 className="text-xl font-semibold mb-4">Edit Course</h2>
           <form onSubmit={handleSubmit}>
             <div className="mb-4">
-              <label htmlFor="name" className="block text-black">Course Name</label>
-              <input type="text" name="name" id="name" value={courseDetails.name} onChange={handleChange} required className="border border-gray-300 rounded-md p-2 w-full" />
+              <label htmlFor="name" className="block text-gray-700">
+                Course Name
+              </label>
+              <input
+                type="text"
+                name="name"
+                id="name"
+                value={courseDetails.name}
+                onChange={handleChange}
+                required
+                className="border border-gray-300 rounded-md p-2 w-full"
+              />
             </div>
             <div className="mb-4">
-              <label htmlFor="credits" className="block text-black">Credits</label>
-              <input type="number" name="credits" id="credits" value={courseDetails.credits} onChange={handleChange} required className="border border-gray-300 rounded-md p-2 w-full" />
+              <label htmlFor="credits" className="block text-gray-700">
+                Credits
+              </label>
+              <input
+                type="number"
+                name="credits"
+                id="credits"
+                value={courseDetails.credits}
+                onChange={handleChange}
+                required
+                className="border border-gray-300 rounded-md p-2 w-full"
+              />
             </div>
             <div className="mb-4">
-              <label htmlFor="semester" className="block text-black">Semester</label>
-              <input type="text" name="semester" id="semester" value={courseDetails.semester} onChange={handleChange} required className="border border-gray-300 rounded-md p-2 w-full" />
+              <label htmlFor="semester" className="block text-gray-700">
+                Semester
+              </label>
+              <input
+                type="text"
+                name="semester"
+                id="semester"
+                value={courseDetails.semester}
+                onChange={handleChange}
+                required
+                className="border border-gray-300 rounded-md p-2 w-full"
+              />
             </div>
             <div className="mb-4">
-              <label htmlFor="classesPerWeek" className="block text-black">Classes Per Week</label>
-              <input type="number" name="classesPerWeek" id="classesPerWeek" value={courseDetails.classesPerWeek} onChange={handleChange} required className="border border-gray-300 rounded-md p-2 w-full" />
+              <label htmlFor="classesPerWeek" className="block text-gray-700">
+                Classes Per Week
+              </label>
+              <input
+                type="number"
+                name="classesPerWeek"
+                id="classesPerWeek"
+                value={courseDetails.classesPerWeek}
+                onChange={handleChange}
+                required
+                className="border border-gray-300 rounded-md p-2 w-full"
+              />
             </div>
-            <button type="submit" className="mr-2">Save</button>
-            <button type="button" onClick={handleClose}>Close</button>
-            <button type="button" onClick={handleEliminate} className="ml-2 bg-red-500 text-white p-2 rounded-md">Eliminate</button>
+            <div className="flex justify-between items-center">
+              <button
+                type="submit"
+                className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+              >
+                Save
+              </button>
+              <button
+                type="button"
+                onClick={handleClose}
+                className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-gray-600 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
+              >
+                Close
+              </button>
+              <button
+                type="button"
+                onClick={handleEliminate}
+                className="ml-2 inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
+              >
+                Eliminate
+              </button>
+            </div>
           </form>
         </Box>
       </Modal>
