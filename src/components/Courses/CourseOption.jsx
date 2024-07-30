@@ -12,7 +12,7 @@ export const CourseOption = ({ index, removeCourse }) => {
   const [days, setDays] = useState([]);
   const [startTimes, setStartTimes] = useState([]);
   const [endTimes, setEndTimes] = useState([]);
-  const [color, setColor] = useState("#ffffff"); // Añadimos un estado para el color
+  const [color, setColor] = useState("#ffffff");
   const { courses } = useContext(CourseContext);
   const { addDetailedCourse } = useContext(DetailedCourseContext);
 
@@ -71,7 +71,7 @@ export const CourseOption = ({ index, removeCourse }) => {
       credits: selectedCourseData ? selectedCourseData.credits : null,
       semester: selectedCourseData ? selectedCourseData.semester : null,
       classesPerWeek: numClasses,
-      color: color, // Añadimos el color al curso
+      color: color,
     };
     addDetailedCourse(course);
     setShowButton(false);
@@ -254,10 +254,10 @@ export const CourseOption = ({ index, removeCourse }) => {
           <button
             type="button"
             onClick={handleAddCourse}
-            className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 mt-4"
+            className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-green-500 hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 mt-4"
             disabled={!isFormComplete()}
           >
-            Add Course
+            Confirm Course
           </button>
         )}
       </form>
