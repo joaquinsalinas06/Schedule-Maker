@@ -29,19 +29,11 @@ class Course {
   collides(other) {
     for (let i = 0; i < this.startTimes.length; i++) {
       for (let j = 0; j < other.startTimes.length; j++) {
-        console.log(this.name, this.days, this.startTimes, this.endTimes);
-        console.log(other.name, other.days, other.startTimes, other.endTimes);
-        console.log(this.days[i], other.days[j]);
-        console.log(daysOverlap(this.days[i], other.days[j]));
         if (daysOverlap(this.days[i], other.days[j])) {
           let thisStart = parseTime(this.startTimes[i]);
           let thisEnd = parseTime(this.endTimes[i]);
           let otherStart = parseTime(other.startTimes[j]);
           let otherEnd = parseTime(other.endTimes[j]);
-          console.log("thisStart:", parseTime(this.startTimes[i]));
-          console.log("thisEnd:", parseTime(this.endTimes[i]));
-          console.log("otherStart:", parseTime(other.startTimes[j]));
-          console.log("otherEnd:", parseTime(other.endTimes[j]));
 
           if (
             (thisStart < otherEnd && thisEnd > otherStart) ||
@@ -77,16 +69,11 @@ class Schedule {
   }
 
   formsValidSchedule(course) {
-    console.log("Checking if course", course.name, "forms a valid schedule");
-    console.log("Current courses:", this.courses);
-    return this.courses.every(
-      (existingCourse) => {
-        console.log("Checking collision between", existingCourse.name, "and", course.name);
-        const collides = existingCourse.collides(course);
-        console.log("Collision:", collides);
-        return !collides;
-      }
-    );
+    return this.courses.every((existingCourse) => {
+      const collides = existingCourse.collides(course);
+
+      return !collides;
+    });
   }
 
   addCourse(course) {
@@ -149,18 +136,17 @@ export const ScheduleComponent = () => {
 
     const generateCombinations = (groupIndex, currentSchedule) => {
       if (groupIndex === courseGroups.length) {
-      allSchedules.push(currentSchedule);
-      console.log("Generated Schedule:", currentSchedule);
-      return;
+        allSchedules.push(currentSchedule);
+
+        return;
       }
 
       for (let course of courseGroups[groupIndex]) {
-      if (currentSchedule.formsValidSchedule(course)) {
-        console.log("Adding Course:", course);
-        let newSchedule = currentSchedule.addCourse(course);
-        console.log("New Schedule:", newSchedule);
-        generateCombinations(groupIndex + 1, newSchedule);
-      }
+        if (currentSchedule.formsValidSchedule(course)) {
+          let newSchedule = currentSchedule.addCourse(course);
+
+          generateCombinations(groupIndex + 1, newSchedule);
+        }
       }
     };
 

@@ -3,7 +3,7 @@ import { CourseOption } from "./CourseOption";
 import { DetailedCourseContext } from "../../contexts/DetailedCourseContext";
 
 export const CourseOptions = () => {
-  const { detailedCourses, setDetailedCoursesList } = useContext(DetailedCourseContext);
+  const { detailedCourses, addDetailedCourse, setDetailedCoursesList } = useContext(DetailedCourseContext);
   const [courseOptions, setCourseOptions] = useState([{ id: 1 }]);
 
   const addCourse = () => {
