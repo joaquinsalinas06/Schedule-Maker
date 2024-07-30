@@ -19,7 +19,9 @@ export const CourseOption = ({ index, removeCourse }) => {
   const handleCourseChange = (event) => {
     const selectedCourseName = event.target.value;
     setSelectedCourse(selectedCourseName);
-    const selectedCourse = courses.find(course => course.name === selectedCourseName);
+    const selectedCourse = courses.find(
+      (course) => course.name === selectedCourseName
+    );
     if (selectedCourse) {
       setNumClasses(parseInt(selectedCourse.classesPerWeek));
     }
@@ -56,7 +58,9 @@ export const CourseOption = ({ index, removeCourse }) => {
   };
 
   const handleAddCourse = () => {
-    const selectedCourseData = courses.find(course => course.name === selectedCourse);
+    const selectedCourseData = courses.find(
+      (course) => course.name === selectedCourse
+    );
     const course = {
       name: selectedCourse,
       section: sectionName,
@@ -67,7 +71,7 @@ export const CourseOption = ({ index, removeCourse }) => {
       credits: selectedCourseData ? selectedCourseData.credits : null,
       semester: selectedCourseData ? selectedCourseData.semester : null,
       classesPerWeek: numClasses,
-      color: color // Añadimos el color al curso
+      color: color, // Añadimos el color al curso
     };
     addDetailedCourse(course);
     setShowButton(false);
@@ -75,7 +79,7 @@ export const CourseOption = ({ index, removeCourse }) => {
 
   useEffect(() => {
     if (selectedCourse) {
-      const course = courses.find(course => course.name === selectedCourse);
+      const course = courses.find((course) => course.name === selectedCourse);
       if (course) {
         setNumClasses(parseInt(course.classesPerWeek));
       }
@@ -96,13 +100,21 @@ export const CourseOption = ({ index, removeCourse }) => {
 
   return (
     <div className="relative border border-double border-gray-300 rounded-lg p-6 w-full mx-auto my-4 bg-white shadow-md">
-      <button onClick={() => removeCourse(index)} className="absolute top-2 right-2">
-        <Delete/>
+      <button
+        onClick={() => removeCourse(index)}
+        className="absolute top-2 right-2"
+      >
+        <Delete />
       </button>
       <form className="space-y-4">
         <div className="grid grid-cols-2 gap-4">
           <div className="col-span-1">
-            <label htmlFor="course" className="block text-sm font-medium text-gray-700">Course:</label>
+            <label
+              htmlFor="course"
+              className="block text-sm font-medium text-gray-700"
+            >
+              Course:
+            </label>
             <select
               name="course"
               id="course"
@@ -119,7 +131,12 @@ export const CourseOption = ({ index, removeCourse }) => {
               ))}
             </select>
 
-            <label htmlFor="section" className="block text-sm font-medium text-gray-700 mt-4">Section:</label>
+            <label
+              htmlFor="section"
+              className="block text-sm font-medium text-gray-700 mt-4"
+            >
+              Section:
+            </label>
             <input
               type="text"
               name="section"
@@ -130,7 +147,12 @@ export const CourseOption = ({ index, removeCourse }) => {
               required
             />
 
-            <label htmlFor="professor" className="block text-sm font-medium text-gray-700 mt-4">Professor:</label>
+            <label
+              htmlFor="professor"
+              className="block text-sm font-medium text-gray-700 mt-4"
+            >
+              Professor:
+            </label>
             <input
               type="text"
               name="professor"
@@ -141,7 +163,12 @@ export const CourseOption = ({ index, removeCourse }) => {
               required
             />
 
-            <label htmlFor="color" className="block text-sm font-medium text-gray-700 mt-4">Color:</label>
+            <label
+              htmlFor="color"
+              className="block text-sm font-medium text-gray-700 mt-4"
+            >
+              Color:
+            </label>
             <input
               type="color"
               name="color"
@@ -157,7 +184,12 @@ export const CourseOption = ({ index, removeCourse }) => {
             {[...Array(numClasses)].map((_, index) => (
               <div key={index} className="space-y-4">
                 <div>
-                  <label htmlFor={`day-${index}`} className="block text-sm font-medium text-gray-700">Day {index + 1}:</label>
+                  <label
+                    htmlFor={`day-${index}`}
+                    className="block text-sm font-medium text-gray-700"
+                  >
+                    Day {index + 1}:
+                  </label>
                   <select
                     name={`day-${index}`}
                     id={`day-${index}`}
@@ -178,7 +210,12 @@ export const CourseOption = ({ index, removeCourse }) => {
 
                 <div className="grid grid-cols-2 gap-4">
                   <div>
-                    <label htmlFor={`startTime-${index}`} className="block text-sm font-medium text-gray-700">Start Time {index + 1}:</label>
+                    <label
+                      htmlFor={`startTime-${index}`}
+                      className="block text-sm font-medium text-gray-700"
+                    >
+                      Start Time {index + 1}:
+                    </label>
                     <input
                       type="time"
                       name={`startTime-${index}`}
@@ -191,7 +228,12 @@ export const CourseOption = ({ index, removeCourse }) => {
                   </div>
 
                   <div>
-                    <label htmlFor={`endTime-${index}`} className="block text-sm font-medium text-gray-700">End Time {index + 1}:</label>
+                    <label
+                      htmlFor={`endTime-${index}`}
+                      className="block text-sm font-medium text-gray-700"
+                    >
+                      End Time {index + 1}:
+                    </label>
                     <input
                       type="time"
                       name={`endTime-${index}`}

@@ -2,7 +2,18 @@ import React, { useContext, useState } from "react";
 import { DetailedCourseContext } from "../contexts/DetailedCourseContext";
 
 class Course {
-  constructor(name, credits, semester, classesPerWeek, section, professor, days, startTimes, endTimes, color) {
+  constructor(
+    name,
+    credits,
+    semester,
+    classesPerWeek,
+    section,
+    professor,
+    days,
+    startTimes,
+    endTimes,
+    color
+  ) {
     this.name = name;
     this.credits = credits;
     this.semester = semester;
@@ -51,15 +62,20 @@ class Schedule {
   }
 
   createIDString() {
-    return this.courses.map(course => course.name).join('-');
+    return this.courses.map((course) => course.name).join("-");
   }
 
   countCredits() {
-    return this.courses.reduce((sum, course) => sum + parseInt(course.credits), 0);
+    return this.courses.reduce(
+      (sum, course) => sum + parseInt(course.credits),
+      0
+    );
   }
 
   formsValidSchedule(course) {
-    return this.courses.every(existingCourse => !existingCourse.collides(course));
+    return this.courses.every(
+      (existingCourse) => !existingCourse.collides(course)
+    );
   }
 
   addCourse(course) {
@@ -146,14 +162,36 @@ export const ScheduleComponent = () => {
   };
 
   const showPrevSchedule = () => {
-    setCurrentScheduleIndex((currentScheduleIndex - 1 + schedules.length) % schedules.length);
+    setCurrentScheduleIndex(
+      (currentScheduleIndex - 1 + schedules.length) % schedules.length
+    );
   };
 
-  const days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+  const days = [
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+  ];
   const timeSlots = [
-    "07:00 AM", "08:00 AM", "09:00 AM", "10:00 AM", "11:00 AM", "12:00 PM",
-    "01:00 PM", "02:00 PM", "03:00 PM", "04:00 PM", "05:00 PM", "06:00 PM",
-    "07:00 PM", "08:00 PM", "09:00 PM", "10:00 PM"
+    "07:00 AM",
+    "08:00 AM",
+    "09:00 AM",
+    "10:00 AM",
+    "11:00 AM",
+    "12:00 PM",
+    "01:00 PM",
+    "02:00 PM",
+    "03:00 PM",
+    "04:00 PM",
+    "05:00 PM",
+    "06:00 PM",
+    "07:00 PM",
+    "08:00 PM",
+    "09:00 PM",
+    "10:00 PM",
   ];
 
   const renderScheduleTable = (schedule) => {
@@ -198,7 +236,9 @@ export const ScheduleComponent = () => {
                     className="h-full flex flex-col justify-center py-2"
                     style={{ backgroundColor: course.color }}
                   >
-                    <div>{course.name} - {course.section}</div>
+                    <div>
+                      {course.name} - {course.section}
+                    </div>
                     <div>{course.professor}</div>
                   </div>
                 );
@@ -226,7 +266,9 @@ export const ScheduleComponent = () => {
     <div className="flex flex-col items-center my-5">
       {schedules.length > 0 && (
         <div className="w-full overflow-x-auto mb-4">
-          <h2 className="text-white text-center mb-2">Schedule {currentScheduleIndex + 1}</h2>
+          <h2 className="text-white text-center mb-2">
+            Schedule {currentScheduleIndex + 1}
+          </h2>
           <table
             className="table-fixed border-collapse border mx-auto"
             style={{ width: "1000px", height: "600px" }}
@@ -250,7 +292,9 @@ export const ScheduleComponent = () => {
                 ))}
               </tr>
             </thead>
-            <tbody>{renderScheduleTable(schedules[currentScheduleIndex])}</tbody>
+            <tbody>
+              {renderScheduleTable(schedules[currentScheduleIndex])}
+            </tbody>
           </table>
         </div>
       )}
