@@ -170,8 +170,8 @@ export const ScheduleComponent = () => {
       (currentScheduleIndex - 1 + schedules.length) % schedules.length
     );
   };
-  //todo hacer que los dias sean en español/ingles
-  const days = [t("mon"), t("tue"), t("wed"), t("thu"), t("fri"), t("sat")];
+
+  const days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
   const timeSlots = [
     "07:00 AM",
     "08:00 AM",
