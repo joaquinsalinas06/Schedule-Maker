@@ -2,7 +2,7 @@ import React, { useState, useContext, useEffect } from "react";
 import { CourseContext } from "../../contexts/CourseContext";
 import { DetailedCourseContext } from "../../contexts/DetailedCourseContext";
 import Delete from "@mui/icons-material/Delete";
-import { CheckCircle} from "@mui/icons-material";
+import { CheckCircle } from "@mui/icons-material";
 import { useTranslation } from "react-i18next";
 
 export const CourseOption = ({ index, removeCourse }) => {
@@ -102,7 +102,7 @@ export const CourseOption = ({ index, removeCourse }) => {
   };
 
   return (
-    <div className="relative border border-double border-gray-300 rounded-lg px-6 pt-6 pb-2 w-full mx-auto mt-4 bg-blueBox shadow-md">
+    <div className="relative rounded-lg px-6 pt-6 pb-2 w-full mx-auto mt-4 bg-blueBox shadow-md">
       <button
         onClick={() => removeCourse(index)}
         className="absolute top-2 right-2"
@@ -114,7 +114,7 @@ export const CourseOption = ({ index, removeCourse }) => {
           <div className="col-span-1">
             <label
               htmlFor="course"
-              className="block text-sm font-medium text-gray-700"
+              className="block text-sm font-medium text-gray-700 w-full"
             >
               {t("course")}:
             </label>
@@ -123,7 +123,7 @@ export const CourseOption = ({ index, removeCourse }) => {
               id="course"
               onChange={handleCourseChange}
               value={selectedCourse}
-              className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm bg-bgCourseOptionInput sm:text-sm"
+              className="mt-1 block w-full rounded-md shadow-sm bg-bgCourseOptionInput focus:bg-bgCourseOptionInputHover sm:text-sm"
               required
             >
               <option value="">{t("selCourse")}</option>
@@ -136,7 +136,7 @@ export const CourseOption = ({ index, removeCourse }) => {
 
             <label
               htmlFor="section"
-              className="block text-sm font-medium text-gray-700 mt-4"
+              className="block text-sm font-medium text-gray-700 mt-4 w-full"
             >
               {t("section")}:
             </label>
@@ -146,13 +146,13 @@ export const CourseOption = ({ index, removeCourse }) => {
               id="section"
               value={sectionName}
               onChange={handleSectionChange}
-              className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm bg-bgCourseOptionInput sm:text-sm"
+              className="mt-1 block w-full rounded-md shadow-sm bg-bgCourseOptionInput focus:bg-bgCourseOptionInputHover sm:text-sm"
               required
             />
 
             <label
               htmlFor="professor"
-              className="block text-sm font-medium text-gray-700 mt-4"
+              className="block text-sm font-medium text-gray-700 mt-4 w-full"
             >
               {t("professor")}:
             </label>
@@ -162,13 +162,13 @@ export const CourseOption = ({ index, removeCourse }) => {
               id="professor"
               value={professor}
               onChange={handleProfessorChange}
-              className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm bg-bgCourseOptionInput sm:text-sm"
+              className="mt-1 block w-full rounded-md shadow-sm bg-bgCourseOptionInput focus:bg-bgCourseOptionInputHover sm:text-sm"
               required
             />
 
             <label
               htmlFor="color"
-              className="block text-sm font-medium text-gray-700 mt-4"
+              className="block text-sm font-medium text-gray-700 mt-4 w-full"
             >
               {t("color")}:
             </label>
@@ -178,7 +178,7 @@ export const CourseOption = ({ index, removeCourse }) => {
               id="color"
               value={color}
               onChange={handleColorChange}
-              className="mt-1 block w-full bg-transparent rounded-md  sm:text-sm"
+              className="mt-1 block w-full bg-transparent rounded-md sm:text-sm"
               required
             />
           </div>
@@ -189,7 +189,7 @@ export const CourseOption = ({ index, removeCourse }) => {
                 <div>
                   <label
                     htmlFor={`day-${index}`}
-                    className="block text-sm font-medium text-gray-700"
+                    className="block text-sm font-medium text-gray-700 w-full"
                   >
                     {t("day")} {index + 1}:
                   </label>
@@ -198,7 +198,7 @@ export const CourseOption = ({ index, removeCourse }) => {
                     id={`day-${index}`}
                     value={days[index] || ""}
                     onChange={(e) => handleDayChange(index, e)}
-                    className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm bg-bgCourseOptionInput sm:text-sm"
+                    className="mt-1 block w-full rounded-md bg-bgCourseOptionInput sm:text-sm"
                     required
                   >
                     <option value="">{t("selDay")}</option>
@@ -215,7 +215,7 @@ export const CourseOption = ({ index, removeCourse }) => {
                   <div>
                     <label
                       htmlFor={`startTime-${index}`}
-                      className="block text-sm font-medium text-gray-700"
+                      className="block text-sm font-medium text-gray-700 w-full"
                     >
                       {t("start")} {index + 1}:
                     </label>
@@ -225,7 +225,7 @@ export const CourseOption = ({ index, removeCourse }) => {
                       id={`startTime-${index}`}
                       value={startTimes[index] || ""}
                       onChange={(e) => handleStartTimeChange(index, e)}
-                      className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm bg-bgCourseOptionInput sm:text-sm"
+                      className="mt-1 block w-full rounded-md shadow-sm bg-bgCourseOptionInput focus:bg-bgCourseOptionInputHover sm:text-sm"
                       required
                     />
                   </div>
@@ -233,7 +233,7 @@ export const CourseOption = ({ index, removeCourse }) => {
                   <div>
                     <label
                       htmlFor={`endTime-${index}`}
-                      className="block text-sm font-medium text-gray-700"
+                      className="block text-sm font-medium text-gray-700 w-full"
                     >
                       {t("end")} {index + 1}:
                     </label>
@@ -243,7 +243,7 @@ export const CourseOption = ({ index, removeCourse }) => {
                       id={`endTime-${index}`}
                       value={endTimes[index] || ""}
                       onChange={(e) => handleEndTimeChange(index, e)}
-                      className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm bg-bgCourseOptionInput sm:text-sm"
+                      className="mt-1 block w-full rounded-md shadow-sm bg-bgCourseOptionInput focus:bg-bgCourseOptionInputHover sm:text-sm"
                       required
                     />
                   </div>
@@ -254,11 +254,11 @@ export const CourseOption = ({ index, removeCourse }) => {
         </div>
 
         {showButton && (
-          <div className="flex justify-center ">
+          <div className="flex justify-center">
             <CheckCircle
               onClick={handleAddCourse}
-              className="cursor-pointer "
-              style={{ fontSize: 40 }}
+              className="cursor-pointer"
+              style={{ fontSize: 34 }}
               disabled={!isFormComplete()}
             />
           </div>

@@ -50,7 +50,7 @@ export const CourseList = () => {
     <div className="flex flex-col items-start">
       <button
         onClick={handleOpen}
-        className="mt-4 inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-buttonCourseList"
+        className="mt-4 inline-flex items-center pl-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-buttonCourseList hover:bg-buttonCourseListHover focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-buttonCourseList w-32 "
       >
         {t("addCourse")}
       </button>
@@ -117,14 +117,14 @@ export const CourseList = () => {
             <div className="flex justify-between">
               <button
                 type="submit"
-                className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
+                className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 w-28"
               >
                 {t("addCourse")}
               </button>
               <button
                 type="button"
                 onClick={handleClose}
-                className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
+                className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 w-20 text-center"
               >
                 {t("close")}
               </button>

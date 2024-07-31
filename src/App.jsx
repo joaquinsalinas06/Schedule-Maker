@@ -1,31 +1,33 @@
 import React, { useContext } from "react";
-import { CourseList } from "./components/Courses/CourseList";
-import { SemesterForm } from "./components/SemesterForm";
 import { CourseContext } from "./contexts/CourseContext";
-import { ScheduleComponent } from "./components/Schedule";
-import { CourseOptions } from "./components/Courses/CourseOptions";
-import { useTranslation } from 'react-i18next';
+import { MainPage } from "./Pages/MainPage";
+import { useTranslation } from "react-i18next";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from "react-router-dom";
+import { Header } from "./components/Header";
+import { Help } from "./Pages/Help";
+import { Footer } from "./components/Footer";
 
 function App() {
   const { courses } = useContext(CourseContext);
 
   const { t, i18n } = useTranslation();
 
-  const changeLanguage = (lng) => {
-    i18n.changeLanguage(lng);
-  };
-
   return (
     <>
-        <button onClick={() => changeLanguage("es")} className="border bg-white rounded-md px-3 py-1 hover:bg-slate-200 mx-3">{t("es")}</button>
-        <button onClick={() => changeLanguage("en")} className="border bg-white rounded-md px-3 py-1 hover:bg-slate-200 mx-3">{t("en")}</button>
-
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 p-4">
-        <SemesterForm />
-        <CourseList />
-      </div>
-      <CourseOptions />
-      <ScheduleComponent />
+      <Router>
+        <Header />
+        <Routes>
+          <Route path="/" element={<MainPage />} />
+          <Route path="/help" element={<Help />} />
+          <Route path="*" element={<Navigate to="/" />} />
+        </Routes>
+        <Footer />
+      </Router>
     </>
   );
 }

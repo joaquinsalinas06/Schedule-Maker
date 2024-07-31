@@ -6,7 +6,8 @@ import { Download, Upload, AddCircle } from "@mui/icons-material";
 
 export const CourseOptions = () => {
   const { t } = useTranslation();
-  const { detailedCourses, addDetailedCourse, setDetailedCoursesList } = useContext(DetailedCourseContext);
+  const { detailedCourses, addDetailedCourse, setDetailedCoursesList } =
+    useContext(DetailedCourseContext);
   const [courseOptions, setCourseOptions] = useState([{ id: 1 }]);
 
   const addCourse = () => {
@@ -41,6 +42,7 @@ export const CourseOptions = () => {
         setCourseOptions(courses.map((_, index) => ({ id: index + 1 })));
       };
       reader.readAsText(file);
+      alert(t("alMessage"));
     }
   };
 
@@ -58,28 +60,27 @@ export const CourseOptions = () => {
           />
           <label
             htmlFor="load-courses-input"
-            className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-buttonImport cursor-pointer"
+            className="inline-flex items-center pl-6 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-buttonImport hover:bg-buttonImportHover cursor-pointer w-40"
           >
             <Download />
             {t("lCourses")}
           </label>
           <button
             onClick={saveCourses}
-            className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-buttonExport"
+            className="inline-flex items-center pl-5 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-buttonExport hover:bg-buttonExportHover w-40"
           >
             <Upload />
             {t("sCourses")}
           </button>
           <button
             onClick={addCourse}
-            className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white "
+            className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white hover:text-slate-200"
           >
             <AddCircle />
-      
           </button>
         </div>
       </div>
-      <hr className="border-t-2 border-gray-200 w-full mb-2"/>
+      <hr className="border-t-2 border-gray-200 w-full mb-2" />
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 w-full">
         {courseOptions.map((_, index) => (
           <CourseOption key={index} index={index} removeCourse={removeCourse} />
