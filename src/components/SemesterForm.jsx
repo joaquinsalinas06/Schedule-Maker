@@ -8,7 +8,7 @@ export const SemesterForm = () => {
 
   return (
     <div className="flex justify-center items-center h-full">
-      <form className="border-solid border border-black p-4 bg-bgSemesterForm max-w-md w-full">
+      <form className=" p-4 bg-blueBox max-w-md w-full">
         <div className="grid grid-cols-2 gap-4">
           <div className="mb-4">
             <label htmlFor="minCourses" className="block text-textColor">
@@ -18,7 +18,7 @@ export const SemesterForm = () => {
               type="number"
               name="minCourses"
               id="minCourses"
-              className="border border-gray-300 rounded-md p-2 w-full text-white bg-bgSemesterFormInput"
+              className="border focus:border-red-700 rounded-md p-2 w-full text-white bg-bgSemesterFormInput"
             />
           </div>
 

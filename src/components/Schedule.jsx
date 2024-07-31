@@ -106,12 +106,14 @@ const parseTime = (timeString) => {
 };
 
 export const ScheduleComponent = () => {
-  const {t} = useTranslation();
+  const { t } = useTranslation();
   const { detailedCourses } = useContext(DetailedCourseContext);
   const [schedules, setSchedules] = useState([]);
+  const [showPrevNext, setShowPrevNext] = useState(false);
   const [currentScheduleIndex, setCurrentScheduleIndex] = useState(0);
 
   const generateSchedules = () => {
+    setShowPrevNext(true);
     let groupedCourses = {};
 
     for (let course of detailedCourses) {
@@ -169,14 +171,7 @@ export const ScheduleComponent = () => {
     );
   };
   //todo hacer que los dias sean en español/ingles
-  const days = [
-    t("mon"),
-    t("tue"),
-    t("wed"),
-    t("thu"),
-    t("fri"),
-    t("sat"),
-  ];
+  const days = [t("mon"), t("tue"), t("wed"), t("thu"), t("fri"), t("sat")];
   const timeSlots = [
     "07:00 AM",
     "08:00 AM",
@@ -283,7 +278,7 @@ export const ScheduleComponent = () => {
                 >
                   {t("time")}
                 </th>
-                {days.map((day, colIndex) => (
+                {days.map((day) => (
                   <th
                     key={day}
                     className="border text-center bg-gray-700 text-white"
@@ -301,24 +296,28 @@ export const ScheduleComponent = () => {
         </div>
       )}
       <div className="flex justify-center mt-4">
-        <button
-          onClick={showPrevSchedule}
-          className="bg-blue-500 text-white px-4 py-2 rounded mx-2"
-        >
-          {t("prev")}
-        </button>
+        {showPrevNext && (
+          <button
+            onClick={showPrevSchedule}
+            className="bg-buttonCourseList hover:bg-buttonCourseListHover text-white px-4 py-2 rounded mx-2 w-24"
+          >
+            {t("prev")}
+          </button>
+        )}
         <button
           onClick={generateSchedules}
-          className="bg-blue-500 text-white px-4 py-2 rounded mx-2"
+          className="bg-buttonCourseList hover:bg-buttonCourseListHover text-white px-4 py-2 rounded mx-2 w-24"
         >
           {t("gen")}
         </button>
-        <button
-          onClick={showNextSchedule}
-          className="bg-blue-500 text-white px-4 py-2 rounded mx-2"
-        >
-          {t("next")}
-        </button>
+        {showPrevNext && (
+          <button
+            onClick={showNextSchedule}
+            className="bg-buttonCourseList hover:bg-buttonCourseListHover text-white px-4 py-2 rounded mx-2 w-24"
+          >
+            {t("next")}
+          </button>
+        )}
       </div>
     </div>
   );

@@ -57,10 +57,10 @@ export const CourseSelect = ({ course }) => {
 
   return (
     <div
-      className="course-box text-textColor p-6 border border-gray-300 rounded-lg shadow-lg cursor-pointer bg-courseListSelectBg"
+      className="course-box text-textColor p-6 rounded-lg shadow-lg cursor-pointer bg-courseListSelectBg hover:bg-courseListSelectBgHover"
       onClick={handleOpen}
     >
-      <div className="flex flex-col justify-between items-start space-y-2">
+      <div className="flex flex-col justify-between items-start space-y-2 w-48 pr-2">
         <div className="text-xl font-bold">{course.name}</div>
         <div className="text-md">{t("cCredits")}: {course.credits} </div>
         <div className="text-md">{t("cSemester")}: {course.semester}</div>

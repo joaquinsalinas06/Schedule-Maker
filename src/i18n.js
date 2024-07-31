@@ -1,4 +1,4 @@
-import { Schedule } from "@mui/icons-material";
+import { Language, Schedule } from "@mui/icons-material";
 import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
 
@@ -35,7 +35,10 @@ const resources = {
       sCourses: "Guardar Cursos",
       lCourses: "Cargar Cursos",
       times: "Horas",
+      alMessage: "Los cursos se han guardado correctamente, por el momento no se pueden ver en la lista de turnos:( \n\nPero puedes darle a generar sin problemas:)!",
       //courseSelect
+      sCredits: "Creditos",
+      sSem: "Semestre",
       save: "Guardar",
       close: "Cerrar",
       //schedule
@@ -51,6 +54,8 @@ const resources = {
       maxCredits: "Creditos Maximos",
       es: "Español",
       en: "Ingles",
+      //header
+      language: "Idioma",
     },
   },
   en: {
@@ -86,6 +91,9 @@ const resources = {
       lCourses: "Load Courses",
       times: "Times",
       //courseSelect
+      alMessage: "The courses have been saved correctly, at the moment they cannot be seen in the shift list:( \n\nBut you can generate the schedules without problems:)!",
+      sCredits: "Credits",
+      sSem: "Semester",
       save: "Save",
       close: "Close",
       //schedule
@@ -101,6 +109,8 @@ const resources = {
       maxCredits: "Maximum Credits",
       es: "Spanish",
       en: "English",
+      //header
+      language: "Language",
     },
   },
 };
