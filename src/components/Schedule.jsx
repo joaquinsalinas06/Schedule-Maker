@@ -1,5 +1,6 @@
 import React, { useContext, useState } from "react";
 import { DetailedCourseContext } from "../contexts/DetailedCourseContext";
+import { useTranslation } from "react-i18next";
 
 class Course {
   constructor(
@@ -105,6 +106,7 @@ const parseTime = (timeString) => {
 };
 
 export const ScheduleComponent = () => {
+  const {t} = useTranslation();
   const { detailedCourses } = useContext(DetailedCourseContext);
   const [schedules, setSchedules] = useState([]);
   const [currentScheduleIndex, setCurrentScheduleIndex] = useState(0);
@@ -166,14 +168,14 @@ export const ScheduleComponent = () => {
       (currentScheduleIndex - 1 + schedules.length) % schedules.length
     );
   };
-
+  //todo hacer que los dias sean en español/ingles
   const days = [
-    "Monday",
-    "Tuesday",
-    "Wednesday",
-    "Thursday",
-    "Friday",
-    "Saturday",
+    t("mon"),
+    t("tue"),
+    t("wed"),
+    t("thu"),
+    t("fri"),
+    t("sat"),
   ];
   const timeSlots = [
     "07:00 AM",
@@ -267,7 +269,7 @@ export const ScheduleComponent = () => {
       {schedules.length > 0 && (
         <div className="w-full overflow-x-auto mb-4">
           <h2 className="text-white text-center mb-2">
-            Schedule {currentScheduleIndex + 1}
+            {t("schedule")} {currentScheduleIndex + 1}
           </h2>
           <table
             className="table-fixed border-collapse border mx-auto"
@@ -279,7 +281,7 @@ export const ScheduleComponent = () => {
                   className="border text-center bg-gray-900 text-white"
                   style={{ width: "100px", height: "37.5px" }}
                 >
-                  Time
+                  {t("time")}
                 </th>
                 {days.map((day, colIndex) => (
                   <th
@@ -303,19 +305,19 @@ export const ScheduleComponent = () => {
           onClick={showPrevSchedule}
           className="bg-blue-500 text-white px-4 py-2 rounded mx-2"
         >
-          Previous
+          {t("prev")}
         </button>
         <button
           onClick={generateSchedules}
           className="bg-blue-500 text-white px-4 py-2 rounded mx-2"
         >
-          Generate
+          {t("gen")}
         </button>
         <button
           onClick={showNextSchedule}
           className="bg-blue-500 text-white px-4 py-2 rounded mx-2"
         >
-          Next
+          {t("next")}
         </button>
       </div>
     </div>

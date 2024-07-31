@@ -2,8 +2,10 @@ import React, { useState, useContext, useEffect } from "react";
 import { CourseContext } from "../../contexts/CourseContext";
 import { DetailedCourseContext } from "../../contexts/DetailedCourseContext";
 import Delete from "@mui/icons-material/Delete";
+import { useTranslation } from "react-i18next";
 
 export const CourseOption = ({ index, removeCourse }) => {
+  const { t } = useTranslation();
   const [showButton, setShowButton] = useState(true);
   const [numClasses, setNumClasses] = useState(1);
   const [selectedCourse, setSelectedCourse] = useState("");
@@ -113,7 +115,7 @@ export const CourseOption = ({ index, removeCourse }) => {
               htmlFor="course"
               className="block text-sm font-medium text-gray-700"
             >
-              Course:
+              {t("course")}:
             </label>
             <select
               name="course"
@@ -123,7 +125,7 @@ export const CourseOption = ({ index, removeCourse }) => {
               className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
               required
             >
-              <option value="">Select a course</option>
+              <option value="">{t("selCourse")}</option>
               {courses.map((course, index) => (
                 <option key={index} value={course.name}>
                   {course.name}
@@ -135,7 +137,7 @@ export const CourseOption = ({ index, removeCourse }) => {
               htmlFor="section"
               className="block text-sm font-medium text-gray-700 mt-4"
             >
-              Section:
+              {t("section")}:
             </label>
             <input
               type="text"
@@ -151,7 +153,7 @@ export const CourseOption = ({ index, removeCourse }) => {
               htmlFor="professor"
               className="block text-sm font-medium text-gray-700 mt-4"
             >
-              Professor:
+              {t("professor")}:
             </label>
             <input
               type="text"
@@ -167,7 +169,7 @@ export const CourseOption = ({ index, removeCourse }) => {
               htmlFor="color"
               className="block text-sm font-medium text-gray-700 mt-4"
             >
-              Color:
+              {t("color")}:
             </label>
             <input
               type="color"
@@ -188,7 +190,7 @@ export const CourseOption = ({ index, removeCourse }) => {
                     htmlFor={`day-${index}`}
                     className="block text-sm font-medium text-gray-700"
                   >
-                    Day {index + 1}:
+                    {t("day")} {index + 1}:
                   </label>
                   <select
                     name={`day-${index}`}
@@ -198,13 +200,13 @@ export const CourseOption = ({ index, removeCourse }) => {
                     className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
                     required
                   >
-                    <option value="">Select Day</option>
-                    <option value="Monday">Monday</option>
-                    <option value="Tuesday">Tuesday</option>
-                    <option value="Wednesday">Wednesday</option>
-                    <option value="Thursday">Thursday</option>
-                    <option value="Friday">Friday</option>
-                    <option value="Saturday">Saturday</option>
+                    <option value="">{t("selDay")}</option>
+                    <option value="Monday">{t("mon")}</option>
+                    <option value="Tuesday">{t("tue")}</option>
+                    <option value="Wednesday">{t("wed")}</option>
+                    <option value="Thursday">{t("thu")}</option>
+                    <option value="Friday">{t("fri")}</option>
+                    <option value="Saturday">{t("sat")}</option>
                   </select>
                 </div>
 
@@ -214,7 +216,7 @@ export const CourseOption = ({ index, removeCourse }) => {
                       htmlFor={`startTime-${index}`}
                       className="block text-sm font-medium text-gray-700"
                     >
-                      Start Time {index + 1}:
+                      {t("start")} {index + 1}:
                     </label>
                     <input
                       type="time"
@@ -232,7 +234,7 @@ export const CourseOption = ({ index, removeCourse }) => {
                       htmlFor={`endTime-${index}`}
                       className="block text-sm font-medium text-gray-700"
                     >
-                      End Time {index + 1}:
+                      {t("end")} {index + 1}:
                     </label>
                     <input
                       type="time"
@@ -257,7 +259,7 @@ export const CourseOption = ({ index, removeCourse }) => {
             className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-green-500 hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 mt-4"
             disabled={!isFormComplete()}
           >
-            Confirm Course
+            {t("conCourse")}
           </button>
         )}
       </form>

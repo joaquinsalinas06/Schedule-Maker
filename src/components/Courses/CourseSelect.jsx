@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import { CourseContext } from "../../contexts/CourseContext";
+import { useTranslation } from "react-i18next";
 
 const style = {
   position: "absolute",
@@ -16,6 +17,7 @@ const style = {
 };
 
 export const CourseSelect = ({ course }) => {
+  const { t } = useTranslation();
   const { courses, setCourses } = useContext(CourseContext);
   const [open, setOpen] = useState(false);
   const [courseDetails, setCourseDetails] = useState(course);
@@ -67,7 +69,7 @@ export const CourseSelect = ({ course }) => {
           <form onSubmit={handleSubmit}>
             <div className="mb-4">
               <label htmlFor="name" className="block text-gray-700">
-                Course Name
+                {t("cName")}
               </label>
               <input
                 type="text"
@@ -81,7 +83,7 @@ export const CourseSelect = ({ course }) => {
             </div>
             <div className="mb-4">
               <label htmlFor="credits" className="block text-gray-700">
-                Credits
+                {t("cCredits")}
               </label>
               <input
                 type="number"
@@ -95,7 +97,7 @@ export const CourseSelect = ({ course }) => {
             </div>
             <div className="mb-4">
               <label htmlFor="semester" className="block text-gray-700">
-                Semester
+                {t("cSemester")}
               </label>
               <input
                 type="text"
@@ -109,7 +111,7 @@ export const CourseSelect = ({ course }) => {
             </div>
             <div className="mb-4">
               <label htmlFor="classesPerWeek" className="block text-gray-700">
-                Classes Per Week
+                {t("cClasses")}
               </label>
               <input
                 type="number"
@@ -126,14 +128,14 @@ export const CourseSelect = ({ course }) => {
                 type="submit"
                 className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
               >
-                Save
+                {t("save")}
               </button>
               <button
                 type="button"
                 onClick={handleClose}
                 className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-gray-600 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
               >
-                Close
+                {t("close")}
               </button>
               <button
                 type="button"

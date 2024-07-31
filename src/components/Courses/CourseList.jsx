@@ -88,7 +88,7 @@ export const CourseList = () => {
             </div>
             <div className="mb-4">
               <label htmlFor="semester" className="block text-gray-700">
-                Semester
+                {t("cSemester")}
               </label>
               <input
                 type="text"
@@ -102,7 +102,7 @@ export const CourseList = () => {
             </div>
             <div className="mb-4">
               <label htmlFor="classesPerWeek" className="block text-gray-700">
-                Classes Per Week
+                {t("cClasses")} 
               </label>
               <input
                 type="number"
@@ -119,21 +119,21 @@ export const CourseList = () => {
                 type="submit"
                 className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
               >
-                Add Course
+                {t("addCourse")}
               </button>
               <button
                 type="button"
                 onClick={handleClose}
                 className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
               >
-                Close
+                {t("close")}
               </button>
             </div>
           </form>
         </Box>
       </Modal>
       {courses.length === 0 ? (
-        <p className="text-white mt-4">No courses found</p>
+        <p className="text-white mt-4">{t("noCFound")}</p>
       ) : (
         <div className="course-list grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-4">
           {courses.map((course, index) => (

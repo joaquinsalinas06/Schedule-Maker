@@ -1,8 +1,10 @@
 import React, { useState, useContext } from "react";
 import { CourseOption } from "./CourseOption";
 import { DetailedCourseContext } from "../../contexts/DetailedCourseContext";
+import { useTranslation } from "react-i18next";
 
 export const CourseOptions = () => {
+  const { t } = useTranslation();
   const { detailedCourses, addDetailedCourse, setDetailedCoursesList } = useContext(DetailedCourseContext);
   const [courseOptions, setCourseOptions] = useState([{ id: 1 }]);
 
@@ -53,13 +55,13 @@ export const CourseOptions = () => {
           onClick={addCourse}
           className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
         >
-          Add Course
+          {t("addCourse")}
         </button>
         <button
           onClick={saveCourses}
           className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
         >
-          Save Courses
+          {t("sCourses")}
         </button>
         <input
           type="file"
@@ -72,7 +74,7 @@ export const CourseOptions = () => {
           htmlFor="load-courses-input"
           className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-yellow-600 hover:bg-yellow-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500 cursor-pointer"
         >
-          Load Courses
+          {t("lCourses")}
         </label>
       </div>
     </div>

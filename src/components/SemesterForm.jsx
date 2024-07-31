@@ -1,7 +1,9 @@
 import React, { useContext } from "react";
 import { CourseContext } from "../contexts/CourseContext";
+import { useTranslation } from "react-i18next";
 
 export const SemesterForm = () => {
+  const { t } = useTranslation();
   const { courses, setCourses } = useContext(CourseContext);
 
   return (
@@ -10,7 +12,7 @@ export const SemesterForm = () => {
         <div className="grid grid-cols-2 gap-4 justify-center">
           <div className="mb-4">
             <label htmlFor="minCourses" className="block text-white">
-              Min Courses
+              {t("minCourses")}
             </label>
             <input
               type="number"
@@ -22,7 +24,7 @@ export const SemesterForm = () => {
 
           <div className="mb-4">
             <label htmlFor="maxCourses" className="block text-white">
-              Max Courses
+              {t("maxCourses")}
             </label>
             <input
               type="number"
@@ -36,7 +38,7 @@ export const SemesterForm = () => {
         <div className="grid grid-cols-2 gap-4">
           <div className="mb-4">
             <label htmlFor="minCredits" className="block text-white">
-              Min Credits
+              {t("minCredits")}
             </label>
             <input
               type="number"
@@ -48,7 +50,7 @@ export const SemesterForm = () => {
 
           <div className="mb-4">
             <label htmlFor="maxCredits" className="block text-white">
-              Max Credits
+              {t("maxCredits")}
             </label>
             <input
               type="number"

@@ -1,3 +1,4 @@
+import { Schedule } from "@mui/icons-material";
 import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
 
@@ -28,7 +29,7 @@ const resources = {
       fri: "Viernes",
       sat: "Sabado",
       start: "Hora de Inicio",
-      end: "Hora de Finalizacion",
+      end: "Hora de Fin",
       conCourse: "Confirmar Curso",
       //CourseOptions
       sCourses: "Guardar Cursos",
@@ -37,8 +38,8 @@ const resources = {
       save: "Guardar",
       close: "Cerrar",
       //schedule
-      horario: "Horario",
-      hora: "Hora",
+      schedule: "Horario",
+      time: "Hora",
       prev: "Anterior",
       gen: "Generar",
       next: "Siguiente",
@@ -84,8 +85,8 @@ const resources = {
       save: "Save",
       close: "Close",
       //schedule
-      horario: "Schedule",
-      hora: "Time",
+      schedule: "Schedule",
+      time: "Time",
       prev: "Previous",
       gen: "Generate",
       next: "Next",
