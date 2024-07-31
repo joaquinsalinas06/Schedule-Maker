@@ -1,4 +1,3 @@
-import { Language, Schedule } from "@mui/icons-material";
 import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
 
@@ -56,6 +55,23 @@ const resources = {
       en: "Ingles",
       //header
       language: "Idioma",
+      help: "Ayuda",
+      // help page
+      helpTitle: "Ayuda de Schedule Maker",
+      helpIntroTitle: "¿Qué es Schedule Maker?",
+      helpIntroContent: "Schedule Maker es una herramienta que te ayudará a generar todos los posibles horarios según las horas/turnos de tus cursos.",
+      helpInitialSetupTitle: "Configuración Inicial",
+      helpInitialSetupContent: "Primero, ingresa los cursos mínimos y máximos permitidos por tu universidad, así como la cantidad de créditos mínima y máxima. Esta información nos ayudará a determinar si puedes generar un horario con los datos proporcionados. Luego, indica el ciclo actual de preferencia.",
+      helpCourseInputTitle: "Ingresar Cursos",
+      helpCourseInputContent1: "Es importante que ingreses los cursos que planeas llevar. Al crear un curso, asegúrate de indicar el número de créditos que equivale, el ciclo al que pertenece y el número de clases por semana. Por ejemplo, si un curso tiene clases el lunes y martes, indícalo como 2 veces. Si tienes el mismo curso dos veces en un mismo día, también indica 2 veces.",
+      helpCourseInputContent2: "Una vez creado el curso, podrás modificar sus parámetros si es necesario. Recomendamos no editar el curso mientras configuras las horas/turnos de cada curso, ya que podrían ocurrir errores.",
+      helpShiftSetupTitle: "Configurar Turnos",
+      helpShiftSetupContent1: "Después, indica los diferentes turnos para cada curso. Crea un nuevo turno y selecciona el curso previamente ingresado. Esto mostrará espacios para que indiques los días y horas correspondientes. Completa el apartado de sección/aula y el nombre del profesor. Si hay varios profesores, puedes colocar ambos nombres.",
+      helpShiftSetupContent2: "Asigna un color a tu curso. Este color se usará para dibujar el curso en tu horario, permitiéndote diferenciar entre turnos según la sección, profesor y color. Rellena todos los días y horas que te corresponden, así como los demás campos. Una vez que todos los campos estén llenos, confirma el curso. No se podrá modificar después de confirmar.",
+      helpExportImportTitle: "Exportar e Importar Cursos",
+      helpExportImportContent: "Si deseas añadir más cursos, utiliza el símbolo de '+' a la derecha para generar más turnos. Si ya tienes todos tus cursos configurados, exporta los cursos para que, cuando vuelvas a la página, puedas importarlos y seguirán ahí.",
+      helpGenerateScheduleTitle: "Generar Horarios",
+      helpGenerateScheduleContent: "Una vez que hayas terminado la selección de cursos, presiona el botón 'Generar' y deja que 'Schedule Maker' haga su magia. Obtendrás todas las opciones de horarios disponibles para que puedas tomar la mejor decisión en cuanto a tu horario."
     },
   },
   en: {
@@ -111,6 +127,23 @@ const resources = {
       en: "English",
       //header
       language: "Language",
+      help: "Help",
+      // help page
+      helpTitle: "Schedule Maker Help",
+      helpIntroTitle: "What is Schedule Maker?",
+      helpIntroContent: "Schedule Maker is a tool that will help you generate all possible schedules according to your course hours/shifts.",
+      helpInitialSetupTitle: "Initial Setup",
+      helpInitialSetupContent: "First, enter the minimum and maximum courses allowed by your university, as well as the minimum and maximum credits. This information will help us determine if you can generate a schedule with the provided data. Then, indicate the current preferred cycle.",
+      helpCourseInputTitle: "Enter Courses",
+      helpCourseInputContent1: "It is important that you enter the courses you plan to take. When creating a course, be sure to indicate the number of credits it equals, the cycle it belongs to, and the number of classes per week. For example, if a course has classes on Monday and Tuesday, indicate it as 2 times. If you have the same course twice in one day, also indicate 2 times.",
+      helpCourseInputContent2: "Once the course is created, you can modify its parameters if necessary. We recommend not editing the course while setting the hours/shifts of each course, as errors may occur.",
+      helpShiftSetupTitle: "Set Up Shifts",
+      helpShiftSetupContent1: "Next, indicate the different shifts for each course. Create a new shift and select the previously entered course. This will show spaces for you to indicate the corresponding days and hours. Fill in the section/classroom and the professor's name. If there are several professors, you can place both names.",
+      helpShiftSetupContent2: "Assign a color to your course. This color will be used to draw the course in your schedule, allowing you to differentiate between shifts by section, professor, and color. Fill in all the days and hours that correspond to you, as well as the other fields. Once all the fields are filled, confirm the course. It cannot be modified after confirmation.",
+      helpExportImportTitle: "Export and Import Courses",
+      helpExportImportContent: "If you want to add more courses, use the '+' symbol on the right to generate more shifts. If you already have all your courses configured, export the courses so that when you return to the page, you can import them and they will still be there.",
+      helpGenerateScheduleTitle: "Generate Schedules",
+      helpGenerateScheduleContent: "Once you have finished selecting courses, press the 'Generate' button and let 'Schedule Maker' work its magic. You will get all the available schedule options so you can make the best decision about your schedule."
     },
   },
 };
