@@ -57,11 +57,13 @@ export const CourseSelect = ({ course }) => {
 
   return (
     <div
-      className="course-box text-white p-4 m-2 border border-gray-300 rounded-md shadow-sm cursor-pointer bg-gray-800 hover:bg-gray-700"
+      className="course-box text-textColor p-6 border border-gray-300 rounded-lg shadow-lg cursor-pointer bg-courseListSelectBg"
       onClick={handleOpen}
     >
-      <div className="flex justify-between items-center">
-        <span className="text-lg font-semibold">{course.name}</span>
+      <div className="flex flex-col justify-between items-start space-y-2">
+        <div className="text-xl font-bold">{course.name}</div>
+        <div className="text-md">{t("cCredits")}: {course.credits} </div>
+        <div className="text-md">{t("cSemester")}: {course.semester}</div>
       </div>
       <Modal open={open} onClose={handleClose}>
         <Box sx={style} onClick={(e) => e.stopPropagation()}>

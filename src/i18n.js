@@ -34,6 +34,7 @@ const resources = {
       //CourseOptions
       sCourses: "Guardar Cursos",
       lCourses: "Cargar Cursos",
+      times: "Horas",
       //courseSelect
       save: "Guardar",
       close: "Cerrar",
@@ -48,6 +49,8 @@ const resources = {
       maxCourses: "Cursos Maximos",
       minCredits: "Creditos Minimos",
       maxCredits: "Creditos Maximos",
+      es: "Español",
+      en: "Ingles",
     },
   },
   en: {
@@ -81,6 +84,7 @@ const resources = {
       //CourseOptions
       sCourses: "Save Courses",
       lCourses: "Load Courses",
+      times: "Times",
       //courseSelect
       save: "Save",
       close: "Close",
@@ -95,6 +99,8 @@ const resources = {
       maxCourses: "Maximum Courses",
       minCredits: "Minimum Credits",
       maxCredits: "Maximum Credits",
+      es: "Spanish",
+      en: "English",
     },
   },
 };

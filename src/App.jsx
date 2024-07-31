@@ -17,9 +17,13 @@ function App() {
 
   return (
     <>
-      <button onClick={() => changeLanguage("es")}>Español</button>
-      <button onClick={() => changeLanguage("en")}>English</button>
-      <CourseList />
+        <button onClick={() => changeLanguage("es")} className="border bg-white rounded-md px-3 py-1 hover:bg-slate-200 mx-3">{t("es")}</button>
+        <button onClick={() => changeLanguage("en")} className="border bg-white rounded-md px-3 py-1 hover:bg-slate-200 mx-3">{t("en")}</button>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 p-4">
+        <SemesterForm />
+        <CourseList />
+      </div>
       <CourseOptions />
       <ScheduleComponent />
     </>

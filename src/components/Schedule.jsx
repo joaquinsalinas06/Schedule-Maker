@@ -286,7 +286,7 @@ export const ScheduleComponent = () => {
                 {days.map((day, colIndex) => (
                   <th
                     key={day}
-                    className="border text-center bg-gray-900 text-white"
+                    className="border text-center bg-gray-700 text-white"
                     style={{ width: "150px", height: "37.5px" }}
                   >
                     {day}

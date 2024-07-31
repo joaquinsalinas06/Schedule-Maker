@@ -2,6 +2,7 @@ import React, { useState, useContext } from "react";
 import { CourseOption } from "./CourseOption";
 import { DetailedCourseContext } from "../../contexts/DetailedCourseContext";
 import { useTranslation } from "react-i18next";
+import { Download, Upload, AddCircle } from "@mui/icons-material";
 
 export const CourseOptions = () => {
   const { t } = useTranslation();
@@ -44,38 +45,45 @@ export const CourseOptions = () => {
   };
 
   return (
-    <div className="flex flex-col items-center">
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+    <div className="flex flex-col items-center w-4/5 mx-auto">
+      <div className="flex justify-between items-center w-full mb-2">
+        <h2 className="text-2xl font-semibold text-white">{t("times")}</h2>
+        <div className="flex space-x-2">
+          <input
+            type="file"
+            accept=".json"
+            onChange={loadCourses}
+            className="hidden"
+            id="load-courses-input"
+          />
+          <label
+            htmlFor="load-courses-input"
+            className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-buttonImport cursor-pointer"
+          >
+            <Download />
+            {t("lCourses")}
+          </label>
+          <button
+            onClick={saveCourses}
+            className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-buttonExport"
+          >
+            <Upload />
+            {t("sCourses")}
+          </button>
+          <button
+            onClick={addCourse}
+            className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white "
+          >
+            <AddCircle />
+      
+          </button>
+        </div>
+      </div>
+      <hr className="border-t-2 border-gray-200 w-full mb-2"/>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 w-full">
         {courseOptions.map((_, index) => (
           <CourseOption key={index} index={index} removeCourse={removeCourse} />
         ))}
-      </div>
-      <div className="flex mt-4 space-x-2">
-        <button
-          onClick={addCourse}
-          className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
-        >
-          {t("addCourse")}
-        </button>
-        <button
-          onClick={saveCourses}
-          className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
-        >
-          {t("sCourses")}
-        </button>
-        <input
-          type="file"
-          accept=".json"
-          onChange={loadCourses}
-          className="hidden"
-          id="load-courses-input"
-        />
-        <label
-          htmlFor="load-courses-input"
-          className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-yellow-600 hover:bg-yellow-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500 cursor-pointer"
-        >
-          {t("lCourses")}
-        </label>
       </div>
     </div>
   );

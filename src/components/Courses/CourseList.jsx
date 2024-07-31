@@ -47,10 +47,10 @@ export const CourseList = () => {
   };
 
   return (
-    <div className="flex flex-col items-center">
+    <div className="flex flex-col items-start">
       <button
         onClick={handleOpen}
-        className="mt-4 inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+        className="mt-4 inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-buttonCourseList"
       >
         {t("addCourse")}
       </button>
@@ -102,7 +102,7 @@ export const CourseList = () => {
             </div>
             <div className="mb-4">
               <label htmlFor="classesPerWeek" className="block text-gray-700">
-                {t("cClasses")} 
+                {t("cClasses")}
               </label>
               <input
                 type="number"
@@ -132,17 +132,17 @@ export const CourseList = () => {
           </form>
         </Box>
       </Modal>
-      {courses.length === 0 ? (
-        <p className="text-white mt-4">{t("noCFound")}</p>
-      ) : (
-        <div className="course-list grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-4">
-          {courses.map((course, index) => (
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
+        {courses.length === 0 ? (
+          <p className="text-white mt-4 md:col-span-3">{t("noCFound")}</p>
+        ) : (
+          courses.map((course, index) => (
             <div key={index}>
               <CourseSelect course={course} />
             </div>
-          ))}
-        </div>
-      )}
+          ))
+        )}
+      </div>
     </div>
   );
 };

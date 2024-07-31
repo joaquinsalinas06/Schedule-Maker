@@ -2,6 +2,7 @@ import React, { useState, useContext, useEffect } from "react";
 import { CourseContext } from "../../contexts/CourseContext";
 import { DetailedCourseContext } from "../../contexts/DetailedCourseContext";
 import Delete from "@mui/icons-material/Delete";
+import { CheckCircle} from "@mui/icons-material";
 import { useTranslation } from "react-i18next";
 
 export const CourseOption = ({ index, removeCourse }) => {
@@ -101,7 +102,7 @@ export const CourseOption = ({ index, removeCourse }) => {
   };
 
   return (
-    <div className="relative border border-double border-gray-300 rounded-lg p-6 w-full mx-auto my-4 bg-white shadow-md">
+    <div className="relative border border-double border-gray-300 rounded-lg px-6 pt-6 pb-2 w-full mx-auto mt-4 bg-blueBox shadow-md">
       <button
         onClick={() => removeCourse(index)}
         className="absolute top-2 right-2"
@@ -122,7 +123,7 @@ export const CourseOption = ({ index, removeCourse }) => {
               id="course"
               onChange={handleCourseChange}
               value={selectedCourse}
-              className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+              className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm bg-bgCourseOptionInput sm:text-sm"
               required
             >
               <option value="">{t("selCourse")}</option>
@@ -145,7 +146,7 @@ export const CourseOption = ({ index, removeCourse }) => {
               id="section"
               value={sectionName}
               onChange={handleSectionChange}
-              className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+              className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm bg-bgCourseOptionInput sm:text-sm"
               required
             />
 
@@ -161,7 +162,7 @@ export const CourseOption = ({ index, removeCourse }) => {
               id="professor"
               value={professor}
               onChange={handleProfessorChange}
-              className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+              className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm bg-bgCourseOptionInput sm:text-sm"
               required
             />
 
@@ -177,7 +178,7 @@ export const CourseOption = ({ index, removeCourse }) => {
               id="color"
               value={color}
               onChange={handleColorChange}
-              className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+              className="mt-1 block w-full bg-transparent rounded-md  sm:text-sm"
               required
             />
           </div>
@@ -197,7 +198,7 @@ export const CourseOption = ({ index, removeCourse }) => {
                     id={`day-${index}`}
                     value={days[index] || ""}
                     onChange={(e) => handleDayChange(index, e)}
-                    className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                    className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm bg-bgCourseOptionInput sm:text-sm"
                     required
                   >
                     <option value="">{t("selDay")}</option>
@@ -224,7 +225,7 @@ export const CourseOption = ({ index, removeCourse }) => {
                       id={`startTime-${index}`}
                       value={startTimes[index] || ""}
                       onChange={(e) => handleStartTimeChange(index, e)}
-                      className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                      className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm bg-bgCourseOptionInput sm:text-sm"
                       required
                     />
                   </div>
@@ -242,7 +243,7 @@ export const CourseOption = ({ index, removeCourse }) => {
                       id={`endTime-${index}`}
                       value={endTimes[index] || ""}
                       onChange={(e) => handleEndTimeChange(index, e)}
-                      className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                      className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm bg-bgCourseOptionInput sm:text-sm"
                       required
                     />
                   </div>
@@ -253,14 +254,14 @@ export const CourseOption = ({ index, removeCourse }) => {
         </div>
 
         {showButton && (
-          <button
-            type="button"
-            onClick={handleAddCourse}
-            className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-green-500 hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 mt-4"
-            disabled={!isFormComplete()}
-          >
-            {t("conCourse")}
-          </button>
+          <div className="flex justify-center ">
+            <CheckCircle
+              onClick={handleAddCourse}
+              className="cursor-pointer "
+              style={{ fontSize: 40 }}
+              disabled={!isFormComplete()}
+            />
+          </div>
         )}
       </form>
     </div>
