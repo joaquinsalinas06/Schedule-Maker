@@ -1,5 +1,6 @@
 import React, { useContext, useState } from "react";
 import { DetailedCourseContext } from "../contexts/DetailedCourseContext";
+import { useTranslation } from "react-i18next";
 
 class Course {
   constructor(
@@ -29,19 +30,11 @@ class Course {
   collides(other) {
     for (let i = 0; i < this.startTimes.length; i++) {
       for (let j = 0; j < other.startTimes.length; j++) {
-        console.log(this.name, this.days, this.startTimes, this.endTimes);
-        console.log(other.name, other.days, other.startTimes, other.endTimes);
-        console.log(this.days[i], other.days[j]);
-        console.log(daysOverlap(this.days[i], other.days[j]));
         if (daysOverlap(this.days[i], other.days[j])) {
           let thisStart = parseTime(this.startTimes[i]);
           let thisEnd = parseTime(this.endTimes[i]);
           let otherStart = parseTime(other.startTimes[j]);
           let otherEnd = parseTime(other.endTimes[j]);
-          console.log("thisStart:", parseTime(this.startTimes[i]));
-          console.log("thisEnd:", parseTime(this.endTimes[i]));
-          console.log("otherStart:", parseTime(other.startTimes[j]));
-          console.log("otherEnd:", parseTime(other.endTimes[j]));
 
           if (
             (thisStart < otherEnd && thisEnd > otherStart) ||
@@ -77,16 +70,11 @@ class Schedule {
   }
 
   formsValidSchedule(course) {
-    console.log("Checking if course", course.name, "forms a valid schedule");
-    console.log("Current courses:", this.courses);
-    return this.courses.every(
-      (existingCourse) => {
-        console.log("Checking collision between", existingCourse.name, "and", course.name);
-        const collides = existingCourse.collides(course);
-        console.log("Collision:", collides);
-        return !collides;
-      }
-    );
+    return this.courses.every((existingCourse) => {
+      const collides = existingCourse.collides(course);
+
+      return !collides;
+    });
   }
 
   addCourse(course) {
@@ -118,6 +106,7 @@ const parseTime = (timeString) => {
 };
 
 export const ScheduleComponent = () => {
+  const {t} = useTranslation();
   const { detailedCourses } = useContext(DetailedCourseContext);
   const [schedules, setSchedules] = useState([]);
   const [currentScheduleIndex, setCurrentScheduleIndex] = useState(0);
@@ -149,18 +138,17 @@ export const ScheduleComponent = () => {
 
     const generateCombinations = (groupIndex, currentSchedule) => {
       if (groupIndex === courseGroups.length) {
-      allSchedules.push(currentSchedule);
-      console.log("Generated Schedule:", currentSchedule);
-      return;
+        allSchedules.push(currentSchedule);
+
+        return;
       }
 
       for (let course of courseGroups[groupIndex]) {
-      if (currentSchedule.formsValidSchedule(course)) {
-        console.log("Adding Course:", course);
-        let newSchedule = currentSchedule.addCourse(course);
-        console.log("New Schedule:", newSchedule);
-        generateCombinations(groupIndex + 1, newSchedule);
-      }
+        if (currentSchedule.formsValidSchedule(course)) {
+          let newSchedule = currentSchedule.addCourse(course);
+
+          generateCombinations(groupIndex + 1, newSchedule);
+        }
       }
     };
 
@@ -180,14 +168,14 @@ export const ScheduleComponent = () => {
       (currentScheduleIndex - 1 + schedules.length) % schedules.length
     );
   };
-
+  //todo hacer que los dias sean en español/ingles
   const days = [
-    "Monday",
-    "Tuesday",
-    "Wednesday",
-    "Thursday",
-    "Friday",
-    "Saturday",
+    t("mon"),
+    t("tue"),
+    t("wed"),
+    t("thu"),
+    t("fri"),
+    t("sat"),
   ];
   const timeSlots = [
     "07:00 AM",
@@ -281,7 +269,7 @@ export const ScheduleComponent = () => {
       {schedules.length > 0 && (
         <div className="w-full overflow-x-auto mb-4">
           <h2 className="text-white text-center mb-2">
-            Schedule {currentScheduleIndex + 1}
+            {t("schedule")} {currentScheduleIndex + 1}
           </h2>
           <table
             className="table-fixed border-collapse border mx-auto"
@@ -293,12 +281,12 @@ export const ScheduleComponent = () => {
                   className="border text-center bg-gray-900 text-white"
                   style={{ width: "100px", height: "37.5px" }}
                 >
-                  Time
+                  {t("time")}
                 </th>
                 {days.map((day, colIndex) => (
                   <th
                     key={day}
-                    className="border text-center bg-gray-900 text-white"
+                    className="border text-center bg-gray-700 text-white"
                     style={{ width: "150px", height: "37.5px" }}
                   >
                     {day}
@@ -317,19 +305,19 @@ export const ScheduleComponent = () => {
           onClick={showPrevSchedule}
           className="bg-blue-500 text-white px-4 py-2 rounded mx-2"
         >
-          Previous
+          {t("prev")}
         </button>
         <button
           onClick={generateSchedules}
           className="bg-blue-500 text-white px-4 py-2 rounded mx-2"
         >
-          Generate
+          {t("gen")}
         </button>
         <button
           onClick={showNextSchedule}
           className="bg-blue-500 text-white px-4 py-2 rounded mx-2"
         >
-          Next
+          {t("next")}
         </button>
       </div>
     </div>
