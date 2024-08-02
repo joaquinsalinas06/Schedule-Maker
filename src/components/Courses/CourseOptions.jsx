@@ -1,23 +1,27 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { CourseOption } from "./CourseOption";
 import { useTranslation } from "react-i18next";
 import { Download, Upload, AddCircle } from "@mui/icons-material";
 import { v4 as uuidv4 } from 'uuid'; 
+import { DetailedCourseContext } from "../../contexts/DetailedCourseContext";
 
 export const CourseOptions = () => {
   const { t } = useTranslation();
   const [detailedCourseOptions, setDetailedCourseOptions] = useState([]);
+  const { detailedCourses, addDetailedCourse, setDetailedCoursesList } = useContext(DetailedCourseContext);
 
   const addDetailedCourseOption = () => {
     console.log("Adding a new detailed course option");
     const newDetailedCourseOption = { id: uuidv4(), name: "", section: "", professor: "", days: [], startTimes: [], endTimes: [], color: "#ffffff" };
     setDetailedCourseOptions([...detailedCourseOptions, newDetailedCourseOption]);
+    addDetailedCourse(newDetailedCourseOption);
   };
 
   const removeDetailedCourseOption = (id) => {
     console.log(`Removing detailed course option with id ${id}`);
     const updatedOptions = detailedCourseOptions.filter(option => option.id !== id);
     setDetailedCourseOptions(updatedOptions);
+    setDetailedCoursesList(updatedOptions);
   };
 
   const updateDetailedCourseOption = (id, updatedCourse) => {
@@ -29,6 +33,7 @@ export const CourseOptions = () => {
       return option;
     });
     setDetailedCourseOptions(updatedOptions);
+    setDetailedCoursesList(updatedOptions);
   };
 
   const copyDetailedCourseOption = (detailedCourseOption) => {
@@ -39,6 +44,7 @@ export const CourseOptions = () => {
       ...detailedCourseOptions,
       newDetailedCourseOption
     ]);
+    addDetailedCourse(newDetailedCourseOption);
   };
 
   const saveDetailedCourseOptions = () => {
@@ -61,6 +67,7 @@ export const CourseOptions = () => {
         const content = e.target.result;
         const detailedCourseOptions = JSON.parse(content);
         setDetailedCourseOptions(detailedCourseOptions);
+        setDetailedCoursesList(detailedCourseOptions);
       };
       reader.readAsText(file);
     }
@@ -114,7 +121,7 @@ export const CourseOptions = () => {
         ))}
       </div>
       <button
-        onClick={() => console.log(detailedCourseOptions)}
+        onClick={() => console.log(detailedCourseOptions, detailedCourses)}
         className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white hover:text-slate-200"
       >
         Debug
