@@ -1,23 +1,49 @@
 import React, { useState, useContext, useEffect } from "react";
 import { CourseContext } from "../../contexts/CourseContext";
-import { DetailedCourseContext } from "../../contexts/DetailedCourseContext";
 import Delete from "@mui/icons-material/Delete";
-import { CheckCircle } from "@mui/icons-material";
+import { CheckCircle, FileCopy } from "@mui/icons-material";
 import { useTranslation } from "react-i18next";
 
-export const CourseOption = ({ index, removeCourse }) => {
+export const CourseOption = ({ index, removeCourse, copyCourse, course, updateCourse}) => {
   const { t } = useTranslation();
   const [showButton, setShowButton] = useState(true);
   const [numClasses, setNumClasses] = useState(1);
-  const [selectedCourse, setSelectedCourse] = useState("");
-  const [sectionName, setSectionName] = useState("");
-  const [professor, setProfessor] = useState("");
-  const [days, setDays] = useState([]);
-  const [startTimes, setStartTimes] = useState([]);
-  const [endTimes, setEndTimes] = useState([]);
-  const [color, setColor] = useState("#ffffff");
+  const [selectedCourse, setSelectedCourse] = useState(course?.name || "");
+  const [sectionName, setSectionName] = useState(course?.section || "");
+  const [professor, setProfessor] = useState(course?.professor || "");
+  const [days, setDays] = useState(course?.days || []);
+  const [startTimes, setStartTimes] = useState(course?.startTimes || []);
+  const [endTimes, setEndTimes] = useState(course?.endTimes || []);
+  const [color, setColor] = useState(course?.color || "#ffffff");
   const { courses } = useContext(CourseContext);
-  const { addDetailedCourse } = useContext(DetailedCourseContext);
+
+  useEffect(() => {
+    if (selectedCourse) {
+      const course = courses.find((course) => course.name === selectedCourse);
+      if (course) {
+        setNumClasses(parseInt(course.classesPerWeek));
+      }
+    }
+  }, [courses, selectedCourse]);
+
+  useEffect(() => {
+    const selectedCourseData = courses.find(
+      (course) => course.name === selectedCourse
+    );
+    const updatedCourse = {
+      name: selectedCourse,
+      section: sectionName,
+      professor: professor,
+      days: days.length > 0 ? days : Array(numClasses).fill("Monday"),
+      startTimes: startTimes,
+      endTimes: endTimes,
+      credits: selectedCourseData ? selectedCourseData.credits : null,
+      semester: selectedCourseData ? selectedCourseData.semester : null,
+      classesPerWeek: numClasses,
+      color: color,
+    };
+    updateCourse(index, updatedCourse);
+  }, [selectedCourse, sectionName, professor, days, startTimes, endTimes, color, numClasses]);
 
   const handleCourseChange = (event) => {
     const selectedCourseName = event.target.value;
@@ -76,7 +102,6 @@ export const CourseOption = ({ index, removeCourse }) => {
       classesPerWeek: numClasses,
       color: color,
     };
-    addDetailedCourse(course);
     setShowButton(false);
   };
 
@@ -101,6 +126,46 @@ export const CourseOption = ({ index, removeCourse }) => {
     return true;
   };
 
+  const handleCopyCourse = () => {
+    const selectedCourseData = courses.find(
+      (course) => course.name === selectedCourse
+    );
+    const copiedCourse = {
+      name: selectedCourse,
+      section: sectionName,
+      professor: professor,
+      days: [...days],
+      startTimes: [...startTimes],
+      endTimes: [...endTimes],
+      credits: selectedCourseData ? selectedCourseData.credits : null,
+      semester: selectedCourseData ? selectedCourseData.semester : null,
+      classesPerWeek: numClasses,
+      color: color,
+    };
+    copyCourse(copiedCourse, index);
+  };
+
+  const curr = () => {
+    console.log("index")
+    console.log(index)
+    const selectedCourseData = courses.find(
+      (course) => course.name === selectedCourse
+    );
+    const consoleCourse = {
+      name: selectedCourse,
+      section: sectionName,
+      professor: professor,
+      days: days.length > 0 ? days : Array(numClasses).fill("Monday"),
+      startTimes: startTimes,
+      endTimes: endTimes,
+      credits: selectedCourseData ? selectedCourseData.credits : null,
+      semester: selectedCourseData ? selectedCourseData.semester : null,
+      classesPerWeek: numClasses,
+      color: color,
+    };
+    console.log(consoleCourse);
+  }
+
   return (
     <div className="relative rounded-lg px-6 pt-6 pb-2 w-full mx-auto mt-4 bg-blueBox shadow-md">
       <button
@@ -108,6 +173,18 @@ export const CourseOption = ({ index, removeCourse }) => {
         className="absolute top-2 right-2"
       >
         <Delete />
+      </button>
+      <button
+        onClick={() => handleCopyCourse()}
+        className="absolute top-2 right-10"
+      >
+        <FileCopy />
+      </button>
+      <button
+        onClick={() => curr()}
+        className="absolute top-2 right-18"
+      >
+        <FileCopy />
       </button>
       <form className="space-y-4">
         <div className="grid grid-cols-2 gap-4">

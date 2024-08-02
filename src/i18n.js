@@ -35,6 +35,7 @@ const resources = {
       lCourses: "Cargar Cursos",
       times: "Horas",
       alMessage: "Los cursos se han guardado correctamente, por el momento no se pueden ver en la lista de turnos:( \n\nPero puedes darle a generar sin problemas:)!",
+      nTurns: "No se han creado turnos",
       //courseSelect
       sCredits: "Creditos",
       sSem: "Semestre",
@@ -106,6 +107,8 @@ const resources = {
       sCourses: "Save Courses",
       lCourses: "Load Courses",
       times: "Times",
+      alMessage: "The courses have been saved correctly, at the moment they cannot be seen in the shift list:( \n\nBut you can generate the schedules without problems:)!",
+      nTurns: "No turns have been created",
       //courseSelect
       alMessage: "The courses have been saved correctly, at the moment they cannot be seen in the shift list:( \n\nBut you can generate the schedules without problems:)!",
       sCredits: "Credits",
