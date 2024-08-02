@@ -16,6 +16,11 @@ export const SemesterProvider = ({ children }) => {
   return (
     <SemesterContext.Provider
       value={{
+        minCourses,
+        maxCourses,
+        minCredits,
+        maxCredits,
+        semester,
         setMinCourses,
         setMaxCourses,
         setMinCredits,
