@@ -4,11 +4,13 @@ import { useTranslation } from "react-i18next";
 import { Download, Upload, AddCircle } from "@mui/icons-material";
 import { v4 as uuidv4 } from 'uuid'; 
 import { DetailedCourseContext } from "../../contexts/DetailedCourseContext";
+import { CourseContext } from "../../contexts/CourseContext"; // Import CourseContext
 
 export const CourseOptions = () => {
   const { t } = useTranslation();
   const [detailedCourseOptions, setDetailedCourseOptions] = useState([]);
   const { detailedCourses, addDetailedCourse, setDetailedCoursesList } = useContext(DetailedCourseContext);
+  const { courses, setCourses } = useContext(CourseContext); // Access courses and setCourses
 
   const addDetailedCourseOption = () => {
     console.log("Adding a new detailed course option");
@@ -66,6 +68,24 @@ export const CourseOptions = () => {
       reader.onload = (e) => {
         const content = e.target.result;
         const detailedCourseOptions = JSON.parse(content);
+  
+        const addedCourses = new Set();
+  
+        detailedCourseOptions.forEach(option => {
+          const courseKey = `${option.name}-${option.credits}-${option.semester}-${option.classesPerWeek}`;
+          
+          if (!addedCourses.has(courseKey)) {
+            const newCourse = {
+              name: option.name,
+              credits: option.credits,
+              semester: option.semester,
+              classesPerWeek: option.classesPerWeek
+            };
+            setCourses(prevCourses => [...prevCourses, newCourse]);
+            addedCourses.add(courseKey);
+          }
+        });
+  
         setDetailedCourseOptions(detailedCourseOptions);
         setDetailedCoursesList(detailedCourseOptions);
       };
