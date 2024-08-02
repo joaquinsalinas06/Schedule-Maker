@@ -3,27 +3,27 @@ import { CourseOption } from "./ShiftOption";
 import { useTranslation } from "react-i18next";
 import { Download, Upload, AddCircle } from "@mui/icons-material";
 import { v4 as uuidv4 } from 'uuid'; 
-import { DetailedCourseContext } from "../../contexts/ShiftsContext";
+import { ShiftsContext } from "../../contexts/ShiftsContext";
 import { CourseContext } from "../../contexts/CourseContext";
 
 export const CourseOptions = () => {
   const { t } = useTranslation();
   const [detailedCourseOptions, setDetailedCourseOptions] = useState([]);
-  const { detailedCourses, addDetailedCourse, setDetailedCoursesList } = useContext(DetailedCourseContext);
+  const { shifts, addShift, setShiftsList } = useContext(ShiftsContext);
   const { courses, setCourses } = useContext(CourseContext); 
 
   const addDetailedCourseOption = () => {
     console.log("Adding a new detailed course option");
     const newDetailedCourseOption = { id: uuidv4(), name: "", section: "", professor: "", days: [], startTimes: [], endTimes: [], color: "#ffffff" };
     setDetailedCourseOptions([...detailedCourseOptions, newDetailedCourseOption]);
-    addDetailedCourse(newDetailedCourseOption);
+    addShift(newDetailedCourseOption);
   };
 
   const removeDetailedCourseOption = (id) => {
     console.log(`Removing detailed course option with id ${id}`);
     const updatedOptions = detailedCourseOptions.filter(option => option.id !== id);
     setDetailedCourseOptions(updatedOptions);
-    setDetailedCoursesList(updatedOptions);
+    setShiftsList(updatedOptions);
   };
 
   const updateDetailedCourseOption = (id, updatedCourse) => {
@@ -35,7 +35,7 @@ export const CourseOptions = () => {
       return option;
     });
     setDetailedCourseOptions(updatedOptions);
-    setDetailedCoursesList(updatedOptions);
+    setShiftsList(updatedOptions);
   };
 
   const copyDetailedCourseOption = (detailedCourseOption) => {
@@ -46,7 +46,7 @@ export const CourseOptions = () => {
       ...detailedCourseOptions,
       newDetailedCourseOption
     ]);
-    addDetailedCourse(newDetailedCourseOption);
+    addShift(newDetailedCourseOption);
   };
 
   const saveDetailedCourseOptions = () => {
@@ -55,7 +55,7 @@ export const CourseOptions = () => {
     const url = URL.createObjectURL(blob);
     const link = document.createElement("a");
     link.href = url;
-    link.download = "detailedCourseOptions.json";
+    link.download = "shiftOptions.json";
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
@@ -87,7 +87,7 @@ export const CourseOptions = () => {
         });
   
         setDetailedCourseOptions(detailedCourseOptions);
-        setDetailedCoursesList(detailedCourseOptions);
+        setShiftsList(detailedCourseOptions);
       };
       reader.readAsText(file);
     }
@@ -141,7 +141,7 @@ export const CourseOptions = () => {
         ))}
       </div>
       <button
-        onClick={() => console.log(detailedCourseOptions, detailedCourses)}
+        onClick={() => console.log(detailedCourseOptions, shifts)}
         className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white hover:text-slate-200"
       >
         Debug

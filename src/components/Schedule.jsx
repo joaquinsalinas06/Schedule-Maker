@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { DetailedCourseContext } from "../contexts/ShiftsContext";
+import { ShiftsContext } from "../contexts/ShiftsContext";
 import { useTranslation } from "react-i18next";
 
 class Course {
@@ -107,7 +107,7 @@ const parseTime = (timeString) => {
 
 export const ScheduleComponent = () => {
   const { t } = useTranslation();
-  const { detailedCourses } = useContext(DetailedCourseContext);
+  const { shifts } = useContext(ShiftsContext);
   const [schedules, setSchedules] = useState([]);
   const [showPrevNext, setShowPrevNext] = useState(false);
   const [currentScheduleIndex, setCurrentScheduleIndex] = useState(0);
@@ -116,7 +116,7 @@ export const ScheduleComponent = () => {
     setShowPrevNext(true);
     let groupedCourses = {};
 
-    for (let course of detailedCourses) {
+    for (let course of shifts) {
       if (!groupedCourses[course.name]) {
         groupedCourses[course.name] = [];
       }

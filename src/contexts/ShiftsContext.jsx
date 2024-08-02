@@ -1,23 +1,23 @@
 import React, { createContext, useState } from "react";
 
-export const DetailedCourseContext = createContext();
+export const ShiftsContext = createContext();
 
-export const DetailedCourseProvider = ({ children }) => {
-  const [detailedCourses, setDetailedCourses] = useState([]);
+export const ShiftsProvider = ({ children }) => {
+  const [shifts, setShifts] = useState([]);
 
-  const addDetailedCourse = (course) => {
-    setDetailedCourses((prevCourses) => [...prevCourses, course]);
+  const addShift = (course) => {
+    setShifts((prevCourses) => [...prevCourses, course]);
   };
 
-  const setDetailedCoursesList = (courses) => {
-    setDetailedCourses(courses);
+  const setShiftsList = (courses) => {
+    setShifts(courses);
   };
 
   return (
-    <DetailedCourseContext.Provider
-      value={{ detailedCourses, addDetailedCourse, setDetailedCoursesList }}
+    <ShiftsContext.Provider
+      value={{ shifts, addShift, setShiftsList }}
     >
       {children}
-    </DetailedCourseContext.Provider>
+    </ShiftsContext.Provider>
   );
 };
