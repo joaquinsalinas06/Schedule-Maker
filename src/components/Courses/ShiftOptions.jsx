@@ -2,33 +2,39 @@ import React, { useState, useContext } from "react";
 import { ShiftOption } from "./ShiftOption";
 import { useTranslation } from "react-i18next";
 import { Download, Upload, AddCircle } from "@mui/icons-material";
-import { v4 as uuidv4 } from 'uuid'; 
+import { v4 as uuidv4 } from "uuid";
 import { ShiftsContext } from "../../contexts/ShiftsContext";
 import { CourseContext } from "../../contexts/CourseContext";
 
 export const ShiftOptions = () => {
   const { t } = useTranslation();
   const [shiftOptions, setShiftOptions] = useState([]);
-  const { shifts, addShift, setShiftsList } = useContext(ShiftsContext);
-  const { courses, setCourses } = useContext(CourseContext); 
+  const { addShift, setShiftsList } = useContext(ShiftsContext);
+  const { setCourses } = useContext(CourseContext);
 
   const addShiftOption = () => {
-    console.log("Adding a new shift option");
-    const newShiftOption = { id: uuidv4(), name: "", section: "", professor: "", days: [], startTimes: [], endTimes: [], color: "#ffffff" };
+    const newShiftOption = {
+      id: uuidv4(),
+      name: "",
+      section: "",
+      professor: "",
+      days: [],
+      startTimes: [],
+      endTimes: [],
+      color: "#ffffff",
+    };
     setShiftOptions([...shiftOptions, newShiftOption]);
     addShift(newShiftOption);
   };
 
   const removeShiftOption = (id) => {
-    console.log(`Removing shift option with id ${id}`);
-    const updatedOptions = shiftOptions.filter(option => option.id !== id);
+    const updatedOptions = shiftOptions.filter((option) => option.id !== id);
     setShiftOptions(updatedOptions);
     setShiftsList(updatedOptions);
   };
 
   const updateShiftOption = (id, updatedCourse) => {
-    console.log(`Updating shift option with id ${id}`);
-    const updatedOptions = shiftOptions.map(option => {
+    const updatedOptions = shiftOptions.map((option) => {
       if (option.id === id) {
         return { ...updatedCourse, id };
       }
@@ -39,13 +45,8 @@ export const ShiftOptions = () => {
   };
 
   const copyShiftOption = (shiftOption) => {
-    console.log(shiftOption);
-    console.log(`Copying shift option with id ${shiftOption.id}`);
     const newShiftOption = { ...shiftOption, id: uuidv4() };
-    setShiftOptions([
-      ...shiftOptions,
-      newShiftOption
-    ]);
+    setShiftOptions([...shiftOptions, newShiftOption]);
     addShift(newShiftOption);
   };
 
@@ -68,24 +69,24 @@ export const ShiftOptions = () => {
       reader.onload = (e) => {
         const content = e.target.result;
         const shiftOptions = JSON.parse(content);
-  
+
         const addedCourses = new Set();
-  
-        shiftOptions.forEach(option => {
+
+        shiftOptions.forEach((option) => {
           const courseKey = `${option.name}-${option.credits}-${option.semester}-${option.classesPerWeek}`;
-          
+
           if (!addedCourses.has(courseKey)) {
             const newCourse = {
               name: option.name,
               credits: option.credits,
               semester: option.semester,
-              classesPerWeek: option.classesPerWeek
+              classesPerWeek: option.classesPerWeek,
             };
-            setCourses(prevCourses => [...prevCourses, newCourse]);
+            setCourses((prevCourses) => [...prevCourses, newCourse]);
             addedCourses.add(courseKey);
           }
         });
-  
+
         setShiftOptions(shiftOptions);
         setShiftsList(shiftOptions);
       };
@@ -140,12 +141,6 @@ export const ShiftOptions = () => {
           />
         ))}
       </div>
-      <button
-        onClick={() => console.log(shiftOptions, shifts)}
-        className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white hover:text-slate-200"
-      >
-        Debug
-      </button>
     </div>
   );
 };

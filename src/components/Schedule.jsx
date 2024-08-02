@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import { ShiftsContext } from "../contexts/ShiftsContext";
 import { useTranslation } from "react-i18next";
-
+//todo, usar el semesterContext, antes de hacer la generacion, reivsar que los cursos cumplan el minimo y maximo de creditos y cursos, ademas, añadir la validacion de que si un curso esta completo o no 
 class Course {
   constructor(
     name,

@@ -54,6 +54,7 @@ const resources = {
       maxCredits: "Creditos Maximos",
       es: "Español",
       en: "Ingles",
+      semester: "Semestre",
       //header
       language: "Idioma",
       help: "Ayuda",
@@ -128,6 +129,7 @@ const resources = {
       maxCredits: "Maximum Credits",
       es: "Spanish",
       en: "English",
+      semester: "Semester",
       //header
       language: "Language",
       help: "Help",
