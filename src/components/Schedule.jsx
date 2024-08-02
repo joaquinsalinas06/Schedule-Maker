@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { DetailedCourseContext } from "../contexts/DetailedCourseContext";
+import { DetailedCourseContext } from "../contexts/ShiftsContext";
 import { useTranslation } from "react-i18next";
 
 class Course {

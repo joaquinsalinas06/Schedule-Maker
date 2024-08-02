@@ -1,16 +1,16 @@
 import React, { useState, useContext } from "react";
-import { CourseOption } from "./CourseOption";
+import { CourseOption } from "./ShiftOption";
 import { useTranslation } from "react-i18next";
 import { Download, Upload, AddCircle } from "@mui/icons-material";
 import { v4 as uuidv4 } from 'uuid'; 
-import { DetailedCourseContext } from "../../contexts/DetailedCourseContext";
-import { CourseContext } from "../../contexts/CourseContext"; // Import CourseContext
+import { DetailedCourseContext } from "../../contexts/ShiftsContext";
+import { CourseContext } from "../../contexts/CourseContext";
 
 export const CourseOptions = () => {
   const { t } = useTranslation();
   const [detailedCourseOptions, setDetailedCourseOptions] = useState([]);
   const { detailedCourses, addDetailedCourse, setDetailedCoursesList } = useContext(DetailedCourseContext);
-  const { courses, setCourses } = useContext(CourseContext); // Access courses and setCourses
+  const { courses, setCourses } = useContext(CourseContext); 
 
   const addDetailedCourseOption = () => {
     console.log("Adding a new detailed course option");
