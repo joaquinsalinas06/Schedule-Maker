@@ -4,7 +4,7 @@ import Delete from "@mui/icons-material/Delete";
 import { CheckCircle, FileCopy } from "@mui/icons-material";
 import { useTranslation } from "react-i18next";
 
-export const CourseOption = ({ index, removeCourse, copyCourse, course, updateCourse}) => {
+export const ShiftOption = ({ index, removeCourse, copyCourse, course, updateCourse}) => {
   const { t } = useTranslation();
   const [showButton, setShowButton] = useState(true);
   const [numClasses, setNumClasses] = useState(1);
