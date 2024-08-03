@@ -4,6 +4,7 @@ import Modal from "@mui/material/Modal";
 import Box from "@mui/material/Box";
 import { CourseContext } from "../../contexts/CourseContext";
 import { useTranslation } from "react-i18next";
+import { motion } from "framer-motion";
 
 const style = {
   position: "absolute",
@@ -15,6 +16,18 @@ const style = {
   border: "2px solid #000",
   boxShadow: 24,
   p: 4,
+};
+
+const courseVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: (i) => ({
+    opacity: 1,
+    y: 0,
+    transition: {
+      delay: i * 0.2,
+      duration: 0.5,
+    },
+  }),
 };
 
 export const CourseList = () => {
@@ -83,6 +96,7 @@ export const CourseList = () => {
                 onChange={handleChange}
                 required
                 className="border border-gray-300 rounded-md p-2 w-full"
+                min="1"
               />
             </div>
             <div className="mb-4">
@@ -97,6 +111,7 @@ export const CourseList = () => {
                 onChange={handleChange}
                 required
                 className="border border-gray-300 rounded-md p-2 w-full"
+                min="1"
               />
             </div>
             <div className="flex justify-between">
@@ -122,9 +137,16 @@ export const CourseList = () => {
           <p className="text-white mt-4 md:col-span-3">{t("noCFound")}</p>
         ) : (
           courses.map((course, index) => (
-            <div key={index}>
+            <motion.div
+              key={index}
+              custom={index}
+              initial="hidden"
+              whileInView="visible"
+              variants={courseVariants}
+              viewport={{ once: true }}
+            >
               <CourseSelect course={course} />
-            </div>
+            </motion.div>
           ))
         )}
       </div>

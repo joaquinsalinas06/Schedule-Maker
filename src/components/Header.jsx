@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import { useTranslation } from "react-i18next";
 import { GitHub, CalendarMonth } from "@mui/icons-material";
 import { useNavigate } from "react-router";
+import { motion } from "framer-motion";
 import { LanguageContext } from "../contexts/LanguageContext";
 
 export const Header = () => {
@@ -23,7 +24,12 @@ export const Header = () => {
   };
 
   return (
-    <header className="bg-bgHeader py-4 shadow-md">
+    <motion.header
+      className="bg-bgHeader py-4 shadow-md"
+      initial={{ y: -90, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.75 }}
+    >
       <div className="flex flex-col sm:flex-row justify-between items-center px-6">
         <div className="flex flex-row items-center mb-4 sm:mb-0 space-x-2">
           <button
@@ -69,6 +75,6 @@ export const Header = () => {
           </a>
         </div>
       </div>
-    </header>
+    </motion.header>
   );
 };
