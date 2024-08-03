@@ -96,6 +96,7 @@ export const CourseList = () => {
                 onChange={handleChange}
                 required
                 className="border border-gray-300 rounded-md p-2 w-full"
+                min="1"
               />
             </div>
             <div className="mb-4">
@@ -110,6 +111,7 @@ export const CourseList = () => {
                 onChange={handleChange}
                 required
                 className="border border-gray-300 rounded-md p-2 w-full"
+                min="1"
               />
             </div>
             <div className="flex justify-between">

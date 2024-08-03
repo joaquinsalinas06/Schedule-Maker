@@ -33,7 +33,9 @@ export const CourseSelect = ({ course }) => {
     setOpen(true);
   };
   const handleClose = (e) => {
-    e.stopPropagation();
+    if (e) {
+      e.stopPropagation();
+    }
     setOpen(false);
   };
 
@@ -51,6 +53,7 @@ export const CourseSelect = ({ course }) => {
       c.name === course.name ? courseDetails : c
     );
     setCourses(updatedCourses);
+
     handleClose();
   };
 
@@ -58,6 +61,7 @@ export const CourseSelect = ({ course }) => {
     e.stopPropagation();
     const updatedCourses = courses.filter((c) => c.name !== course.name);
     setCourses(updatedCourses);
+
     handleClose();
   };
 
@@ -110,6 +114,7 @@ export const CourseSelect = ({ course }) => {
                 onChange={handleChange}
                 required
                 className="border border-gray-300 rounded-md p-2 w-full"
+                min="1"
               />
             </div>
             <div>
@@ -127,6 +132,7 @@ export const CourseSelect = ({ course }) => {
                 onChange={handleChange}
                 required
                 className="border border-gray-300 rounded-md p-2 w-full"
+                min="1"
               />
             </div>
             <div className="flex justify-between items-center">

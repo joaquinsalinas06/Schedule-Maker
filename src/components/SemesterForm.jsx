@@ -14,24 +14,36 @@ export const SemesterForm = () => {
   } = useContext(SemesterContext);
 
   const [semesters, setSemesters] = useState([]);
+  const [minCredits, setMinCreditsState] = useState(0);
+  const [maxCredits, setMaxCreditsState] = useState(Infinity);
+  const [semester, setSemesterState] = useState("");
 
   const handleChange = (e) => {
     const { name, value } = e.target;
+    const numericValue = Number(value);
+
     switch (name) {
       case "minCourses":
-        setMinCourses(Number(value));
+        setMinCourses(numericValue);
         break;
       case "maxCourses":
-        setMaxCourses(Number(value));
+        setMaxCourses(numericValue);
         break;
       case "minCredits":
-        setMinCredits(Number(value));
+        if (numericValue >= 0) {
+          setMinCredits(numericValue);
+          setMinCreditsState(numericValue);
+        }
         break;
       case "maxCredits":
-        setMaxCredits(Number(value));
+        if (numericValue >= 0) {
+          setMaxCredits(numericValue);
+          setMaxCreditsState(numericValue);
+        }
         break;
       case "semester":
         setSemester(value);
+        setSemesterState(value);
         break;
       default:
         break;
@@ -45,12 +57,15 @@ export const SemesterForm = () => {
   };
 
   useEffect(() => {
-    setSemesters(getSemesters());
+    const semestersList = getSemesters();
+    setSemesters(semestersList);
+    setSemester(semestersList[0]);
+    setSemesterState(semestersList[0]);
   }, []);
 
   return (
     <div className="flex justify-center items-center h-full">
-      <form className=" p-4 bg-blueBox max-w-md w-full">
+      <form className="p-4 bg-blueBox max-w-md w-full">
         <div className="grid grid-cols-2 gap-4">
           <div className="mb-4">
             <label htmlFor="minCredits" className="block text-textColor">
@@ -62,6 +77,8 @@ export const SemesterForm = () => {
               id="minCredits"
               className="border border-gray-300 rounded-md p-2 w-full text-textColor bg-bgSemesterFormInput"
               onChange={handleChange}
+              value={minCredits}
+              min="0"
             />
           </div>
 
@@ -75,6 +92,8 @@ export const SemesterForm = () => {
               id="maxCredits"
               className="border border-gray-300 rounded-md p-2 w-full text-textColor bg-bgSemesterFormInput"
               onChange={handleChange}
+              value={maxCredits}
+              min="0"
             />
           </div>
         </div>
@@ -88,7 +107,7 @@ export const SemesterForm = () => {
             id="semester"
             className="border border-gray-300 rounded-md p-2 w-full text-textColor bg-bgSemesterFormInput"
             onChange={handleChange}
-            defaultValue=""
+            value={semester}
           >
             <option value="" disabled>
               {t("Pick a Semester")}

@@ -1,8 +1,9 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { ShiftsContext } from "../contexts/ShiftsContext";
 import { useTranslation } from "react-i18next";
 import { SemesterContext } from "../contexts/SemesterContext";
-//todo, usar el semesterContext, antes de hacer la generacion, reivsar que los cursos cumplan el minimo y maximo de creditos y cursos, ademas, añadir la validacion de que si un curso esta completo o no
+import { motion } from "framer-motion";
+
 class Course {
   constructor(
     name,
@@ -113,8 +114,15 @@ export const ScheduleComponent = () => {
   const [schedules, setSchedules] = useState([]);
   const [showPrevNext, setShowPrevNext] = useState(false);
   const [currentScheduleIndex, setCurrentScheduleIndex] = useState(0);
+  const [lastSemester, setLastSemester] = useState(semester);
+
+  useEffect(() => {
+    setLastSemester(semester);
+  }, [semester]);
 
   const generateSchedules = () => {
+    setLastSemester(semester);
+
     let creditsC = 0;
     let groupedCourses = {};
 
@@ -296,7 +304,12 @@ export const ScheduleComponent = () => {
   return (
     <div className="flex flex-col items-center my-5">
       {schedules.length > 0 && (
-        <div className="w-full overflow-x-auto mb-4">
+        <motion.div
+          className="w-full overflow-x-auto mb-4"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.5 }}
+        >
           <h2 className="text-white text-center mb-2">
             {t("schedule")} {currentScheduleIndex + 1}
           </h2>
@@ -310,7 +323,7 @@ export const ScheduleComponent = () => {
                   className="border text-center bg-gray-900 text-white"
                   style={{ width: "100px", height: "37.5px" }}
                 >
-                  {semester}
+                  {lastSemester}
                 </th>
                 {days.map((day) => (
                   <th
@@ -327,30 +340,39 @@ export const ScheduleComponent = () => {
               {renderScheduleTable(schedules[currentScheduleIndex])}
             </tbody>
           </table>
-        </div>
+        </motion.div>
       )}
       <div className="flex justify-center mt-4">
         {showPrevNext && (
-          <button
+          <motion.button
             onClick={showPrevSchedule}
             className="bg-buttonCourseList hover:bg-buttonCourseListHover text-white px-4 py-2 rounded mx-2 w-24"
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.9 }}
           >
             {t("prev")}
-          </button>
+          </motion.button>
         )}
-        <button
+        <motion.button
           onClick={generateSchedules}
           className="bg-buttonCourseList hover:bg-buttonCourseListHover text-white px-4 py-2 rounded mx-2 w-24"
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.9 }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1.5, delay: 1.7 }}
         >
           {t("gen")}
-        </button>
+        </motion.button>
         {showPrevNext && (
-          <button
+          <motion.button
             onClick={showNextSchedule}
             className="bg-buttonCourseList hover:bg-buttonCourseListHover text-white px-4 py-2 rounded mx-2 w-24"
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.9 }}
           >
             {t("next")}
-          </button>
+          </motion.button>
         )}
       </div>
     </div>
