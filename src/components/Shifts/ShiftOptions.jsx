@@ -112,7 +112,7 @@ export const ShiftOptions = () => {
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: 20 }}
-          transition={{ duration: 0.5, delay:0.5 }}
+          transition={{ duration: 0.5, delay: 0.4 }}
           className="flex justify-between items-center w-full mb-2"
         >
           <h2 className="text-xl md:text-2xl font-semibold text-white">
@@ -123,7 +123,7 @@ export const ShiftOptions = () => {
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 20 }}
-            transition={{ duration: 0.5, delay: 0.8 }}
+            transition={{ duration: 0.5, delay: 0.7 }}
             className="flex space-x-2"
           >
             <input
@@ -138,18 +138,14 @@ export const ShiftOptions = () => {
               className="inline-flex items-center p-2 sm:pl-4 md:pl-6 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-buttonImport hover:bg-buttonImportHover cursor-pointer w-auto sm:w-32 md:w-40"
             >
               <Download />
-              <span className="ml-1 md:ml-2 hidden sm:inline">
-                {t("lCourses")}
-              </span>
+              <span className="hidden sm:inline">{t("lCourses")}</span>
             </label>
             <button
               onClick={saveShiftOptions}
               className="inline-flex items-center p-2 sm:pl-4 md:pl-5 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-buttonExport hover:bg-buttonExportHover w-auto sm:w-32 md:w-40"
             >
               <Upload />
-              <span className="ml-1 md:ml-2 hidden sm:inline">
-                {t("sCourses")}
-              </span>
+              <span className="hidden sm:inline">{t("sCourses")}</span>
             </button>
             <button
               onClick={addShiftOption}
@@ -160,15 +156,21 @@ export const ShiftOptions = () => {
           </motion.div>
         </motion.div>
       </AnimatePresence>
-      <hr className="border-t-2 border-gray-200 w-full mb-2" />
-      <AnimatePresence>
-        <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: 20 }}
-          transition={{ duration: 0.5, delay: 1.1}}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 w-full"
-        >
+      <motion.hr
+        initial={{ opacity: 0, x: -0 }}
+        animate={{ opacity: 1, x: 0 }}
+        exit={{ opacity: 0, x: 20 }}
+        transition={{ duration: 1.5, delay: 0.9 }}
+        className="border-t-2 border-gray-200 w-full mb-2"
+      />
+      <motion.div
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        exit={{ opacity: 0, y: 20 }}
+        transition={{ duration: 1.2, delay: 1.2 }}
+        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 w-full"
+      >
+        <AnimatePresence>
           {shiftOptions.map((option) => (
             <motion.div
               key={option.id}
@@ -186,8 +188,8 @@ export const ShiftOptions = () => {
               />
             </motion.div>
           ))}
-        </motion.div>
-      </AnimatePresence>
+        </AnimatePresence>
+      </motion.div>
     </div>
   );
 };

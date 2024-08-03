@@ -3,6 +3,7 @@ import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import { CourseContext } from "../../contexts/CourseContext";
 import { useTranslation } from "react-i18next";
+import { motion } from "framer-motion";
 
 const style = {
   position: "absolute",
@@ -14,6 +15,11 @@ const style = {
   border: "2px solid #000",
   boxShadow: 24,
   p: 4,
+};
+
+const courseSelectVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
 };
 
 export const CourseSelect = ({ course }) => {
@@ -56,22 +62,30 @@ export const CourseSelect = ({ course }) => {
   };
 
   return (
-    <div
-      className="course-box text-textColor p-6 rounded-lg shadow-lg cursor-pointer bg-courseListSelectBg hover:bg-courseListSelectBgHover"
+    <motion.div
+      className="course-box text-textColor p-4 rounded-lg shadow-lg cursor-pointer bg-courseListSelectBg hover:bg-courseListSelectBgHover "
       onClick={handleOpen}
+      initial="hidden"
+      whileInView="visible"
+      variants={courseSelectVariants}
+      viewport={{ once: true }}
     >
-      <div className="flex flex-col justify-between items-start space-y-2 w-48 pr-2">
-        <div className="text-xl font-bold">{course.name}</div>
-        <div className="text-md">
+      <div className="flex flex-col justify-between items-start pr-2">
+        <div className="text-xl font-bold mb-2">{course.name}</div>
+        <div className="text-md ">
           {t("cCredits")}: {course.credits}{" "}
+        </div>
+        <div className=" text-md">
+          {" "}
+          {t("clases-p-w")} {course.classesPerWeek}
         </div>
       </div>
       <Modal open={open} onClose={handleClose}>
-        <Box sx={style} onClick={(e) => e.stopPropagation()}>
+        <Box sx={{ ...style, padding: 4 }} onClick={(e) => e.stopPropagation()}>
           <h2 className="text-xl font-semibold mb-4">Edit Course</h2>
-          <form onSubmit={handleSubmit}>
-            <div className="mb-4">
-              <label htmlFor="name" className="block text-gray-700">
+          <form onSubmit={handleSubmit} className="flex flex-col space-y-4">
+            <div>
+              <label htmlFor="name" className="block text-gray-700 mb-2">
                 {t("cName")}
               </label>
               <input
@@ -84,8 +98,8 @@ export const CourseSelect = ({ course }) => {
                 className="border border-gray-300 rounded-md p-2 w-full"
               />
             </div>
-            <div className="mb-4">
-              <label htmlFor="credits" className="block text-gray-700">
+            <div>
+              <label htmlFor="credits" className="block text-gray-700 mb-2">
                 {t("cCredits")}
               </label>
               <input
@@ -98,8 +112,11 @@ export const CourseSelect = ({ course }) => {
                 className="border border-gray-300 rounded-md p-2 w-full"
               />
             </div>
-            <div className="mb-4">
-              <label htmlFor="classesPerWeek" className="block text-gray-700">
+            <div>
+              <label
+                htmlFor="classesPerWeek"
+                className="block text-gray-700 mb-2"
+              >
                 {t("cClasses")}
               </label>
               <input
@@ -137,6 +154,6 @@ export const CourseSelect = ({ course }) => {
           </form>
         </Box>
       </Modal>
-    </div>
+    </motion.div>
   );
 };

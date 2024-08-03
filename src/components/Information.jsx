@@ -8,7 +8,7 @@ export const Information = () => {
     <motion.div
     initial={{ opacity: 0, y: -20 }}
     animate={{ opacity: 1, y: 0 }}
-    transition={{ ease: "easeOut", duration: 0.5, delay:0.3 }}
+    transition={{ ease: "easeOut", duration: 0.5, delay:0.2 }}
     >
     <div className="grid grid-cols-1 md:grid-cols-2 gap-6 py-4 ">
       <SemesterForm />
