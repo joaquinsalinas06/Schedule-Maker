@@ -1,10 +1,11 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { ShiftOption } from "./ShiftOption";
 import { useTranslation } from "react-i18next";
 import { Download, Upload, AddCircle } from "@mui/icons-material";
 import { v4 as uuidv4 } from "uuid";
 import { ShiftsContext } from "../../contexts/ShiftsContext";
 import { CourseContext } from "../../contexts/CourseContext";
+import { AnimatePresence, motion } from "framer-motion";
 
 export const ShiftOptions = () => {
   const { t } = useTranslation();
@@ -106,57 +107,87 @@ export const ShiftOptions = () => {
 
   return (
     <div className="flex flex-col items-center">
-      <div className="flex justify-between items-center w-full mb-2">
-        <h2 className="text-xl md:text-2xl font-semibold text-white">
-          {t("times")}
-        </h2>
-        <div className="flex space-x-2">
-          <input
-            type="file"
-            accept=".json"
-            onChange={loadShiftOptions}
-            className="hidden"
-            id="load-shift-options-input"
-          />
-          <label
-            htmlFor="load-shift-options-input"
-            className="inline-flex items-center p-2 sm:pl-4 md:pl-6 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-buttonImport hover:bg-buttonImportHover cursor-pointer w-auto sm:w-32 md:w-40"
+      <AnimatePresence>
+        <motion.div
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: 20 }}
+          transition={{ duration: 0.5, delay:0.5 }}
+          className="flex justify-between items-center w-full mb-2"
+        >
+          <h2 className="text-xl md:text-2xl font-semibold text-white">
+            {t("times")}
+          </h2>
+
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 20 }}
+            transition={{ duration: 0.5, delay: 0.8 }}
+            className="flex space-x-2"
           >
-            <Download />
-            <span className="ml-1 md:ml-2 hidden sm:inline">
-              {t("lCourses")}
-            </span>
-          </label>
-          <button
-            onClick={saveShiftOptions}
-            className="inline-flex items-center p-2 sm:pl-4 md:pl-5 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-buttonExport hover:bg-buttonExportHover w-auto sm:w-32 md:w-40"
-          >
-            <Upload />
-            <span className="ml-1 md:ml-2 hidden sm:inline">
-              {t("sCourses")}
-            </span>
-          </button>
-          <button
-            onClick={addShiftOption}
-            className="inline-flex items-center p-2 sm:px-2 md:px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white hover:text-slate-200 w-auto"
-          >
-            <AddCircle />
-          </button>
-        </div>
-      </div>
+            <input
+              type="file"
+              accept=".json"
+              onChange={loadShiftOptions}
+              className="hidden"
+              id="load-shift-options-input"
+            />
+            <label
+              htmlFor="load-shift-options-input"
+              className="inline-flex items-center p-2 sm:pl-4 md:pl-6 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-buttonImport hover:bg-buttonImportHover cursor-pointer w-auto sm:w-32 md:w-40"
+            >
+              <Download />
+              <span className="ml-1 md:ml-2 hidden sm:inline">
+                {t("lCourses")}
+              </span>
+            </label>
+            <button
+              onClick={saveShiftOptions}
+              className="inline-flex items-center p-2 sm:pl-4 md:pl-5 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-buttonExport hover:bg-buttonExportHover w-auto sm:w-32 md:w-40"
+            >
+              <Upload />
+              <span className="ml-1 md:ml-2 hidden sm:inline">
+                {t("sCourses")}
+              </span>
+            </button>
+            <button
+              onClick={addShiftOption}
+              className="inline-flex items-center p-2 sm:px-2 md:px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white hover:text-slate-200 w-auto"
+            >
+              <AddCircle />
+            </button>
+          </motion.div>
+        </motion.div>
+      </AnimatePresence>
       <hr className="border-t-2 border-gray-200 w-full mb-2" />
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 w-full">
-        {shiftOptions.map((option) => (
-          <ShiftOption
-            key={option.id}
-            index={option.id}
-            removeCourse={removeShiftOption}
-            copyCourse={copyShiftOption}
-            course={option}
-            updateCourse={updateShiftOption}
-          />
-        ))}
-      </div>
+      <AnimatePresence>
+        <motion.div
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: 20 }}
+          transition={{ duration: 0.5, delay: 1.1}}
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 w-full"
+        >
+          {shiftOptions.map((option) => (
+            <motion.div
+              key={option.id}
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 20 }}
+              transition={{ duration: 0.5 }}
+            >
+              <ShiftOption
+                index={option.id}
+                removeCourse={removeShiftOption}
+                copyCourse={copyShiftOption}
+                course={option}
+                updateCourse={updateShiftOption}
+              />
+            </motion.div>
+          ))}
+        </motion.div>
+      </AnimatePresence>
     </div>
   );
 };
