@@ -8,7 +8,6 @@ class Course {
   constructor(
     name,
     credits,
-    semester,
     classesPerWeek,
     section,
     professor,
@@ -19,7 +18,6 @@ class Course {
   ) {
     this.name = name;
     this.credits = credits;
-    this.semester = semester;
     this.classesPerWeek = classesPerWeek;
     this.section = section;
     this.professor = professor;
@@ -125,12 +123,13 @@ export const ScheduleComponent = () => {
 
     let creditsC = 0;
     let groupedCourses = {};
+    console.log(shifts);
 
     for (let course of shifts) {
+      console.log(course);
       if (
         course.name &&
         course.credits &&
-        course.semester &&
         course.classesPerWeek &&
         course.section &&
         course.professor &&
@@ -142,10 +141,12 @@ export const ScheduleComponent = () => {
         if (!groupedCourses[course.name]) {
           groupedCourses[course.name] = [];
         }
+       
+
+
         const newCourse = new Course(
           course.name,
           course.credits,
-          course.semester,
           course.classesPerWeek,
           course.section,
           course.professor,
@@ -154,6 +155,7 @@ export const ScheduleComponent = () => {
           course.endTimes,
           course.color
         );
+        console.log(newCourse);
         groupedCourses[course.name].push(newCourse);
         creditsC += parseInt(course.credits);
       }
