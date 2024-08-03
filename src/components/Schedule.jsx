@@ -109,13 +109,13 @@ const parseTime = (timeString) => {
 export const ScheduleComponent = () => {
   const { t } = useTranslation();
   const { shifts } = useContext(ShiftsContext);
-  const { minCredits, maxCredits } = useContext(SemesterContext);
-  const [creditsC, setCreditsC] = useState(0);
+  const { minCredits, maxCredits, semester } = useContext(SemesterContext);
   const [schedules, setSchedules] = useState([]);
   const [showPrevNext, setShowPrevNext] = useState(false);
   const [currentScheduleIndex, setCurrentScheduleIndex] = useState(0);
 
   const generateSchedules = () => {
+    let creditsC = 0;
     let groupedCourses = {};
 
     for (let course of shifts) {
@@ -147,7 +147,7 @@ export const ScheduleComponent = () => {
           course.color
         );
         groupedCourses[course.name].push(newCourse);
-        setCreditsC(creditsC + parseInt(course.credits));
+        creditsC += parseInt(course.credits);
       }
     }
 
@@ -182,6 +182,7 @@ export const ScheduleComponent = () => {
 
     setSchedules(allSchedules);
     setCurrentScheduleIndex(0);
+    console.log(creditsC)
   };
 
   const showNextSchedule = () => {
@@ -306,7 +307,7 @@ export const ScheduleComponent = () => {
                   className="border text-center bg-gray-900 text-white"
                   style={{ width: "100px", height: "37.5px" }}
                 >
-                  {t("time")}
+                  {semester}
                 </th>
                 {days.map((day) => (
                   <th

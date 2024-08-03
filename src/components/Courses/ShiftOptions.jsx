@@ -8,7 +8,17 @@ import { CourseContext } from "../../contexts/CourseContext";
 
 export const ShiftOptions = () => {
   const { t } = useTranslation();
-  const [shiftOptions, setShiftOptions] = useState([]);
+  const defaultShiftOption = {
+    id: uuidv4(),
+    name: "",
+    section: "",
+    professor: "",
+    days: [],
+    startTimes: [],
+    endTimes: [],
+    color: "#ffffff",
+  };
+  const [shiftOptions, setShiftOptions] = useState([defaultShiftOption]);
   const { addShift, setShiftsList } = useContext(ShiftsContext);
   const { setCourses } = useContext(CourseContext);
 

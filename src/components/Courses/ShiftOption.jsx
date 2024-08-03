@@ -224,7 +224,7 @@ export const ShiftOption = ({ index, removeCourse, copyCourse, course, updateCou
                     className="mt-1 block w-full rounded-md bg-bgCourseOptionInput sm:text-sm"
                     required
                   >
-                    <option value="">{t("selDay")}</option>
+                    <option value="" disabled selected>{t("selDay")}</option>
                     <option value="Monday">{t("mon")}</option>
                     <option value="Tuesday">{t("tue")}</option>
                     <option value="Wednesday">{t("wed")}</option>
