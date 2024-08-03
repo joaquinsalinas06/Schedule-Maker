@@ -14,9 +14,7 @@ export const ShiftsProvider = ({ children }) => {
   };
 
   return (
-    <ShiftsContext.Provider
-      value={{ shifts, addShift, setShiftsList }}
-    >
+    <ShiftsContext.Provider value={{ shifts, addShift, setShiftsList }}>
       {children}
     </ShiftsContext.Provider>
   );

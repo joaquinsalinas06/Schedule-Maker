@@ -1,17 +1,43 @@
-@import 'tailwindcss/base';
-@import 'tailwindcss/components';
-@import 'tailwindcss/utilities';
-
-body{
-    background-color: #22252A
-}
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
 
 .hide-scrollbar {
-    -ms-overflow-style: none;  /* Internet Explorer 10+ */
-    scrollbar-width: none;  /* Firefox */
-  }
-  
-  .hide-scrollbar::-webkit-scrollbar {
-    display: none;  /* Safari and Chrome */
-  }
-  
+  -ms-overflow-style: none; /* Internet Explorer 10+ */
+  scrollbar-width: none; /* Firefox */
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none; /* Safari and Chrome */
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+  background-color: #22252a;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+main {
+  flex-grow: 1;
+}
+
+
+button {
+  transition: transform 0.1s ease-in-out;
+}
+
+button:hover {
+  transform: scale(1.03);
+}
+
+button:active {
+  transform: scale(0.97);
+}
+

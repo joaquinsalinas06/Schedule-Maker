@@ -3,8 +3,15 @@ import { CourseContext } from "../../contexts/CourseContext";
 import Delete from "@mui/icons-material/Delete";
 import { CheckCircle, FileCopy } from "@mui/icons-material";
 import { useTranslation } from "react-i18next";
+import "./ShiftsStyles.css"
 
-export const ShiftOption = ({ index, removeCourse, copyCourse, course, updateCourse}) => {
+export const ShiftOption = ({
+  index,
+  removeCourse,
+  copyCourse,
+  course,
+  updateCourse,
+}) => {
   const { t } = useTranslation();
   const [showButton, setShowButton] = useState(true);
   const [numClasses, setNumClasses] = useState(1);
@@ -43,7 +50,16 @@ export const ShiftOption = ({ index, removeCourse, copyCourse, course, updateCou
       color: color,
     };
     updateCourse(index, updatedCourse);
-  }, [selectedCourse, sectionName, professor, days, startTimes, endTimes, color, numClasses]);
+  }, [
+    selectedCourse,
+    sectionName,
+    professor,
+    days,
+    startTimes,
+    endTimes,
+    color,
+    numClasses,
+  ]);
 
   const handleCourseChange = (event) => {
     const selectedCourseName = event.target.value;
@@ -95,8 +111,6 @@ export const ShiftOption = ({ index, removeCourse, copyCourse, course, updateCou
     }
   }, [courses, selectedCourse]);
 
-
-
   const handleCopyCourse = () => {
     const selectedCourseData = courses.find(
       (course) => course.name === selectedCourse
@@ -116,9 +130,8 @@ export const ShiftOption = ({ index, removeCourse, copyCourse, course, updateCou
     copyCourse(copiedCourse, index);
   };
 
-
   return (
-    <div className="relative rounded-lg px-6 pt-6 pb-2 w-full mx-auto mt-4 bg-blueBox shadow-md">
+    <div className="relative rounded-lg px-6 pt-6 pb-2 w-full mx-auto mt-4 bg-blueBox shadow-md shift-option">
       <button
         onClick={() => removeCourse(index)}
         className="absolute top-2 right-2"
@@ -149,7 +162,9 @@ export const ShiftOption = ({ index, removeCourse, copyCourse, course, updateCou
               className="mt-1 block w-full rounded-md shadow-sm bg-bgCourseOptionInput focus:bg-bgCourseOptionInputHover sm:text-sm"
               required
             >
-              <option value="">{t("selCourse")}</option>
+              <option value="" disabled selected>
+                {t("selCourse")}
+              </option>
               {courses.map((course, index) => (
                 <option key={index} value={course.name}>
                   {course.name}
@@ -224,7 +239,9 @@ export const ShiftOption = ({ index, removeCourse, copyCourse, course, updateCou
                     className="mt-1 block w-full rounded-md bg-bgCourseOptionInput sm:text-sm"
                     required
                   >
-                    <option value="" disabled selected>{t("selDay")}</option>
+                    <option value="" disabled selected>
+                      {t("selDay")}
+                    </option>
                     <option value="Monday">{t("mon")}</option>
                     <option value="Tuesday">{t("tue")}</option>
                     <option value="Wednesday">{t("wed")}</option>

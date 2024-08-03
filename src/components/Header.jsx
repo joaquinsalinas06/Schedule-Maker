@@ -1,14 +1,16 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useTranslation } from "react-i18next";
-import { GitHub } from "@mui/icons-material";
+import { GitHub, CalendarMonth } from "@mui/icons-material";
 import { useNavigate } from "react-router";
-import { CalendarMonth } from "@mui/icons-material";
+import { LanguageContext } from "../contexts/LanguageContext";
 
 export const Header = () => {
+  const { language, setLanguage } = useContext(LanguageContext);
   const navigate = useNavigate();
   const { t, i18n } = useTranslation();
 
   const changeLanguage = (lng) => {
+    setLanguage(lng);
     i18n.changeLanguage(lng);
   };
 
@@ -21,54 +23,49 @@ export const Header = () => {
   };
 
   return (
-    <header className="bg-bgHeader px-5 py-3">
-      <div className="flex justify-between items-center">
-        <div>
-          <div>
-            <p className="text-white text-lg mb-2 "> {t("language")} </p>
-          </div>
-          <div className="flex">
-            <button
-              onClick={() => changeLanguage("es")}
-              className="border bg-white rounded-md px-3 py-1 hover:bg-slate-200 mr-2 w-20"
-            >
-              {t("es")}
-            </button>
-            <button
-              onClick={() => changeLanguage("en")}
-              className="border bg-white rounded-md px-3 py-1 hover:bg-slate-200 mx-2 w-20"
-            >
-              {t("en")}
-            </button>
-          </div>
+    <header className="bg-bgHeader py-4 shadow-md">
+      <div className="flex flex-col sm:flex-row justify-between items-center px-6">
+        <div className="flex flex-row items-center mb-4 sm:mb-0 space-x-2">
+          <button
+            onClick={() => changeLanguage("es")}
+            className="border border-gray-300 bg-white rounded-md hover:bg-gray-200 px-2 sm:px-3 py-1 sm:py-2 text-sm w-16 sm:w-20"
+          >
+            {t("es")}
+          </button>
+          <button
+            onClick={() => changeLanguage("en")}
+            className="border border-gray-300 bg-white rounded-md hover:bg-gray-200 px-2 sm:px-3 py-1 sm:py-2 text-sm w-16 sm:w-20"
+          >
+            {t("en")}
+          </button>
         </div>
 
-        <div className="text-white text-center flex-grow text-3xl">
+        <div className="text-white text-center flex-grow text-2xl sm:text-3xl font-semibold mb-4 sm:mb-0">
           <a onClick={MainPage} className="cursor-pointer">
             Schedule Maker
           </a>
         </div>
 
-        <div className="text-white ml-6 mr-8">
-          <a onClick={MainPage}>
-            <button className="border bg-white rounded-md px-3 py-1 hover:bg-slate-200 text-black mr-4 mt-2 ">
-              <CalendarMonth />
-            </button>
-          </a>
-          <a>
-            <button
-              onClick={Help}
-              className="border bg-white rounded-md px-3 py-1 hover:bg-slate-200 text-black mr-6 mt-2 w-16 "
-            >
-              {t("help")}
-            </button>
-          </a>
-
+        <div className="flex flex-row sm:flex-row items-center space-x-2 sm:space-x-4">
+          <button
+            onClick={MainPage}
+            className="border border-gray-300 bg-white rounded-md hover:bg-gray-200 text-black p-1"
+          >
+            <CalendarMonth />
+          </button>
+          <button
+            onClick={Help}
+            className="border border-gray-300 bg-white rounded-md hover:bg-gray-200 text-black py-1 sm:py-2 text-sm w-12 sm:w-16"
+          >
+            <span>{t("help")}</span>
+          </button>
           <a
             href="https://github.com/joaquinsalinas06/Scheduler-Maker"
             target="_blank"
+            rel="noopener noreferrer"
+            className="text-white"
           >
-            <GitHub className="cursor-pointer" style={{ fontSize: 44 }} />
+            <GitHub className="cursor-pointer" style={{ fontSize: 36 }} />
           </a>
         </div>
       </div>

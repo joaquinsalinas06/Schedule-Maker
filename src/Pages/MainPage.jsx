@@ -1,20 +1,14 @@
 import React from "react";
-import { CourseList } from "../components/Courses/CourseList";
-import { SemesterForm } from "../components/SemesterForm";
+import { Information } from "../components/Information";
 import { ScheduleComponent } from "../components/Schedule";
-import { ShiftOptions } from "../components/Courses/ShiftOptions";
-
+import { ShiftOptions } from "../components/Shifts/ShiftOptions";
 
 export const MainPage = () => {
   return (
-    <>
-
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 py-4 w-4/5 mx-auto">
-        <SemesterForm />
-        <CourseList />
-      </div>
+    <div className="w-4/5 mx-auto">
+      <Information />
       <ShiftOptions />
       <ScheduleComponent />
-    </>
+    </div>
   );
 };

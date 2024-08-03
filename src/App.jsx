@@ -11,8 +11,8 @@ import {
 import { Header } from "./components/Header";
 import { Help } from "./Pages/Help";
 import { Footer } from "./components/Footer";
-import { Analytics } from "@vercel/analytics/react"
-import { SpeedInsights } from '@vercel/speed-insights/react';
+import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/react";
 
 function App() {
   const { courses } = useContext(CourseContext);
@@ -30,8 +30,8 @@ function App() {
         </Routes>
         <Footer />
       </Router>
-      <SpeedInsights/>
-      <Analytics/>
+      <SpeedInsights />
+      <Analytics />
     </>
   );
 }
