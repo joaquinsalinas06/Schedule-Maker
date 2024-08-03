@@ -62,8 +62,12 @@ export const CourseSelect = ({ course }) => {
     >
       <div className="flex flex-col justify-between items-start space-y-2 w-48 pr-2">
         <div className="text-xl font-bold">{course.name}</div>
-        <div className="text-md">{t("cCredits")}: {course.credits} </div>
-        <div className="text-md">{t("cSemester")}: {course.semester}</div>
+        <div className="text-md">
+          {t("cCredits")}: {course.credits}{" "}
+        </div>
+        <div className="text-md">
+          {t("cSemester")}: {course.semester}
+        </div>
       </div>
       <Modal open={open} onClose={handleClose}>
         <Box sx={style} onClick={(e) => e.stopPropagation()}>

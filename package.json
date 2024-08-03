@@ -22,6 +22,7 @@
     "react-i18next": "^15.0.0",
     "react-router": "^6.25.1",
     "react-router-dom": "^6.25.1",
+    "scheduller-maker": "file:",
     "uuid": "^10.0.0"
   },
   "devDependencies": {

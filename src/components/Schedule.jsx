@@ -182,7 +182,7 @@ export const ScheduleComponent = () => {
 
     setSchedules(allSchedules);
     setCurrentScheduleIndex(0);
-    console.log(creditsC)
+    console.log(creditsC);
   };
 
   const showNextSchedule = () => {

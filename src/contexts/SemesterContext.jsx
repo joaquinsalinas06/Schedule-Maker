@@ -9,9 +9,9 @@ export const SemesterProvider = ({ children }) => {
   const [maxCredits, setMaxCredits] = useState();
   const [semester, setSemester] = useState();
 
-  const showValues  =  () => {
+  const showValues = () => {
     console.log(minCourses, maxCourses, minCredits, maxCredits, semester);
-  }
+  };
 
   return (
     <SemesterContext.Provider
@@ -26,7 +26,7 @@ export const SemesterProvider = ({ children }) => {
         setMinCredits,
         setMaxCredits,
         setSemester,
-        showValues
+        showValues,
       }}
     >
       {children}

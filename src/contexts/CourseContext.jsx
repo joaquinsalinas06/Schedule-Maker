@@ -6,7 +6,7 @@ export const CourseProvider = ({ children }) => {
   const [courses, setCourses] = useState([]);
 
   const addCourse = (course) => {
-    setCourses(prevCourses => [...prevCourses, course]);
+    setCourses((prevCourses) => [...prevCourses, course]);
   };
 
   return (
