@@ -2,7 +2,7 @@ import React from "react";
 import { CourseList } from "../components/Courses/CourseList";
 import { SemesterForm } from "../components/SemesterForm";
 import { ScheduleComponent } from "../components/Schedule";
-import { CourseOptions } from "../components/Courses/CourseOptions";
+import { ShiftOptions } from "../components/Courses/ShiftOptions";
 
 
 export const MainPage = () => {
@@ -13,7 +13,7 @@ export const MainPage = () => {
         <SemesterForm />
         <CourseList />
       </div>
-      <CourseOptions />
+      <ShiftOptions />
       <ScheduleComponent />
     </>
   );

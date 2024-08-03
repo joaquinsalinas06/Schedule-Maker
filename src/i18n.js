@@ -13,7 +13,7 @@ const resources = {
       cClasses: "Clases por Semana",
       close: "Cerrar",
       noCFound: "No se encontraron cursos",
-      // CourseOption
+      // ShiftOption
       course: "Curso",
       selCourse: "Selecciona un Curso",
       section: "Seccion",
@@ -30,11 +30,12 @@ const resources = {
       start: "Hora de Inicio",
       end: "Hora de Fin",
       conCourse: "Confirmar Curso",
-      //CourseOptions
-      sCourses: "Guardar Cursos",
-      lCourses: "Cargar Cursos",
+      //ShiftOptions
+      sCourses: "Guardar Turnos",
+      lCourses: "Cargar Turnos",
       times: "Horas",
       alMessage: "Los cursos se han guardado correctamente, por el momento no se pueden ver en la lista de turnos:( \n\nPero puedes darle a generar sin problemas:)!",
+      nTurns: "No se han creado turnos",
       //courseSelect
       sCredits: "Creditos",
       sSem: "Semestre",
@@ -53,6 +54,7 @@ const resources = {
       maxCredits: "Creditos Maximos",
       es: "Español",
       en: "Ingles",
+      semester: "Semestre",
       //header
       language: "Idioma",
       help: "Ayuda",
@@ -85,7 +87,7 @@ const resources = {
       cClasses: "Classes per Week",
       close: "Close",
       noCFound: "No courses found",
-      // CourseOption
+      // ShiftOption
       course: "Course",
       selCourse: "Select a Course",
       section: "Section",
@@ -102,10 +104,12 @@ const resources = {
       start: "Start Time",
       end: "End Time",
       conCourse: "Confirm Course",
-      //CourseOptions
-      sCourses: "Save Courses",
-      lCourses: "Load Courses",
+      //ShiftOptions
+      sCourses: "Save Shifts",
+      lCourses: "Load Shifts",
       times: "Times",
+      alMessage: "The courses have been saved correctly, at the moment they cannot be seen in the shift list:( \n\nBut you can generate the schedules without problems:)!",
+      nTurns: "No turns have been created",
       //courseSelect
       alMessage: "The courses have been saved correctly, at the moment they cannot be seen in the shift list:( \n\nBut you can generate the schedules without problems:)!",
       sCredits: "Credits",
@@ -125,6 +129,7 @@ const resources = {
       maxCredits: "Maximum Credits",
       es: "Spanish",
       en: "English",
+      semester: "Semester",
       //header
       language: "Language",
       help: "Help",

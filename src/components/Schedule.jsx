@@ -1,7 +1,8 @@
 import React, { useContext, useState } from "react";
-import { DetailedCourseContext } from "../contexts/DetailedCourseContext";
+import { ShiftsContext } from "../contexts/ShiftsContext";
 import { useTranslation } from "react-i18next";
-
+import { SemesterContext } from "../contexts/SemesterContext";
+//todo, usar el semesterContext, antes de hacer la generacion, reivsar que los cursos cumplan el minimo y maximo de creditos y cursos, ademas, añadir la validacion de que si un curso esta completo o no
 class Course {
   constructor(
     name,
@@ -107,32 +108,52 @@ const parseTime = (timeString) => {
 
 export const ScheduleComponent = () => {
   const { t } = useTranslation();
-  const { detailedCourses } = useContext(DetailedCourseContext);
+  const { shifts } = useContext(ShiftsContext);
+  const { minCredits, maxCredits, semester } = useContext(SemesterContext);
   const [schedules, setSchedules] = useState([]);
   const [showPrevNext, setShowPrevNext] = useState(false);
   const [currentScheduleIndex, setCurrentScheduleIndex] = useState(0);
 
   const generateSchedules = () => {
-    setShowPrevNext(true);
+    let creditsC = 0;
     let groupedCourses = {};
 
-    for (let course of detailedCourses) {
-      if (!groupedCourses[course.name]) {
-        groupedCourses[course.name] = [];
-      }
-      const newCourse = new Course(
-        course.name,
-        course.credits,
-        course.semester,
-        course.classesPerWeek,
-        course.section,
-        course.professor,
-        course.days,
-        course.startTimes,
-        course.endTimes,
+    for (let course of shifts) {
+      if (
+        course.name &&
+        course.credits &&
+        course.semester &&
+        course.classesPerWeek &&
+        course.section &&
+        course.professor &&
+        course.days &&
+        course.startTimes &&
+        course.endTimes &&
         course.color
-      );
-      groupedCourses[course.name].push(newCourse);
+      ) {
+        if (!groupedCourses[course.name]) {
+          groupedCourses[course.name] = [];
+        }
+        const newCourse = new Course(
+          course.name,
+          course.credits,
+          course.semester,
+          course.classesPerWeek,
+          course.section,
+          course.professor,
+          course.days,
+          course.startTimes,
+          course.endTimes,
+          course.color
+        );
+        groupedCourses[course.name].push(newCourse);
+        creditsC += parseInt(course.credits);
+      }
+    }
+
+    if (creditsC < minCredits || creditsC > maxCredits) {
+      alert("The number of credits is not between the min and max");
+      return;
     }
 
     let courseGroups = Object.values(groupedCourses);
@@ -157,8 +178,11 @@ export const ScheduleComponent = () => {
     let initialSchedule = new Schedule([]);
     generateCombinations(0, initialSchedule);
 
+    setShowPrevNext(true);
+
     setSchedules(allSchedules);
     setCurrentScheduleIndex(0);
+    console.log(creditsC)
   };
 
   const showNextSchedule = () => {
@@ -171,7 +195,14 @@ export const ScheduleComponent = () => {
     );
   };
 
-  const days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+  const days = [
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+  ];
   const timeSlots = [
     "07:00 AM",
     "08:00 AM",
@@ -276,7 +307,7 @@ export const ScheduleComponent = () => {
                   className="border text-center bg-gray-900 text-white"
                   style={{ width: "100px", height: "37.5px" }}
                 >
-                  {t("time")}
+                  {semester}
                 </th>
                 {days.map((day) => (
                   <th
