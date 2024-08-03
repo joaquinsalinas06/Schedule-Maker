@@ -27,3 +27,17 @@ body {
 main {
   flex-grow: 1;
 }
+
+
+button {
+  transition: transform 0.1s ease-in-out;
+}
+
+button:hover {
+  transform: scale(1.03);
+}
+
+button:active {
+  transform: scale(0.97);
+}
+

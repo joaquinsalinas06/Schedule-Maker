@@ -3,6 +3,7 @@ import { CourseContext } from "../../contexts/CourseContext";
 import Delete from "@mui/icons-material/Delete";
 import { CheckCircle, FileCopy } from "@mui/icons-material";
 import { useTranslation } from "react-i18next";
+import "./ShiftsStyles.css"
 
 export const ShiftOption = ({
   index,
@@ -130,7 +131,7 @@ export const ShiftOption = ({
   };
 
   return (
-    <div className="relative rounded-lg px-6 pt-6 pb-2 w-full mx-auto mt-4 bg-blueBox shadow-md">
+    <div className="relative rounded-lg px-6 pt-6 pb-2 w-full mx-auto mt-4 bg-blueBox shadow-md shift-option">
       <button
         onClick={() => removeCourse(index)}
         className="absolute top-2 right-2"
