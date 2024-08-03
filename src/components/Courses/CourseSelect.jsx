@@ -65,9 +65,6 @@ export const CourseSelect = ({ course }) => {
         <div className="text-md">
           {t("cCredits")}: {course.credits}{" "}
         </div>
-        <div className="text-md">
-          {t("cSemester")}: {course.semester}
-        </div>
       </div>
       <Modal open={open} onClose={handleClose}>
         <Box sx={style} onClick={(e) => e.stopPropagation()}>
@@ -96,20 +93,6 @@ export const CourseSelect = ({ course }) => {
                 name="credits"
                 id="credits"
                 value={courseDetails.credits}
-                onChange={handleChange}
-                required
-                className="border border-gray-300 rounded-md p-2 w-full"
-              />
-            </div>
-            <div className="mb-4">
-              <label htmlFor="semester" className="block text-gray-700">
-                {t("cSemester")}
-              </label>
-              <input
-                type="text"
-                name="semester"
-                id="semester"
-                value={courseDetails.semester}
                 onChange={handleChange}
                 required
                 className="border border-gray-300 rounded-md p-2 w-full"

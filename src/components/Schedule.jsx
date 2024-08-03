@@ -231,7 +231,7 @@ export const ScheduleComponent = () => {
 
     const dayWidth = (WIDTH * (1 - SIDE_MARGIN)) / DAY_COUNT;
     const hourCount = 16;
-    const hourHeight = (HEIGHT * (1 - TOP_MARGIN)) / hourCount;
+    const hourHeight = ((HEIGHT * (1 - TOP_MARGIN)) / hourCount) * 1.5;
 
     let table = [];
 
@@ -241,7 +241,7 @@ export const ScheduleComponent = () => {
         <td
           key={`time-${rowIndex}`}
           className="border text-center bg-gray-700 text-white"
-          style={{ width: dayWidth / 2, height: hourHeight / 2 }}
+          style={{ width: dayWidth, height: hourHeight }}
         >
           {timeSlots[rowIndex]}
         </td>
@@ -261,8 +261,11 @@ export const ScheduleComponent = () => {
               if (slotTime >= startTime && slotTime < endTime) {
                 cellContent = (
                   <div
-                    className="h-full flex flex-col justify-center py-2"
-                    style={{ backgroundColor: course.color }}
+                    className=" flex flex-col justify-center py-2"
+                    style={{
+                      backgroundColor: course.color,
+                      height: hourHeight,
+                    }}
                   >
                     <div>
                       {course.name} - {course.section}

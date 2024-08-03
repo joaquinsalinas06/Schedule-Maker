@@ -105,9 +105,11 @@ export const ShiftOptions = () => {
   };
 
   return (
-    <div className="flex flex-col items-center w-4/5 mx-auto">
+    <div className="flex flex-col items-center">
       <div className="flex justify-between items-center w-full mb-2">
-        <h2 className="text-2xl font-semibold text-white">{t("times")}</h2>
+        <h2 className="text-xl md:text-2xl font-semibold text-white">
+          {t("times")}
+        </h2>
         <div className="flex space-x-2">
           <input
             type="file"
@@ -118,21 +120,25 @@ export const ShiftOptions = () => {
           />
           <label
             htmlFor="load-shift-options-input"
-            className="inline-flex items-center pl-6 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-buttonImport hover:bg-buttonImportHover cursor-pointer w-40"
+            className="inline-flex items-center p-2 sm:pl-4 md:pl-6 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-buttonImport hover:bg-buttonImportHover cursor-pointer w-auto sm:w-32 md:w-40"
           >
             <Download />
-            {t("lCourses")}
+            <span className="ml-1 md:ml-2 hidden sm:inline">
+              {t("lCourses")}
+            </span>
           </label>
           <button
             onClick={saveShiftOptions}
-            className="inline-flex items-center pl-5 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-buttonExport hover:bg-buttonExportHover w-40"
+            className="inline-flex items-center p-2 sm:pl-4 md:pl-5 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-buttonExport hover:bg-buttonExportHover w-auto sm:w-32 md:w-40"
           >
             <Upload />
-            {t("sCourses")}
+            <span className="ml-1 md:ml-2 hidden sm:inline">
+              {t("sCourses")}
+            </span>
           </button>
           <button
             onClick={addShiftOption}
-            className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white hover:text-slate-200"
+            className="inline-flex items-center p-2 sm:px-2 md:px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white hover:text-slate-200 w-auto"
           >
             <AddCircle />
           </button>

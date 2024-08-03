@@ -24,7 +24,6 @@ export const CourseList = () => {
   const [newCourse, setNewCourse] = useState({
     name: "",
     credits: "",
-    semester: "",
     classesPerWeek: "",
   });
 
@@ -42,7 +41,7 @@ export const CourseList = () => {
   const addCourse = (e) => {
     e.preventDefault();
     setCourses([...courses, newCourse]);
-    setNewCourse({ name: "", credits: "", semester: "", classesPerWeek: "" });
+    setNewCourse({ name: "", credits: "", classesPerWeek: "" });
     handleClose();
   };
 
@@ -81,20 +80,6 @@ export const CourseList = () => {
                 name="credits"
                 id="credits"
                 value={newCourse.credits}
-                onChange={handleChange}
-                required
-                className="border border-gray-300 rounded-md p-2 w-full"
-              />
-            </div>
-            <div className="mb-4">
-              <label htmlFor="semester" className="block text-gray-700">
-                {t("cSemester")}
-              </label>
-              <input
-                type="text"
-                name="semester"
-                id="semester"
-                value={newCourse.semester}
                 onChange={handleChange}
                 required
                 className="border border-gray-300 rounded-md p-2 w-full"

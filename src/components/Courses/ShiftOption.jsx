@@ -161,7 +161,9 @@ export const ShiftOption = ({
               className="mt-1 block w-full rounded-md shadow-sm bg-bgCourseOptionInput focus:bg-bgCourseOptionInputHover sm:text-sm"
               required
             >
-              <option value="">{t("selCourse")}</option>
+              <option value="" disabled selected>
+                {t("selCourse")}
+              </option>
               {courses.map((course, index) => (
                 <option key={index} value={course.name}>
                   {course.name}
