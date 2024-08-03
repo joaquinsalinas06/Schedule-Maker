@@ -11,7 +11,7 @@ export const Help = () => {
       opacity: 1,
       y: 0,
       transition: {
-        delay: i * 0.1, 
+        delay: i * 0.1,
         duration: 0.3,
       },
     }),
@@ -56,7 +56,9 @@ export const Help = () => {
         },
         {
           title: t("helpGenerateScheduleTitle"),
-          content: <p className="text-lg">{t("helpGenerateScheduleContent")} :)</p>,
+          content: (
+            <p className="text-lg">{t("helpGenerateScheduleContent")} :)</p>
+          ),
         },
       ].map((section, index) => (
         <motion.section

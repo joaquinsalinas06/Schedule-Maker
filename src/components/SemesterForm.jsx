@@ -110,7 +110,7 @@ export const SemesterForm = () => {
             value={semester}
           >
             <option value="" disabled>
-              {t("Pick a Semester")}
+              {t("pSemester")}
             </option>
             {semesters.map((semester) => (
               <option key={semester} value={semester}>

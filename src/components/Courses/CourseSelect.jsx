@@ -67,7 +67,7 @@ export const CourseSelect = ({ course }) => {
 
   return (
     <motion.div
-      className="course-box text-textColor p-4 rounded-lg shadow-lg cursor-pointer bg-courseListSelectBg hover:bg-courseListSelectBgHover "
+      className="course-box text-textColor p-4 rounded-lg shadow-lg cursor-pointer bg-courseListSelectBg hover:bg-courseListSelectBgHover w-48 "
       onClick={handleOpen}
       initial="hidden"
       whileInView="visible"
@@ -81,7 +81,7 @@ export const CourseSelect = ({ course }) => {
         </div>
         <div className=" text-md">
           {" "}
-          {t("clases-p-w")} {course.classesPerWeek}
+          {t("cpw")}: {course.classesPerWeek}
         </div>
       </div>
       <Modal open={open} onClose={handleClose}>

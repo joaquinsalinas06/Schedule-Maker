@@ -42,6 +42,7 @@ const resources = {
       sSem: "Semestre",
       save: "Guardar",
       close: "Cerrar",
+      cpw: "Clases x Semana",
       //schedule
       schedule: "Horario",
       time: "Hora",
@@ -56,6 +57,7 @@ const resources = {
       es: "Español",
       en: "Ingles",
       semester: "Semestre",
+      pSemester: "Elige un Semestre",
       //header
       language: "Idioma",
       help: "Ayuda",
@@ -127,6 +129,7 @@ const resources = {
       sSem: "Semester",
       save: "Save",
       close: "Close",
+      cpw: "Classes x Week",
       //schedule
       schedule: "Schedule",
       time: "Time",
@@ -141,6 +144,7 @@ const resources = {
       es: "Spanish",
       en: "English",
       semester: "Semester",
+      pSemester: "Pick a Semester",
       //header
       language: "Language",
       help: "Help",

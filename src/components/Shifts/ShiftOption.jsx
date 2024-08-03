@@ -3,7 +3,7 @@ import { CourseContext } from "../../contexts/CourseContext";
 import Delete from "@mui/icons-material/Delete";
 import { CheckCircle, FileCopy } from "@mui/icons-material";
 import { useTranslation } from "react-i18next";
-import "./ShiftsStyles.css"
+import "./ShiftsStyles.css";
 
 export const ShiftOption = ({
   index,
@@ -87,14 +87,22 @@ export const ShiftOption = ({
   };
 
   const handleStartTimeChange = (index, event) => {
+    const time = event.target.value;
+    const [hours, minutes] = time.split(":").map(Number);
+    const roundedHours = minutes >= 30 ? hours + 1 : hours;
+    const newTime = `${String(roundedHours).padStart(2, "0")}:00`;
     const newStartTimes = [...startTimes];
-    newStartTimes[index] = event.target.value;
+    newStartTimes[index] = newTime;
     setStartTimes(newStartTimes);
   };
 
   const handleEndTimeChange = (index, event) => {
+    const time = event.target.value;
+    const [hours, minutes] = time.split(":").map(Number);
+    const roundedHours = minutes >= 30 ? hours + 1 : hours;
+    const newTime = `${String(roundedHours).padStart(2, "0")}:00`;
     const newEndTimes = [...endTimes];
-    newEndTimes[index] = event.target.value;
+    newEndTimes[index] = newTime;
     setEndTimes(newEndTimes);
   };
 
@@ -162,7 +170,7 @@ export const ShiftOption = ({
               className="mt-1 block w-full rounded-md shadow-sm bg-bgCourseOptionInput focus:bg-bgCourseOptionInputHover sm:text-sm"
               required
             >
-              <option value="" disabled selected>
+              <option value="" disabled >
                 {t("selCourse")}
               </option>
               {courses.map((course, index) => (
@@ -239,7 +247,7 @@ export const ShiftOption = ({
                     className="mt-1 block w-full rounded-md bg-bgCourseOptionInput sm:text-sm"
                     required
                   >
-                    <option value="" disabled selected>
+                    <option value="" disabled >
                       {t("selDay")}
                     </option>
                     <option value="Monday">{t("mon")}</option>

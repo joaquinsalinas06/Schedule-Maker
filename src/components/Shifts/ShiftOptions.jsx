@@ -1,7 +1,7 @@
 import React, { useState, useContext, useEffect } from "react";
 import { ShiftOption } from "./ShiftOption";
 import { useTranslation } from "react-i18next";
-import { Download, Upload, AddCircle } from "@mui/icons-material";
+import { Download, Upload, AddCircle, Save } from "@mui/icons-material";
 import { v4 as uuidv4 } from "uuid";
 import { ShiftsContext } from "../../contexts/ShiftsContext";
 import { CourseContext } from "../../contexts/CourseContext";
@@ -60,7 +60,6 @@ export const ShiftOptions = () => {
     setShiftOptions([...shiftOptions, newShiftOption]);
     addShift(newShiftOption);
   };
-
   const saveShiftOptions = () => {
     const dataStr = JSON.stringify(shiftOptions, null, 2);
     const blob = new Blob([dataStr], { type: "application/json" });
@@ -126,6 +125,13 @@ export const ShiftOptions = () => {
             transition={{ duration: 0.5, delay: 0.7 }}
             className="flex space-x-2"
           >
+            <button
+              onClick={saveShiftOptions}
+              className="inline-flex items-center p-2 sm:pl-4 md:pl-5 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-buttonExport hover:bg-buttonExportHover w-auto sm:w-32 md:w-40"
+            >
+              <Save />
+              <span className="hidden sm:inline">{t("sCourses")}</span>
+            </button>
             <input
               type="file"
               accept=".json"
@@ -140,13 +146,7 @@ export const ShiftOptions = () => {
               <Download />
               <span className="hidden sm:inline">{t("lCourses")}</span>
             </label>
-            <button
-              onClick={saveShiftOptions}
-              className="inline-flex items-center p-2 sm:pl-4 md:pl-5 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-buttonExport hover:bg-buttonExportHover w-auto sm:w-32 md:w-40"
-            >
-              <Upload />
-              <span className="hidden sm:inline">{t("sCourses")}</span>
-            </button>
+
             <button
               onClick={addShiftOption}
               className="inline-flex items-center p-2 sm:px-2 md:px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white hover:text-slate-200 w-auto"
