@@ -12,58 +12,78 @@ export const Help = () => {
       y: 0,
       transition: {
         delay: i * 0.1,
-        duration: 0.3,
+        duration: 0.2,
       },
     }),
   };
 
   return (
     <div className="p-10 text-white w-3/4 mx-auto">
-      <h1 className="text-3xl font-bold mb-6">{t("helpTitle")}</h1>
+      <h1 className="text-3xl font-bold mb-6">{t("mainTitle")}</h1>
 
       {[
         {
-          title: t("helpIntroTitle"),
-          content: <p className="text-lg">{t("helpIntroContent")} :D</p>,
-        },
-        {
-          title: t("helpInitialSetupTitle"),
-          content: <p className="text-lg">{t("helpInitialSetupContent")}</p>,
-        },
-        {
-          title: t("helpCourseInputTitle"),
+          title: t("introTitle"),
           content: (
-            <ul className="list-disc list-inside text-lg ml-5">
-              <li>{t("helpCourseInputContent1")}</li>
-              <br />
-              <li>{t("helpCourseInputContent2")}</li>
+            <div className="text-lg space-y-4">
+              <p>{t("introContentPart1")}</p>
+              <p>{t("introContentPart2")}</p>
+              <p>{t("introContentPart3")}</p>
+            </div>
+          ),
+        },
+        {
+          title: t("initialSetupTitle"),
+          content: (
+            <div className="text-lg space-y-4">
+              <p>{t("initialSetupContentPart1")}</p>
+              <p>{t("initialSetupContentPart2")}</p>
+            </div>
+          ),
+        },
+        {
+          title: t("courseInputTitle"),
+          content: (
+            <ul className="list-disc list-inside text-lg ml-5 space-y-4">
+              <li>
+                {t("courseInputContentPart1")}
+                <ul className="list-disc list-inside ml-10 mt-2">
+                  <li>{t("courseInputContentPart2")}</li>
+                  <li>{t("courseInputContentPart3")}</li>
+                </ul>
+              </li>
+              <li>
+                {t("courseInputContentPart4")}
+                <ul className="list-disc list-inside ml-10 mt-2">
+                  <li>{t("courseInputContentPart5")}</li>
+                  <li>{t("courseInputContentPart6")}</li>
+                </ul>
+              </li>
+              <li>{t("courseInputContentPart7")}</li>
             </ul>
           ),
         },
         {
-          title: t("helpShiftSetupTitle"),
+          title: t("saveOptionsTitle"),
           content: (
-            <ul className="list-disc list-inside text-lg ml-5">
-              <li>{t("helpShiftSetupContent1")}</li>
-              <br />
-              <li>{t("helpShiftSetupContent2")}</li>
-            </ul>
+            <div className="text-lg space-y-4">
+              <p>{t("saveOptionsContentPart1")}</p>
+            </div>
           ),
         },
         {
-          title: t("helpExportImportTitle"),
-          content: <p className="text-lg">{t("helpExportImportContent")}</p>,
-        },
-        {
-          title: t("helpGenerateScheduleTitle"),
+          title: t("generateScheduleTitle"),
           content: (
-            <p className="text-lg">{t("helpGenerateScheduleContent")} :)</p>
+            <div className="text-lg space-y-4">
+              <p>{t("generateScheduleContentPart1")}</p>
+              <p>{t("generateScheduleContentPart2")}</p>
+            </div>
           ),
         },
       ].map((section, index) => (
         <motion.section
           key={index}
-          className="mb-5"
+          className="mb-10"
           custom={index}
           initial="hidden"
           whileInView="visible"

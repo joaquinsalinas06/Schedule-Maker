@@ -141,8 +141,6 @@ export const ScheduleComponent = () => {
         if (!groupedCourses[course.name]) {
           groupedCourses[course.name] = [];
         }
-       
-
 
         const newCourse = new Course(
           course.name,

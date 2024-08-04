@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { CourseContext } from "./contexts/CourseContext";
 import { MainPage } from "./Pages/MainPage";
+import { AboutMe } from "./Pages/AboutMe";
 import { useTranslation } from "react-i18next";
 import {
   BrowserRouter as Router,
@@ -26,6 +27,7 @@ function App() {
         <Routes>
           <Route path="/" element={<MainPage />} />
           <Route path="/help" element={<Help />} />
+          <Route path="/aboutme" element={<AboutMe />} />
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>
         <Footer />
