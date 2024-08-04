@@ -83,13 +83,12 @@ export const ShiftOptions = () => {
         const addedCourses = new Set();
 
         shiftOptions.forEach((option) => {
-          const courseKey = `${option.name}-${option.credits}-${option.semester}-${option.classesPerWeek}`;
+          const courseKey = `${option.name}-${option.credits}-${option.classesPerWeek}`;
 
           if (!addedCourses.has(courseKey)) {
             const newCourse = {
               name: option.name,
               credits: option.credits,
-              semester: option.semester,
               classesPerWeek: option.classesPerWeek,
             };
             setCourses((prevCourses) => [...prevCourses, newCourse]);

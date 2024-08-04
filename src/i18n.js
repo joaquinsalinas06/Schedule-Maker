@@ -62,29 +62,47 @@ const resources = {
       language: "Idioma",
       help: "Ayuda",
       // help page
-      helpTitle: "Ayuda de Schedule Maker",
-      helpIntroTitle: "¿Qué es Schedule Maker?",
-      helpIntroContent:
-        "Schedule Maker es una herramienta que te ayudará a generar todos los posibles horarios según las horas/turnos de tus cursos.",
-      helpInitialSetupTitle: "Configuración Inicial",
-      helpInitialSetupContent:
-        "Primero, ingresa los cursos mínimos y máximos permitidos por tu universidad, así como la cantidad de créditos mínima y máxima. Esta información nos ayudará a determinar si puedes generar un horario con los datos proporcionados. Luego, indica el ciclo actual de preferencia.",
-      helpCourseInputTitle: "Ingresar Cursos",
-      helpCourseInputContent1:
-        "Es importante que ingreses los cursos que planeas llevar. Al crear un curso, asegúrate de indicar el número de créditos que equivale, el ciclo al que pertenece y el número de clases por semana. Por ejemplo, si un curso tiene clases el lunes y martes, indícalo como 2 veces. Si tienes el mismo curso dos veces en un mismo día, también indica 2 veces.",
-      helpCourseInputContent2:
-        "Una vez creado el curso, podrás modificar sus parámetros si es necesario. Recomendamos no editar el curso mientras configuras las horas/turnos de cada curso, ya que podrían ocurrir errores.",
-      helpShiftSetupTitle: "Configurar Turnos",
-      helpShiftSetupContent1:
-        "Después, indica los diferentes turnos para cada curso. Crea un nuevo turno y selecciona el curso previamente ingresado. Esto mostrará espacios para que indiques los días y horas correspondientes. Completa el apartado de sección/aula y el nombre del profesor. Si hay varios profesores, puedes colocar ambos nombres.",
-      helpShiftSetupContent2:
-        "Asigna un color a tu curso. Este color se usará para dibujar el curso en tu horario, permitiéndote diferenciar entre turnos según la sección, profesor y color. Rellena todos los días y horas que te corresponden, así como los demás campos. Una vez que todos los campos estén llenos, confirma el curso. No se podrá modificar después de confirmar.",
-      helpExportImportTitle: "Exportar e Importar Cursos",
-      helpExportImportContent:
-        "Si deseas añadir más cursos, utiliza el símbolo de '+' a la derecha para generar más turnos. Si ya tienes todos tus cursos configurados, exporta los cursos para que, cuando vuelvas a la página, puedas importarlos y seguirán ahí.",
-      helpGenerateScheduleTitle: "Generar Horarios",
-      helpGenerateScheduleContent:
-        "Una vez que hayas terminado la selección de cursos, presiona el botón 'Generar' y deja que 'Schedule Maker' haga su magia. Obtendrás todas las opciones de horarios disponibles para que puedas tomar la mejor decisión en cuanto a tu horario.",
+      mainTitle: "¡Bienvenido a Schedule Maker! 😀",
+
+      introTitle: "¿Qué es Schedule Maker?",
+      introContentPart1:
+        "Schedule Maker es una página donde podrás obtener todas las combinaciones posibles según la gran cantidad de oportunidades de horario que existen. 😄",
+      introContentPart2:
+        "Sabemos que escoger un horario puede ser complicado, sobre todo cuando una clase que queremos quizá nos bloquea algunas otras. 😕",
+      introContentPart3:
+        "Es por ello que Schedule Maker llega a resolver esto. 🎉",
+
+      initialSetupTitle: "Configuración Inicial",
+      initialSetupContentPart1:
+        "Primero, ingresa cuántos créditos mínimos y máximos te permite tu universidad. 🎓",
+      initialSetupContentPart2:
+        "Actualmente nos basamos en el sistema de semestres de Perú, pero si eres de algún otro lugar o tu universidad trabaja diferente, ¡escríbeme! Trataré de adaptar el sistema para que puedas realizar un buen horario. 🌍",
+
+      courseInputTitle: "Ingresar Cursos",
+      courseInputContentPart1:
+        "Es importante que ingreses los cursos que podrías llevar, indicando el nombre del curso, los créditos que vale y cuántas clases por semana tienes del curso. 📝",
+      courseInputContentPart2:
+        "Por ejemplo, si tienes 2 horas el lunes y 2 horas el martes de ese curso, coloca 2. 📅",
+      courseInputContentPart3:
+        "O si tienes 2 horas en la mañana y 2 horas en la noche del mismo curso, igualmente coloca 2. 🕒🕕",
+      courseInputContentPart4:
+        "Una vez crees un curso, podrás crear los turnos/horas de cada curso con el botón '+', donde podrás escoger en cada turno a qué curso pertenece, la sección/salón que te toque, profesor o profesores del curso, y darle un color al curso. 🎨",
+      courseInputContentPart5:
+        "Este será la forma en la que verás el curso en tu horario. 📅",
+      courseInputContentPart6:
+        "Además, dependiendo del número de veces que tienes que llevar el curso a la semana, te daremos espacio para que indiques qué día y a qué hora te toca el curso. 🕒",
+      courseInputContentPart7:
+        "Actualmente solo trabajamos con horas exactas, es decir, no tomamos en cuenta los minutos, pero estamos trabajando para que pueda darse así. ⏳",
+
+      saveOptionsTitle: "Guardar Opciones",
+      saveOptionsContentPart1:
+        "Una vez hayas definido todos tus turnos, te recomendamos guardar tus opciones, para que de esa forma, la próxima vez que nos visites, cargues tus turnos y tengas todo de vuelta. 💾",
+
+      generateScheduleTitle: "Generar Horarios",
+      generateScheduleContentPart1:
+        "Una vez tengas todos los turnos definidos, dale click a 'Generar' y deja que Schedule Maker haga su magia. ✨",
+      generateScheduleContentPart2:
+        "Podrás ver todos los posibles horarios que hayas seleccionado, permitiéndote así poder escoger sabiamente tu próximo ciclo. 📅",
     },
   },
   en: {

@@ -45,7 +45,6 @@ export const ShiftOption = ({
       startTimes: startTimes,
       endTimes: endTimes,
       credits: selectedCourseData ? selectedCourseData.credits : null,
-      semester: selectedCourseData ? selectedCourseData.semester : null,
       classesPerWeek: numClasses,
       color: color,
     };
@@ -131,7 +130,6 @@ export const ShiftOption = ({
       startTimes: [...startTimes],
       endTimes: [...endTimes],
       credits: selectedCourseData ? selectedCourseData.credits : null,
-      semester: selectedCourseData ? selectedCourseData.semester : null,
       classesPerWeek: numClasses,
       color: color,
     };
