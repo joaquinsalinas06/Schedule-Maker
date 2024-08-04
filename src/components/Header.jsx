@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { useTranslation } from "react-i18next";
-import { GitHub, CalendarMonth } from "@mui/icons-material";
+import { GitHub, CalendarMonth, ContactPage } from "@mui/icons-material";
 import { useNavigate } from "react-router";
 import { motion } from "framer-motion";
 import { LanguageContext } from "../contexts/LanguageContext";
@@ -21,6 +21,10 @@ export const Header = () => {
 
   const Help = () => {
     navigate("/help");
+  };
+
+  const AboutMe = () => {
+    navigate("/aboutme");
   };
 
   return (
@@ -58,6 +62,12 @@ export const Header = () => {
             className="border border-gray-300 bg-white rounded-md hover:bg-gray-200 text-black p-1"
           >
             <CalendarMonth />
+          </button>
+          <button
+            onClick={AboutMe}
+            className="border border-gray-300 bg-white rounded-md hover:bg-gray-200 text-black p-1"
+          >
+            <ContactPage />
           </button>
           <button
             onClick={Help}

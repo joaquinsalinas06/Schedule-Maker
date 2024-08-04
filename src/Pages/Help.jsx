@@ -12,7 +12,7 @@ export const Help = () => {
       y: 0,
       transition: {
         delay: i * 0.1,
-        duration: 0.3,
+        duration: 0.2,
       },
     }),
   };
@@ -25,7 +25,7 @@ export const Help = () => {
         {
           title: t("introTitle"),
           content: (
-            <div className="text-lg">
+            <div className="text-lg space-y-4">
               <p>{t("introContentPart1")}</p>
               <p>{t("introContentPart2")}</p>
               <p>{t("introContentPart3")}</p>
@@ -35,7 +35,7 @@ export const Help = () => {
         {
           title: t("initialSetupTitle"),
           content: (
-            <div className="text-lg">
+            <div className="text-lg space-y-4">
               <p>{t("initialSetupContentPart1")}</p>
               <p>{t("initialSetupContentPart2")}</p>
             </div>
@@ -44,25 +44,37 @@ export const Help = () => {
         {
           title: t("courseInputTitle"),
           content: (
-            <ul className="list-disc list-inside text-lg ml-5">
-              <li>{t("courseInputContentPart1")}</li>
-              <li>{t("courseInputContentPart2")}</li>
-              <li>{t("courseInputContentPart3")}</li>
-              <li>{t("courseInputContentPart4")}</li>
-              <li>{t("courseInputContentPart5")}</li>
-              <li>{t("courseInputContentPart6")}</li>
+            <ul className="list-disc list-inside text-lg ml-5 space-y-4">
+              <li>
+                {t("courseInputContentPart1")}
+                <ul className="list-disc list-inside ml-10 mt-2">
+                  <li>{t("courseInputContentPart2")}</li>
+                  <li>{t("courseInputContentPart3")}</li>
+                </ul>
+              </li>
+              <li>
+                {t("courseInputContentPart4")}
+                <ul className="list-disc list-inside ml-10 mt-2">
+                  <li>{t("courseInputContentPart5")}</li>
+                  <li>{t("courseInputContentPart6")}</li>
+                </ul>
+              </li>
               <li>{t("courseInputContentPart7")}</li>
             </ul>
           ),
         },
         {
           title: t("saveOptionsTitle"),
-          content: <p className="text-lg">{t("saveOptionsContentPart1")}</p>,
+          content: (
+            <div className="text-lg space-y-4">
+              <p>{t("saveOptionsContentPart1")}</p>
+            </div>
+          ),
         },
         {
           title: t("generateScheduleTitle"),
           content: (
-            <div className="text-lg">
+            <div className="text-lg space-y-4">
               <p>{t("generateScheduleContentPart1")}</p>
               <p>{t("generateScheduleContentPart2")}</p>
             </div>
@@ -71,7 +83,7 @@ export const Help = () => {
       ].map((section, index) => (
         <motion.section
           key={index}
-          className="mb-5"
+          className="mb-10"
           custom={index}
           initial="hidden"
           whileInView="visible"
