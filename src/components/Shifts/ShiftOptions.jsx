@@ -124,13 +124,13 @@ export const ShiftOptions = () => {
             transition={{ duration: 0.5, delay: 0.7 }}
             className="flex space-x-2"
           >
-            <button
+            <motion.button
               onClick={saveShiftOptions}
               className="inline-flex items-center p-2 sm:pl-4 md:pl-5 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-buttonExport hover:bg-buttonExportHover w-auto sm:w-32 md:w-40"
             >
               <Save />
               <span className="hidden sm:inline">{t("sCourses")}</span>
-            </button>
+            </motion.button>
             <input
               type="file"
               accept=".json"
@@ -145,13 +145,6 @@ export const ShiftOptions = () => {
               <Download />
               <span className="hidden sm:inline">{t("lCourses")}</span>
             </label>
-
-            <button
-              onClick={addShiftOption}
-              className="inline-flex items-center p-2 sm:px-2 md:px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white hover:text-slate-200 w-auto"
-            >
-              <AddCircle />
-            </button>
           </motion.div>
         </motion.div>
       </AnimatePresence>
@@ -167,7 +160,8 @@ export const ShiftOptions = () => {
         animate={{ opacity: 1, y: 0 }}
         exit={{ opacity: 0, y: 20 }}
         transition={{ duration: 1.2, delay: 1.2 }}
-        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 w-full"
+        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 w-full overflow-y-auto hide-scrollbar"
+        style={{ height: "36rem" }}
       >
         <AnimatePresence>
           {shiftOptions.map((option) => (
@@ -187,6 +181,15 @@ export const ShiftOptions = () => {
               />
             </motion.div>
           ))}
+
+          <motion.button
+            onClick={addShiftOption}
+            className="inline-flex items-center p-2 sm:px-2 md:px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white hover:text-slate-200 w-auto mx-auto my-auto"
+            whileHover={{ rotate: 90 }}
+            transition={{ duration: 0.2 }}
+          >
+            <AddCircle />
+          </motion.button>
         </AnimatePresence>
       </motion.div>
     </div>

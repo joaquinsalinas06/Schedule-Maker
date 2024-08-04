@@ -38,13 +38,13 @@ export const Header = () => {
         <div className="flex flex-row items-center mb-4 sm:mb-0 space-x-2">
           <button
             onClick={() => changeLanguage("es")}
-            className="border border-gray-300 bg-white rounded-md hover:bg-gray-200 px-2 sm:px-3 py-1 sm:py-2 text-sm w-16 sm:w-20"
+            className="border border-gray-300 bg-white rounded-md hover:bg-gray-200 px-2 sm:px-3 py-1 sm:py-2 text-sm w-16 sm:w-20 font-semibold"
           >
             {t("es")}
           </button>
           <button
             onClick={() => changeLanguage("en")}
-            className="border border-gray-300 bg-white rounded-md hover:bg-gray-200 px-2 sm:px-3 py-1 sm:py-2 text-sm w-16 sm:w-20"
+            className="border border-gray-300 bg-white rounded-md hover:bg-gray-200 px-2 sm:px-3 py-1 sm:py-2 text-sm w-16 sm:w-20 font-semibold"
           >
             {t("en")}
           </button>
@@ -71,7 +71,7 @@ export const Header = () => {
           </button>
           <button
             onClick={Help}
-            className="border border-gray-300 bg-white rounded-md hover:bg-gray-200 text-black py-1 sm:py-2 text-sm w-12 sm:w-16"
+            className="border border-gray-300 bg-white rounded-md hover:bg-gray-200 text-black py-1 sm:py-2 text-sm w-12 sm:w-16 font-semibold"
           >
             <span>{t("help")}</span>
           </button>

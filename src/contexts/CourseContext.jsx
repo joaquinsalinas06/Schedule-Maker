@@ -2,7 +2,7 @@ import React, { createContext, useState } from "react";
 
 export const CourseContext = createContext();
 
-export const CourseProvider = ({ children }) => {
+export const CourseProvider = ({ children }) => { //todo change to set 
   const [courses, setCourses] = useState([]);
 
   const addCourse = (course) => {
