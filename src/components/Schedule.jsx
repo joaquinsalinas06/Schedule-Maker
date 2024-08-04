@@ -159,10 +159,6 @@ export const ScheduleComponent = () => {
       }
     }
 
-    if (creditsC < minCredits || creditsC > maxCredits) {
-      alert("The number of credits is not between the min and max");
-      return;
-    }
 
     let courseGroups = Object.values(groupedCourses);
     let allSchedules = [];
