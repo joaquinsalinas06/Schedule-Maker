@@ -49,8 +49,10 @@ export const CourseSelect = ({ course }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const updatedCourses = courses.map((c) =>
-      c.name === course.name ? courseDetails : c
+    const updatedCourses = new Set(
+      Array.from(courses).map((c) =>
+        c.name === course.name ? courseDetails : c
+      )
     );
     setCourses(updatedCourses);
 
@@ -59,7 +61,9 @@ export const CourseSelect = ({ course }) => {
 
   const handleEliminate = (e) => {
     e.stopPropagation();
-    const updatedCourses = courses.filter((c) => c.name !== course.name);
+    const updatedCourses = new Set(
+      Array.from(courses).filter((c) => c.name !== course.name)
+    );
     setCourses(updatedCourses);
 
     handleClose();

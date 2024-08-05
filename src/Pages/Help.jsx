@@ -1,4 +1,5 @@
 import React from "react";
+import { ContactPage } from "@mui/icons-material";
 import { useTranslation } from "react-i18next";
 import { motion } from "framer-motion";
 
@@ -33,14 +34,26 @@ export const Help = () => {
           ),
         },
         {
+          title: t("aknowledgementsTitle"),
+          content: (
+            <div className="text-lg space-y-4">
+              <p>{t("aknowledgementsContentPart1")}</p>
+            </div>
+          ),
+        },
+        {
           title: t("initialSetupTitle"),
           content: (
             <div className="text-lg space-y-4">
               <p>{t("initialSetupContentPart1")}</p>
-              <p>{t("initialSetupContentPart2")}</p>
+
+              <p>
+                {t("initialSetupContentPart2")} <ContactPage />
+              </p>
             </div>
           ),
         },
+
         {
           title: t("courseInputTitle"),
           content: (

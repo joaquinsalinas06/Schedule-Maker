@@ -2,11 +2,21 @@ import React, { createContext, useState } from "react";
 
 export const CourseContext = createContext();
 
-export const CourseProvider = ({ children }) => { //todo change to set 
-  const [courses, setCourses] = useState([]);
+export const CourseProvider = ({ children }) => {
+  const [courses, setCourses] = useState(new Set());
 
   const addCourse = (course) => {
-    setCourses((prevCourses) => [...prevCourses, course]);
+    const isCourseExist = Array.from(courses).some((existingCourse) => {
+      return (
+        existingCourse.name === course.name &&
+        existingCourse.classesPerWeek === course.classesPerWeek &&
+        existingCourse.credits === course.credits
+      );
+    });
+
+    if (!isCourseExist) {
+      setCourses((prevCourses) => new Set([...prevCourses, course]));
+    }
   };
 
   return (

@@ -32,7 +32,7 @@ const courseVariants = {
 
 export const CourseList = () => {
   const { t } = useTranslation();
-  const { courses, setCourses } = useContext(CourseContext);
+  const { courses, addCourse } = useContext(CourseContext);
   const [open, setOpen] = useState(false);
   const [newCourse, setNewCourse] = useState({
     name: "",
@@ -51,9 +51,9 @@ export const CourseList = () => {
     }));
   };
 
-  const addCourse = (e) => {
+  const handleAddCourse = (e) => {
     e.preventDefault();
-    setCourses([...courses, newCourse]);
+    addCourse(newCourse);
     setNewCourse({ name: "", credits: "", classesPerWeek: "" });
     handleClose();
   };
@@ -69,7 +69,7 @@ export const CourseList = () => {
       <Modal open={open} onClose={handleClose}>
         <Box sx={style}>
           <h2 className="text-xl font-semibold mb-4">{t("addNCourse")}</h2>
-          <form onSubmit={addCourse}>
+          <form onSubmit={handleAddCourse}>
             <div className="mb-4">
               <label htmlFor="name" className="block text-gray-700">
                 {t("cName")}
@@ -133,10 +133,10 @@ export const CourseList = () => {
         </Box>
       </Modal>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
-        {courses.length === 0 ? (
+        {courses.size === 0 ? (
           <p className="text-white mt-4 md:col-span-3">{t("noCFound")}</p>
         ) : (
-          courses.map((course, index) => (
+          Array.from(courses).map((course, index) => (
             <motion.div
               key={index}
               custom={index}

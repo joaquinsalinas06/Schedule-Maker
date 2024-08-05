@@ -62,7 +62,7 @@ const resources = {
       language: "Idioma",
       help: "Ayuda",
       // help page
-      mainTitle: "¡Bienvenido a Schedule Maker! ",
+      mainTitle: "Aqui esta la ayudas que necesitas:) ",
 
       introTitle: "¿Qué es Schedule Maker?",
       introContentPart1:
@@ -72,11 +72,15 @@ const resources = {
       introContentPart3:
         "Es por ello que Schedule Maker llega a resolver esto 🎉",
 
+      aknowledgementsTitle: "Agradecimientos",
+      aknowledgementsContentPart1:
+        "Quiero agradecer a Dylan Carroll, de quien este proyecto se basa, dado que gracias a el pude hacer el funcionamiento de la generacion de horarios, chequea el README del proyecto y ahi tendras su perfil de GitHub junto a su pagina web:)", 
+
       initialSetupTitle: "Configuración Inicial",
       initialSetupContentPart1:
         "Primero, ingresa cuántos créditos mínimos y máximos te permite tu universidad 🏛️",
       initialSetupContentPart2:
-        'Actualmente nos basamos en el sistema de semestres de Perú (es decir ciclo 2x-0, 2x-1 y 2x-2), pero si eres de algún otro lugar o tu universidad trabaja diferente, ¡escríbeme! Trataré de adaptar el sistema para que puedas realizar un buen horario 🌍\n \nPuedes encontrar mi contacto en la pagina de "Sobre mi". ',
+        'Actualmente nos basamos en el sistema de semestres de Perú (es decir ciclo 2x-0, 2x-1 y 2x-2), pero si eres de algún otro lugar o tu universidad trabaja diferente, ¡escríbeme! Trataré de adaptar el sistema para que puedas realizar un buen horario 🌍\n \nPuedes encontrar mi contacto en la pagina de "Sobre mi", que tiene este icono ',
 
       courseInputTitle: "Ingresar Cursos/Turnos",
       courseInputContentPart1:
@@ -191,7 +195,7 @@ const resources = {
       language: "Language",
       help: "Help",
       // help page
-      mainTitle: "Welcome to Schedule Maker! ",
+      mainTitle: "Here is the help you need:) ",
 
       introTitle: "What is Schedule Maker?",
       introContentPart1:
@@ -201,37 +205,41 @@ const resources = {
       introContentPart3:
         "That's why Schedule Maker is here to solve this for you 🎉",
 
+      aknowledgementsTitle: "Acknowledgements",
+      aknowledgementsContentPart1:
+        "I want to thank Dylan Carroll, from whom this project is based, since thanks to him I was able to make the schedule generation work, check the README of the project and there you will have his GitHub profile along with his website:)",
+
       initialSetupTitle: "Initial Setup",
       initialSetupContentPart1:
-        "First, enter the minimum and maximum credits allowed by your university. 🏛️",
+        "First, enter the minimum and maximum credits allowed by your university 🏛️",
       initialSetupContentPart2:
-        'We currently base our system on the semester system in Peru (i.e., cycles 2x-0, 2x-1, and 2x-2), but if you are from another place or your university works differently, let me know! I will try to adapt the system so you can create a good schedule. 🌍\n\nYou can find my contact information on the "About Me" page.',
+        'We currently base our system on the semester system in Peru (i.e., cycles 2x-0, 2x-1, and 2x-2), but if you are from another place or your university works differently, let me know! I will try to adapt the system so you can create a good schedule. 🌍\n\nYou can find my contact information on the "About Me" page, which has this icon',
 
       courseInputTitle: "Enter Courses/Shifts",
       courseInputContentPart1:
-        "It is important to enter the courses you might take, indicating the course name, the credits it is worth, and how many classes per week you have for that course. 📝",
+        "It is important to enter the courses you might take, indicating the course name, the credits it is worth, and how many classes per week you have for that course 📝",
       courseInputContentPart2:
-        "For example, if you have 2 hours on Monday and 2 hours on Tuesday for that course, enter 2. 📅",
+        "For example, if you have 2 hours on Monday and 2 hours on Tuesday for that course, enter 📅",
       courseInputContentPart3:
-        "Or if you have 2 hours in the morning and 2 hours in the evening for the same course, also enter 2. 🕒🕕",
+        "Or if you have 2 hours in the morning and 2 hours in the evening for the same course, also enter 2 🕒🕕",
       courseInputContentPart4:
-        "Once you create a course, you can create the shifts/hours for each course with the '+' button, where you can select which course the shift belongs to, the section/classroom, the professor(s), and assign a color to the course. 🎨",
+        "Once you create a course, you can create the shifts/hours for each course with the '+' button, where you can select which course the shift belongs to, the section/classroom, the professor(s), and assign a color to the course 🎨",
       courseInputContentPart5:
-        "This will be the way you see the course in your schedule. 📅",
+        "This will be the way you see the course in your schedule 📅",
       courseInputContentPart6:
-        "Additionally, depending on the number of times you have to attend the course per week, we will provide space for you to indicate the day and time of the course. 🕒",
+        "Additionally, depending on the number of times you have to attend the course per week, we will provide space for you to indicate the day and time of the course 🕒",
       courseInputContentPart7:
-        "We currently only work with exact hours, meaning we don't account for minutes, but we are working on making this possible. ⏳",
+        "We currently only work with exact hours, meaning we don't account for minutes, but we are working on making this possible ⏳",
 
       saveOptionsTitle: "Save Options",
       saveOptionsContentPart1:
-        "Once you have defined all your shifts, we recommend saving your options so that the next time you visit, you can load your shifts and have everything back. 💾",
+        "Once you have defined all your shifts, we recommend saving your options so that the next time you visit, you can load your shifts and have everything back 💾",
 
       generateScheduleTitle: "Generate Schedules",
       generateScheduleContentPart1:
-        "Once you have defined all the shifts, click 'Generate' and let Schedule Maker work its magic. ✨",
+        "Once you have defined all the shifts, click 'Generate' and let Schedule Maker work its magic ✨",
       generateScheduleContentPart2:
-        "You will be able to see all the possible schedules you have selected, allowing you to wisely choose your next cycle. 📅",
+        "You will be able to see all the possible schedules you have selected, allowing you to wisely choose your next cycle 📅",
       //AboutMe
       aboutMeTitle: "Hello! 👋",
       aboutMeIntro:

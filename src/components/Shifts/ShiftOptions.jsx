@@ -1,7 +1,7 @@
 import React, { useState, useContext, useEffect } from "react";
 import { ShiftOption } from "./ShiftOption";
 import { useTranslation } from "react-i18next";
-import { Download, Upload, AddCircle, Save } from "@mui/icons-material";
+import { Download, AddCircle, Save } from "@mui/icons-material";
 import { v4 as uuidv4 } from "uuid";
 import { ShiftsContext } from "../../contexts/ShiftsContext";
 import { CourseContext } from "../../contexts/CourseContext";
@@ -60,6 +60,7 @@ export const ShiftOptions = () => {
     setShiftOptions([...shiftOptions, newShiftOption]);
     addShift(newShiftOption);
   };
+
   const saveShiftOptions = () => {
     const dataStr = JSON.stringify(shiftOptions, null, 2);
     const blob = new Blob([dataStr], { type: "application/json" });
@@ -91,7 +92,11 @@ export const ShiftOptions = () => {
               credits: option.credits,
               classesPerWeek: option.classesPerWeek,
             };
-            setCourses((prevCourses) => [...prevCourses, newCourse]);
+            setCourses((prevCourses) => {
+              const updatedCourses = new Set(prevCourses);
+              updatedCourses.add(newCourse);
+              return updatedCourses;
+            });
             addedCourses.add(courseKey);
           }
         });

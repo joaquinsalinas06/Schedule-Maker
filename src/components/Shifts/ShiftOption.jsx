@@ -26,7 +26,7 @@ export const ShiftOption = ({
 
   useEffect(() => {
     if (selectedCourse) {
-      const course = courses.find((course) => course.name === selectedCourse);
+      const course = Array.from(courses).find((course) => course.name === selectedCourse);
       if (course) {
         setNumClasses(parseInt(course.classesPerWeek));
       }
@@ -34,7 +34,7 @@ export const ShiftOption = ({
   }, [courses, selectedCourse]);
 
   useEffect(() => {
-    const selectedCourseData = courses.find(
+    const selectedCourseData = Array.from(courses).find(
       (course) => course.name === selectedCourse
     );
     const updatedCourse = {
@@ -63,7 +63,7 @@ export const ShiftOption = ({
   const handleCourseChange = (event) => {
     const selectedCourseName = event.target.value;
     setSelectedCourse(selectedCourseName);
-    const selectedCourse = courses.find(
+    const selectedCourse = Array.from(courses).find(
       (course) => course.name === selectedCourseName
     );
     if (selectedCourse) {
@@ -111,7 +111,7 @@ export const ShiftOption = ({
 
   useEffect(() => {
     if (selectedCourse) {
-      const course = courses.find((course) => course.name === selectedCourse);
+      const course = Array.from(courses).find((course) => course.name === selectedCourse);
       if (course) {
         setNumClasses(parseInt(course.classesPerWeek));
       }
@@ -119,7 +119,7 @@ export const ShiftOption = ({
   }, [courses, selectedCourse]);
 
   const handleCopyCourse = () => {
-    const selectedCourseData = courses.find(
+    const selectedCourseData = Array.from(courses).find(
       (course) => course.name === selectedCourse
     );
     const copiedCourse = {
@@ -168,10 +168,10 @@ export const ShiftOption = ({
               className="mt-1 block w-full rounded-md shadow-sm bg-bgCourseOptionInput focus:bg-bgCourseOptionInputHover sm:text-sm"
               required
             >
-              <option value="" disabled >
+              <option value="" disabled>
                 {t("selCourse")}
               </option>
-              {courses.map((course, index) => (
+              {Array.from(courses).map((course, index) => (
                 <option key={index} value={course.name}>
                   {course.name}
                 </option>
@@ -245,7 +245,7 @@ export const ShiftOption = ({
                     className="mt-1 block w-full rounded-md bg-bgCourseOptionInput sm:text-sm"
                     required
                   >
-                    <option value="" disabled >
+                    <option value="" disabled>
                       {t("selDay")}
                     </option>
                     <option value="Monday">{t("mon")}</option>
