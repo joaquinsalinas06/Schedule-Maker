@@ -3,6 +3,7 @@ import { ShiftsContext } from "../contexts/ShiftsContext";
 import { useTranslation } from "react-i18next";
 import { SemesterContext } from "../contexts/SemesterContext";
 import { motion } from "framer-motion";
+import html2canvas from "html2canvas"; // Import html2canvas
 
 class Course {
   constructor(
@@ -159,7 +160,6 @@ export const ScheduleComponent = () => {
       }
     }
 
-
     let courseGroups = Object.values(groupedCourses);
     let allSchedules = [];
 
@@ -232,40 +232,41 @@ export const ScheduleComponent = () => {
     const TOP_MARGIN = 0.07;
     const SIDE_MARGIN = 0.1;
     const DAY_COUNT = 6;
-
+  
     const dayWidth = (WIDTH * (1 - SIDE_MARGIN)) / DAY_COUNT;
     const hourCount = 16;
     const hourHeight = ((HEIGHT * (1 - TOP_MARGIN)) / hourCount) * 1.5;
-
+  
     let table = [];
-
+  
     for (let rowIndex = 0; rowIndex < timeSlots.length; rowIndex++) {
       let row = [];
       row.push(
         <td
           key={`time-${rowIndex}`}
           className="border text-center bg-gray-700 text-white"
-          style={{ width: dayWidth, height: hourHeight }}
+          style={{ width: dayWidth, height: hourHeight, backgroundColor: "#22252a" }}
         >
           {timeSlots[rowIndex]}
         </td>
       );
-
+  
       for (let colIndex = 0; colIndex < days.length; colIndex++) {
         let cellContent = "";
         let cellClass = "border text-center";
-
+        let cellStyle = { width: dayWidth / 2, height: hourHeight / 2, backgroundColor: "#22252a" };
+  
         for (let course of schedule.courses) {
           for (let i = 0; i < course.days.length; i++) {
             if (course.days[i].toLowerCase() === days[colIndex].toLowerCase()) {
               let startTime = parseTime(course.startTimes[i]);
               let endTime = parseTime(course.endTimes[i]);
               let slotTime = parseTime(timeSlots[rowIndex]);
-
+  
               if (slotTime >= startTime && slotTime < endTime) {
                 cellContent = (
                   <div
-                    className=" flex flex-col justify-center py-2"
+                    className="flex flex-col justify-center py-2"
                     style={{
                       backgroundColor: course.color,
                       height: hourHeight,
@@ -278,6 +279,7 @@ export const ScheduleComponent = () => {
                   </div>
                 );
                 cellClass += " text-white";
+                cellStyle.backgroundColor = course.color;
               }
             }
           }
@@ -286,7 +288,7 @@ export const ScheduleComponent = () => {
           <td
             key={`${rowIndex}-${colIndex}`}
             className={cellClass}
-            style={{ width: dayWidth / 2, height: hourHeight / 2 }}
+            style={cellStyle}
           >
             {cellContent}
           </td>
@@ -295,6 +297,16 @@ export const ScheduleComponent = () => {
       table.push(<tr key={rowIndex}>{row}</tr>);
     }
     return table;
+  };
+
+  const downloadScheduleAsImage = () => {
+    const tableElement = document.querySelector(".schedule-table");
+    html2canvas(tableElement).then((canvas) => {
+      const link = document.createElement("a");
+      link.download = `schedule_${currentScheduleIndex + 1}.jpg`;
+      link.href = canvas.toDataURL();
+      link.click();
+    });
   };
 
   return (
@@ -310,7 +322,7 @@ export const ScheduleComponent = () => {
             {t("schedule")} {currentScheduleIndex + 1}
           </h2>
           <table
-            className="table-fixed border-collapse border mx-auto"
+            className="table-fixed border-collapse border mx-auto schedule-table"
             style={{ width: "1000px", height: "600px" }}
           >
             <thead>
@@ -368,6 +380,16 @@ export const ScheduleComponent = () => {
             whileTap={{ scale: 0.9 }}
           >
             {t("next")}
+          </motion.button>
+        )}
+        {schedules.length > 0 && (
+          <motion.button
+            onClick={downloadScheduleAsImage}
+            className="bg-buttonCourseList hover:bg-buttonCourseListHover text-white px-4 py-2 rounded mx-2 w-24"
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.9 }}
+          >
+            {t("down")}
           </motion.button>
         )}
       </div>

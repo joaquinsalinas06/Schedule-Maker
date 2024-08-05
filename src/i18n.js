@@ -49,6 +49,7 @@ const resources = {
       prev: "Anterior",
       gen: "Generar",
       next: "Siguiente",
+      down: "Descargar",
       //semesterForm
       minCourses: "Cursos Minimos",
       maxCourses: "Cursos Maximos",
@@ -182,6 +183,7 @@ const resources = {
       prev: "Previous",
       gen: "Generate",
       next: "Next",
+      down: "Download",
       //semesterForm
       minCourses: "Minimum Courses",
       maxCourses: "Maximum Courses",
