@@ -62,12 +62,24 @@ export const ShiftOptions = () => {
   };
 
   const saveShiftOptions = () => {
+    const addedNames = new Set();
+    let fileName = "";
+
+    shiftOptions.forEach((option) => {
+      if (!addedNames.has(option.name)) {
+        fileName += option.name + "-";
+        addedNames.add(option.name);
+      }
+    });
+
+    fileName = fileName.slice(0, -1) + ".json";
+
     const dataStr = JSON.stringify(shiftOptions, null, 2);
     const blob = new Blob([dataStr], { type: "application/json" });
     const url = URL.createObjectURL(blob);
     const link = document.createElement("a");
     link.href = url;
-    link.download = "shiftOptions.json";
+    link.download = fileName;
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);

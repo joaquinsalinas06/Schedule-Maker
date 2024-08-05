@@ -65,7 +65,7 @@ export const SemesterForm = () => {
 
   return (
     <div className="flex justify-center items-center h-full">
-      <form className="p-4 bg-blueBox max-w-md w-full">
+      <form className="p-4 bg-blueBox max-w-md w-full rounded-md">
         <div className="mb-4">
           <label htmlFor="semester" className="block text-textColor">
             {t("semester")}
