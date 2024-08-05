@@ -129,10 +129,10 @@ export const ScheduleComponent = () => {
 
     let creditsC = 0;
     let groupedCourses = {};
-    console.log(shifts);
+
 
     for (let course of shifts) {
-      console.log(course);
+
       if (
         course.name &&
         course.credits &&
@@ -159,7 +159,7 @@ export const ScheduleComponent = () => {
           course.endTimes,
           course.color
         );
-        console.log(newCourse);
+
         groupedCourses[course.name].push(newCourse);
         creditsC += parseInt(course.credits);
       }
@@ -191,7 +191,7 @@ export const ScheduleComponent = () => {
 
     setSchedules(allSchedules);
     setCurrentScheduleIndex(0);
-    console.log(creditsC);
+
   };
 
   const showNextSchedule = () => {
@@ -253,13 +253,13 @@ export const ScheduleComponent = () => {
     const TOP_MARGIN = 0.07;
     const SIDE_MARGIN = 0.1;
     const DAY_COUNT = 6;
-
+  
     const dayWidth = (WIDTH * (1 - SIDE_MARGIN)) / DAY_COUNT;
     const hourCount = 16;
     const hourHeight = ((HEIGHT * (1 - TOP_MARGIN)) / hourCount) * 1.5;
-
+  
     let table = [];
-
+    let renderedCells = {}; 
     for (let rowIndex = 0; rowIndex < timeSlots.length; rowIndex++) {
       let row = [];
       row.push(
@@ -275,8 +275,12 @@ export const ScheduleComponent = () => {
           {timeSlots[rowIndex]}
         </td>
       );
-
+  
       for (let colIndex = 0; colIndex < days.length; colIndex++) {
+        if (renderedCells[`${rowIndex}-${colIndex}`]) {
+          continue; 
+        }
+  
         let cellContent = "";
         let cellClass = "border text-center";
         let cellStyle = {
@@ -284,21 +288,21 @@ export const ScheduleComponent = () => {
           height: hourHeight / 2,
           backgroundColor: "#22252a",
         };
-
+        let rowSpan = 1;
         for (let course of schedule.courses) {
           for (let i = 0; i < course.days.length; i++) {
             if (course.days[i].toLowerCase() === days[colIndex].toLowerCase()) {
               let startTime = parseTime(course.startTimes[i]);
               let endTime = parseTime(course.endTimes[i]);
               let slotTime = parseTime(timeSlots[rowIndex]);
-
               if (slotTime >= startTime && slotTime < endTime) {
+                rowSpan = (endTime - startTime) / 60;
                 cellContent = (
                   <div
                     className="flex flex-col justify-center py-2"
                     style={{
                       backgroundColor: course.color,
-                      height: hourHeight,
+                      height: hourHeight * rowSpan,
                     }}
                   >
                     <div>
@@ -309,15 +313,22 @@ export const ScheduleComponent = () => {
                 );
                 cellClass += " text-white";
                 cellStyle.backgroundColor = course.color;
+  
+                for (let span = 0; span < rowSpan; span++) {
+                  renderedCells[`${rowIndex + span}-${colIndex}`] = true;
+                }
+                break;
               }
             }
           }
         }
+  
         row.push(
           <td
-            key={`${rowIndex}-${colIndex}`}
+            key={`cell-${rowIndex}-${colIndex}`}
             className={cellClass}
             style={cellStyle}
+            rowSpan={rowSpan}
           >
             {cellContent}
           </td>
