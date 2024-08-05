@@ -2,8 +2,9 @@ import React, { useContext, useState, useEffect } from "react";
 import { ShiftsContext } from "../contexts/ShiftsContext";
 import { useTranslation } from "react-i18next";
 import { SemesterContext } from "../contexts/SemesterContext";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import html2canvas from "html2canvas"; // Import html2canvas
+import { Search } from "@mui/icons-material";
 
 class Course {
   constructor(
@@ -114,6 +115,10 @@ export const ScheduleComponent = () => {
   const [showPrevNext, setShowPrevNext] = useState(false);
   const [currentScheduleIndex, setCurrentScheduleIndex] = useState(0);
   const [lastSemester, setLastSemester] = useState(semester);
+  const [error, setError] = useState("");
+  const [showError, setShowError] = useState(false);
+  const [showInput, setShowInput] = useState(false);
+  const [inputValue, setInputValue] = useState("");
 
   useEffect(() => {
     setLastSemester(semester);
@@ -199,6 +204,22 @@ export const ScheduleComponent = () => {
     );
   };
 
+  const searchSchedule = (index) => {
+    if (index >= 1 && index < schedules.length) {
+      setCurrentScheduleIndex(index - 1);
+      setShowError(false);
+      setError("");
+    } else {
+      setShowError(true);
+      setError("Not a valid index");
+    }
+  };
+
+  const handleSearch = () => {
+    const index = parseInt(inputValue, 10);
+    searchSchedule(index);
+  };
+
   const days = [
     "Monday",
     "Tuesday",
@@ -232,37 +253,45 @@ export const ScheduleComponent = () => {
     const TOP_MARGIN = 0.07;
     const SIDE_MARGIN = 0.1;
     const DAY_COUNT = 6;
-  
+
     const dayWidth = (WIDTH * (1 - SIDE_MARGIN)) / DAY_COUNT;
     const hourCount = 16;
     const hourHeight = ((HEIGHT * (1 - TOP_MARGIN)) / hourCount) * 1.5;
-  
+
     let table = [];
-  
+
     for (let rowIndex = 0; rowIndex < timeSlots.length; rowIndex++) {
       let row = [];
       row.push(
         <td
           key={`time-${rowIndex}`}
           className="border text-center bg-gray-700 text-white"
-          style={{ width: dayWidth, height: hourHeight, backgroundColor: "#22252a" }}
+          style={{
+            width: dayWidth,
+            height: hourHeight,
+            backgroundColor: "#22252a",
+          }}
         >
           {timeSlots[rowIndex]}
         </td>
       );
-  
+
       for (let colIndex = 0; colIndex < days.length; colIndex++) {
         let cellContent = "";
         let cellClass = "border text-center";
-        let cellStyle = { width: dayWidth / 2, height: hourHeight / 2, backgroundColor: "#22252a" };
-  
+        let cellStyle = {
+          width: dayWidth / 2,
+          height: hourHeight / 2,
+          backgroundColor: "#22252a",
+        };
+
         for (let course of schedule.courses) {
           for (let i = 0; i < course.days.length; i++) {
             if (course.days[i].toLowerCase() === days[colIndex].toLowerCase()) {
               let startTime = parseTime(course.startTimes[i]);
               let endTime = parseTime(course.endTimes[i]);
               let slotTime = parseTime(timeSlots[rowIndex]);
-  
+
               if (slotTime >= startTime && slotTime < endTime) {
                 cellContent = (
                   <div
@@ -393,6 +422,51 @@ export const ScheduleComponent = () => {
           </motion.button>
         )}
       </div>
+      <div className="flex justify-center mt-4 gap-4">
+        {schedules.length > 0 && (
+          <>
+            <motion.button
+              onClick={() => setShowInput(!showInput)}
+              className="bg-buttonCourseList hover:bg-buttonCourseListHover text-white rounded mx-auto mb-auto p-1 mt-2"
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.5 }}
+            >
+              <Search />
+            </motion.button>
+            <AnimatePresence>
+          {showInput && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.5 }}
+               className="flex items-center mt-2"
+            >
+                <input
+                  type="text"
+                  value={inputValue}
+                  onChange={(e) => setInputValue(e.target.value)}
+                  className="border rounded px-2 py-1"
+                  placeholder={t("enterIndex")}
+                />
+                <motion.button
+                  onClick={handleSearch}
+                  className="bg-buttonCourseList hover:bg-buttonCourseListHover text-white px-4 py-2 rounded mx-2 w-24"
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.9 }}
+                >
+                  {t("srch")}
+                </motion.button>
+              </motion.div>
+            )}
+          </AnimatePresence>
+          </>
+        )}
+      </div>
+      {showError && <div className="text-red-500 mt-2">{error}</div>}
     </div>
   );
 };

@@ -1,7 +1,7 @@
 import React, { useState, useContext, useEffect } from "react";
 import { CourseContext } from "../../contexts/CourseContext";
 import Delete from "@mui/icons-material/Delete";
-import { CheckCircle, FileCopy } from "@mui/icons-material";
+import {  FileCopy } from "@mui/icons-material";
 import { useTranslation } from "react-i18next";
 import "./ShiftsStyles.css";
 

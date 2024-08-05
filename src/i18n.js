@@ -50,6 +50,8 @@ const resources = {
       gen: "Generar",
       next: "Siguiente",
       down: "Descargar",
+      enterIndex: "Numero de horario...",
+      srch: "Buscar",
       //semesterForm
       minCourses: "Cursos Minimos",
       maxCourses: "Cursos Maximos",
@@ -184,6 +186,8 @@ const resources = {
       gen: "Generate",
       next: "Next",
       down: "Download",
+      enterIndex: "Schedule number...",
+      srch: "Search",
       //semesterForm
       minCourses: "Minimum Courses",
       maxCourses: "Maximum Courses",
