@@ -247,6 +247,21 @@ export const ScheduleComponent = () => {
     "10:00 PM",
   ];
 
+  // Function to determine if a color is light or dark
+const isColorLight = (color) => {
+  // Convert hex color to RGB
+  const hex = color.replace("#", "");
+  const r = parseInt(hex.substring(0, 2), 16);
+  const g = parseInt(hex.substring(2, 4), 16);
+  const b = parseInt(hex.substring(4, 6), 16);
+
+  // Calculate luminance
+  const luminance = 0.2126 * r + 0.7152 * g + 0.0722 * b;
+
+  // Return true if luminance is greater than 128 (light color), otherwise false (dark color)
+  return luminance > 128;
+};
+
   const renderScheduleTable = (schedule) => {
     const WIDTH = 1000;
     const HEIGHT = 600;
@@ -312,6 +327,7 @@ export const ScheduleComponent = () => {
                   </div>
                 );
                 cellClass += " text-white";
+                cellStyle.color = isColorLight(course.color) ? "#000000" : "#FFFFFF";      
                 cellStyle.backgroundColor = course.color;
   
                 for (let span = 0; span < rowSpan; span++) {
