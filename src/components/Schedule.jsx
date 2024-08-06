@@ -130,9 +130,7 @@ export const ScheduleComponent = () => {
     let creditsC = 0;
     let groupedCourses = {};
 
-
     for (let course of shifts) {
-
       if (
         course.name &&
         course.credits &&
@@ -191,7 +189,6 @@ export const ScheduleComponent = () => {
 
     setSchedules(allSchedules);
     setCurrentScheduleIndex(0);
-
   };
 
   const showNextSchedule = () => {
@@ -247,20 +244,18 @@ export const ScheduleComponent = () => {
     "10:00 PM",
   ];
 
-  // Function to determine if a color is light or dark
-const isColorLight = (color) => {
-  // Convert hex color to RGB
-  const hex = color.replace("#", "");
-  const r = parseInt(hex.substring(0, 2), 16);
-  const g = parseInt(hex.substring(2, 4), 16);
-  const b = parseInt(hex.substring(4, 6), 16);
+  
 
-  // Calculate luminance
-  const luminance = 0.2126 * r + 0.7152 * g + 0.0722 * b;
+  const isColorLight = (color) => {
+    const hex = color.replace("#", "");
+    const r = parseInt(hex.substring(0, 2), 16);
+    const g = parseInt(hex.substring(2, 4), 16);
+    const b = parseInt(hex.substring(4, 6), 16);
 
-  // Return true if luminance is greater than 128 (light color), otherwise false (dark color)
-  return luminance > 128;
-};
+    const luminance = 0.2126 * r + 0.7152 * g + 0.0722 * b;
+
+    return luminance > 128;
+  };
 
   const renderScheduleTable = (schedule) => {
     const WIDTH = 1000;
@@ -268,13 +263,13 @@ const isColorLight = (color) => {
     const TOP_MARGIN = 0.07;
     const SIDE_MARGIN = 0.1;
     const DAY_COUNT = 6;
-  
+
     const dayWidth = (WIDTH * (1 - SIDE_MARGIN)) / DAY_COUNT;
     const hourCount = 16;
     const hourHeight = ((HEIGHT * (1 - TOP_MARGIN)) / hourCount) * 1.5;
-  
+
     let table = [];
-    let renderedCells = {}; 
+    let renderedCells = {};
     for (let rowIndex = 0; rowIndex < timeSlots.length; rowIndex++) {
       let row = [];
       row.push(
@@ -290,12 +285,12 @@ const isColorLight = (color) => {
           {timeSlots[rowIndex]}
         </td>
       );
-  
+
       for (let colIndex = 0; colIndex < days.length; colIndex++) {
         if (renderedCells[`${rowIndex}-${colIndex}`]) {
-          continue; 
+          continue;
         }
-  
+
         let cellContent = "";
         let cellClass = "border text-center";
         let cellStyle = {
@@ -327,9 +322,11 @@ const isColorLight = (color) => {
                   </div>
                 );
                 cellClass += " text-white";
-                cellStyle.color = isColorLight(course.color) ? "#000000" : "#FFFFFF";      
+                cellStyle.color = isColorLight(course.color)
+                  ? "#000000"
+                  : "#FFFFFF";
                 cellStyle.backgroundColor = course.color;
-  
+
                 for (let span = 0; span < rowSpan; span++) {
                   renderedCells[`${rowIndex + span}-${colIndex}`] = true;
                 }
@@ -338,7 +335,7 @@ const isColorLight = (color) => {
             }
           }
         }
-  
+
         row.push(
           <td
             key={`cell-${rowIndex}-${colIndex}`}
@@ -464,32 +461,32 @@ const isColorLight = (color) => {
               <Search />
             </motion.button>
             <AnimatePresence>
-          {showInput && (
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.5 }}
-               className="flex items-center mt-2"
-            >
-                <input
-                  type="text"
-                  value={inputValue}
-                  onChange={(e) => setInputValue(e.target.value)}
-                  className="border rounded px-2 py-1"
-                  placeholder={t("enterIndex")}
-                />
-                <motion.button
-                  onClick={handleSearch}
-                  className="bg-buttonCourseList hover:bg-buttonCourseListHover text-white px-4 py-2 rounded mx-2 w-24"
-                  whileHover={{ scale: 1.1 }}
-                  whileTap={{ scale: 0.9 }}
+              {showInput && (
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.5 }}
+                  className="flex items-center mt-2"
                 >
-                  {t("srch")}
-                </motion.button>
-              </motion.div>
-            )}
-          </AnimatePresence>
+                  <input
+                    type="text"
+                    value={inputValue}
+                    onChange={(e) => setInputValue(e.target.value)}
+                    className="border rounded px-2 py-1"
+                    placeholder={t("enterIndex")}
+                  />
+                  <motion.button
+                    onClick={handleSearch}
+                    className="bg-buttonCourseList hover:bg-buttonCourseListHover text-white px-4 py-2 rounded mx-2 w-24"
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.9 }}
+                  >
+                    {t("srch")}
+                  </motion.button>
+                </motion.div>
+              )}
+            </AnimatePresence>
           </>
         )}
       </div>
