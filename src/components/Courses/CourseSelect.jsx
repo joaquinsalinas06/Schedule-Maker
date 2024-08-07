@@ -71,7 +71,7 @@ export const CourseSelect = ({ course }) => {
 
   return (
     <motion.div
-      className="course-box text-textColor p-4 rounded-lg shadow-lg cursor-pointer bg-courseListSelectBg hover:bg-courseListSelectBgHover w-48 "
+      className="course-box text-textColor p-4 rounded-lg shadow-lg cursor-pointer bg-courseListSelectBg hover:bg-courseListSelectBgHover w-44 "
       onClick={handleOpen}
       initial="hidden"
       whileInView="visible"

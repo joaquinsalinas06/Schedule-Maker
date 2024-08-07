@@ -119,6 +119,7 @@ export const ScheduleComponent = () => {
   const [showError, setShowError] = useState(false);
   const [showInput, setShowInput] = useState(false);
   const [inputValue, setInputValue] = useState("");
+  const [latestEndTime, setLatestEndTime] = useState(0);
 
   useEffect(() => {
     setLastSemester(semester);
@@ -129,6 +130,7 @@ export const ScheduleComponent = () => {
 
     let creditsC = 0;
     let groupedCourses = {};
+    let maxEndTime = 0;
 
     for (let course of shifts) {
       if (
@@ -159,7 +161,17 @@ export const ScheduleComponent = () => {
         );
 
         groupedCourses[course.name].push(newCourse);
-        creditsC += parseInt(course.credits);
+
+        for (let endTime of course.endTimes) {
+          const parsedEndTime = parseTime(endTime);
+          console.log(parsedEndTime);
+          if (parsedEndTime > maxEndTime) {
+            console.log("Before:", maxEndTime);
+            maxEndTime = parsedEndTime;
+            console.log("After:", maxEndTime);
+            console.log("Because of:", course.name);
+          }
+        }
       }
     }
 
@@ -169,7 +181,6 @@ export const ScheduleComponent = () => {
     const generateCombinations = (groupIndex, currentSchedule) => {
       if (groupIndex === courseGroups.length) {
         allSchedules.push(currentSchedule);
-
         return;
       }
 
@@ -186,9 +197,10 @@ export const ScheduleComponent = () => {
     generateCombinations(0, initialSchedule);
 
     setShowPrevNext(true);
-
     setSchedules(allSchedules);
     setCurrentScheduleIndex(0);
+    setLatestEndTime(maxEndTime);
+    console.log(maxEndTime)
   };
 
   const showNextSchedule = () => {
@@ -241,10 +253,7 @@ export const ScheduleComponent = () => {
     "07:00 PM",
     "08:00 PM",
     "09:00 PM",
-    "10:00 PM",
   ];
-
-  
 
   const isColorLight = (color) => {
     const hex = color.replace("#", "");
@@ -265,12 +274,12 @@ export const ScheduleComponent = () => {
     const DAY_COUNT = 6;
 
     const dayWidth = (WIDTH * (1 - SIDE_MARGIN)) / DAY_COUNT;
-    const hourCount = 16;
+    const hourCount = Math.ceil(latestEndTime / 60) - 7; // Calculate the number of hours to render
     const hourHeight = ((HEIGHT * (1 - TOP_MARGIN)) / hourCount) * 1.5;
 
     let table = [];
     let renderedCells = {};
-    for (let rowIndex = 0; rowIndex < timeSlots.length; rowIndex++) {
+    for (let rowIndex = 0; rowIndex < hourCount; rowIndex++) {
       let row = [];
       row.push(
         <td
@@ -403,48 +412,52 @@ export const ScheduleComponent = () => {
           </table>
         </motion.div>
       )}
-      <div className="flex justify-center mt-4">
-        {showPrevNext && (
+      <div className="flex flex-col sm:flex-row justify-center mt-4 gap-4">
+        <div className="flex justify-center gap-4">
+          {showPrevNext && (
+            <motion.button
+              onClick={showPrevSchedule}
+              className="bg-buttonCourseList hover:bg-buttonCourseListHover text-white px-4 py-2 rounded mx-2 w-24"
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
+            >
+              {t("prev")}
+            </motion.button>
+          )}
+          {showPrevNext && (
+            <motion.button
+              onClick={showNextSchedule}
+              className="bg-buttonCourseList hover:bg-buttonCourseListHover text-white px-4 py-2 rounded mx-2 w-24"
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
+            >
+              {t("next")}
+            </motion.button>
+          )}
+        </div>
+        <div className="flex justify-center gap-4">
           <motion.button
-            onClick={showPrevSchedule}
+            onClick={generateSchedules}
             className="bg-buttonCourseList hover:bg-buttonCourseListHover text-white px-4 py-2 rounded mx-2 w-24"
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 1.5, delay: 1.7 }}
           >
-            {t("prev")}
+            {t("gen")}
           </motion.button>
-        )}
-        <motion.button
-          onClick={generateSchedules}
-          className="bg-buttonCourseList hover:bg-buttonCourseListHover text-white px-4 py-2 rounded mx-2 w-24"
-          whileHover={{ scale: 1.1 }}
-          whileTap={{ scale: 0.9 }}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1.5, delay: 1.7 }}
-        >
-          {t("gen")}
-        </motion.button>
-        {showPrevNext && (
-          <motion.button
-            onClick={showNextSchedule}
-            className="bg-buttonCourseList hover:bg-buttonCourseListHover text-white px-4 py-2 rounded mx-2 w-24"
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.9 }}
-          >
-            {t("next")}
-          </motion.button>
-        )}
-        {schedules.length > 0 && (
-          <motion.button
-            onClick={downloadScheduleAsImage}
-            className="bg-buttonCourseList hover:bg-buttonCourseListHover text-white px-4 py-2 rounded mx-2 w-24"
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.9 }}
-          >
-            {t("down")}
-          </motion.button>
-        )}
+          {schedules.length > 0 && (
+            <motion.button
+              onClick={downloadScheduleAsImage}
+              className="bg-buttonCourseList hover:bg-buttonCourseListHover text-white px-4 py-2 rounded mx-2 w-24"
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
+            >
+              {t("down")}
+            </motion.button>
+          )}
+        </div>
       </div>
       <div className="flex justify-center mt-4 gap-4">
         {schedules.length > 0 && (

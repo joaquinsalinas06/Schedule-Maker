@@ -148,7 +148,7 @@ export const AboutMe = () => {
           <motion.img
             src={Yape}
             alt="Código de Yape"
-            className="mt-2 w-1/5 mx-auto"
+            className="mt-2 w-4/5 sm:w-1/5 mx-auto"
             custom={8}
             initial="hidden"
             animate="visible"
