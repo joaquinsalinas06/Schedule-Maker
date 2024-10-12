@@ -32,7 +32,7 @@ export const Header = () => {
       className="bg-bgHeader py-4 shadow-md"
       initial={{ y: -90, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.75 }}
+      transition={{ duration: 1.1 }}
     >
       <div className="flex flex-col sm:flex-row justify-between items-center px-6">
         <div className="flex flex-row items-center mb-4 sm:mb-0 space-x-2">
