@@ -1,7 +1,7 @@
-import React, { useState, useContext, useEffect } from "react";
+import { useState, useContext, useEffect } from "react";
 import { CourseContext } from "../../contexts/CourseContext";
 import Delete from "@mui/icons-material/Delete";
-import {  FileCopy } from "@mui/icons-material";
+import { FileCopy } from "@mui/icons-material";
 import { useTranslation } from "react-i18next";
 import "./ShiftsStyles.css";
 
@@ -26,7 +26,9 @@ export const ShiftOption = ({
 
   useEffect(() => {
     if (selectedCourse) {
-      const course = Array.from(courses).find((course) => course.name === selectedCourse);
+      const course = Array.from(courses).find(
+        (course) => course.name === selectedCourse
+      );
       if (course) {
         setNumClasses(parseInt(course.classesPerWeek));
       }
@@ -111,7 +113,9 @@ export const ShiftOption = ({
 
   useEffect(() => {
     if (selectedCourse) {
-      const course = Array.from(courses).find((course) => course.name === selectedCourse);
+      const course = Array.from(courses).find(
+        (course) => course.name === selectedCourse
+      );
       if (course) {
         setNumClasses(parseInt(course.classesPerWeek));
       }

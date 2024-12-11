@@ -1,4 +1,3 @@
-import React from "react";
 import { Information } from "../components/Information";
 import { ScheduleComponent } from "../components/Schedule";
 import { ShiftOptions } from "../components/Shifts/ShiftOptions";

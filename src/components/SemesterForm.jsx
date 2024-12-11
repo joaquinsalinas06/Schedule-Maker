@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from "react";
+import { useContext, useState, useEffect } from "react";
 import { SemesterContext } from "../contexts/SemesterContext";
 import { useTranslation } from "react-i18next";
 
@@ -57,7 +57,7 @@ export const SemesterForm = () => {
     const day = today.getDate();
 
     console.log(month, day);
-    
+
     if (month === 11 && day > 7) {
       year += 1;
     }

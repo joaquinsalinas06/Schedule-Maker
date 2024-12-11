@@ -1,4 +1,3 @@
-import React from "react";
 import { MainPage } from "./Pages/MainPage";
 import { AboutMe } from "./Pages/AboutMe";
 import {

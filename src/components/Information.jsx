@@ -1,4 +1,3 @@
-import React from "react";
 import { SemesterForm } from "./SemesterForm";
 import { CourseList } from "./Courses/CourseList";
 import { motion } from "framer-motion";

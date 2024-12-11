@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 import { useTranslation } from "react-i18next";
 import { GitHub, CalendarMonth, ContactPage } from "@mui/icons-material";
 import { useNavigate } from "react-router";

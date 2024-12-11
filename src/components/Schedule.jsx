@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from "react";
+import { useContext, useState, useEffect } from "react";
 import { ShiftsContext } from "../contexts/ShiftsContext";
 import { useTranslation } from "react-i18next";
 import { SemesterContext } from "../contexts/SemesterContext";
@@ -200,7 +200,7 @@ export const ScheduleComponent = () => {
     setSchedules(allSchedules);
     setCurrentScheduleIndex(0);
     setLatestEndTime(maxEndTime);
-    console.log(maxEndTime)
+    console.log(maxEndTime);
   };
 
   const showNextSchedule = () => {

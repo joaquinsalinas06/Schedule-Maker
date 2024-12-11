@@ -1,6 +1,3 @@
-import React from "react";
-import { GitHub } from "@mui/icons-material";
-
 export const Footer = () => {
   return (
     <footer className="bg-bgHeader px-5 py-1 mt-auto">
