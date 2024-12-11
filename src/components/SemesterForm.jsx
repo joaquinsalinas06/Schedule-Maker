@@ -51,7 +51,17 @@ export const SemesterForm = () => {
   };
 
   const getSemesters = () => {
-    const year = new Date().getFullYear();
+    const today = new Date();
+    let year = today.getFullYear();
+    const month = today.getMonth();
+    const day = today.getDate();
+
+    console.log(month, day);
+    
+    if (month === 11 && day > 7) {
+      year += 1;
+    }
+
     const lastTwoDigits = year.toString().slice(-2);
     return [`${lastTwoDigits}-0`, `${lastTwoDigits}-1`, `${lastTwoDigits}-2`];
   };
